@@ -14,39 +14,6 @@
 
 using namespace std;
 
-class Cliente {
-	int noviagens;
-	string nome;
-public:
-	Cliente(string nome,int noviagens = 0);
-	virtual ~Cliente();
-	int getNoviagens() const;
-	string getNome() const;
-	bool operator ==(const Cliente cliente);
-};
-
-class Particular: public Cliente {
-public:
-	Particular(string nome,int noviagens=0);
-	virtual ~Particular();
-};
-
-class Comercial: public Cliente {
-public:
-	Comercial(string nome,int noviagens=0);
-	virtual ~Comercial();
-};
-
-class Agencia {
-	string nome;
-	vector<Cliente> clientes;
-public:
-	Agencia(string nome);
-	virtual ~Agencia();
-	string getNome() const;
-	bool addCliente(Cliente cliente);
-};
-
 class Cidade {
 	string nome;
 public:
@@ -109,6 +76,42 @@ public:
 	float getPreco() const;
 	Itenerario getItenerario();
 	Alojamento getAlojamento();
+};
+
+class Cliente {
+	int noviagens;
+	string nome;
+	vector<Viagem> viagens;
+public:
+	Cliente(string nome,int noviagens = 0);
+	virtual ~Cliente();
+	int getNoviagens() const;
+	string getNome() const;
+	bool operator ==(const Cliente cliente);
+	void addViagem(Viagem viagem);
+};
+
+class Particular: public Cliente {
+public:
+	Particular(string nome,int noviagens=0);
+	virtual ~Particular();
+};
+
+class Comercial: public Cliente {
+	int noparticipantes;
+public:
+	Comercial(string nome,int noviagens=0);
+	virtual ~Comercial();
+};
+
+class Agencia {
+	string nome;
+	vector<Cliente> clientes;
+public:
+	Agencia(string nome);
+	virtual ~Agencia();
+	string getNome() const;
+	bool addCliente(Cliente cliente);
 };
 #endif /* SRC_AGENCIA_H_ */
 
