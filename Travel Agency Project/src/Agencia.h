@@ -112,6 +112,7 @@ public:
 	virtual ~Agencia();
 	string getNome() const;
 	bool addCliente(Cliente cliente);
+	void sortClientes();
 };
 #endif /* SRC_AGENCIA_H_ */
 

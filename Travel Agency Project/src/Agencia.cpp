@@ -35,6 +35,10 @@ bool Agencia::addCliente(Cliente cliente){
 	return false;
 }
 
+void Agencia::sortClientes(){
+
+}
+
 /* Class: Cliente
  *
  *
