@@ -137,7 +137,11 @@ float Comercial::Desconto(){
  *
  */
 
+<<<<<<< HEAD
+Viagem::Viagem(Itinerario itinerario,Alojamento alojamento,float preco):itinerario(itinerario),alojamento(alojamento),preco(preco) {
+=======
 Viagem::Viagem(Itinerario Itinerario,Alojamento alojamento,float preco,tm data):Itinerario(Itinerario),alojamento(alojamento),preco(preco),data(data) {
+>>>>>>> origin/master
 	// TODO Auto-generated constructor stub
 }
 
@@ -197,6 +201,17 @@ Troco::~Troco() {
 	// TODO Auto-generated destructor stub
 }
 
+Cidade Troco::getCidadeOrigem() const{
+	return origem;
+}
+
+Cidade Troco::getCidadeDestino() const{
+	return destino;
+}
+
+Transporte Troco::getTransporte() const{
+	return transporte;
+}
 /* Class: Transporte
  *
  *

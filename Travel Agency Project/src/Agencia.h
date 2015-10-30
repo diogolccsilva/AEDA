@@ -38,6 +38,7 @@ class Alojamento {
 public:
 	Alojamento(string tipo,string nome);
 	virtual ~Alojamento();
+
 };
 
 class Transporte {
@@ -52,6 +53,9 @@ class Troco {
 public:
 	Troco(Cidade origem,Cidade destino,Transporte transporte);
 	virtual ~Troco();
+	Cidade getCidadeOrigem() const;
+	Cidade getCidadeDestino() const;
+	Transporte getTransporte() const;
 
 };
 
@@ -74,7 +78,11 @@ class Viagem {
 	float preco;
 	tm data;
 public:
+<<<<<<< HEAD
+	Viagem(Itinerario itinerario,Alojamento alojamento,float preco);
+=======
 	Viagem(Itinerario itinerario,Alojamento alojamento,float preco,tm date);
+>>>>>>> origin/master
 	virtual ~Viagem();
 	float getPreco() const;
 	Itinerario getItinerario();
