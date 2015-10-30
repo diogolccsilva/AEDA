@@ -24,12 +24,12 @@ public:
 };
 
 class Pais {
-	vector<Cidade*> cidades;
+	vector<Cidade> cidades;
 	string nome;
 public:
 	Pais(string nome);
 	virtual ~Pais();
-	void AddCidade(Cidade *cidade);
+	void addCidade(Cidade cidade);
 	string getNome() const;
 };
 
@@ -89,7 +89,7 @@ public:
 class Cliente {
 	string nome;
 protected:
-	vector<Viagem> viagens;
+	vector<Viagem*> viagens;
 public:
 	Cliente(string nome);
 	virtual ~Cliente();
@@ -97,13 +97,16 @@ public:
 	string getNome() const;
 	bool operator ==(const Cliente cliente);
 	virtual void addViagem(Viagem viagem);
-	vector<Viagem> getViagens() const;
+	vector<Viagem*> getViagens() const;
+	virtual string getTipo() const;
+	friend ostream & operator<<(ostream & o, const Cliente & c);
 };
 
 class Particular: public Cliente {
 public:
 	Particular(string nome);
 	virtual ~Particular();
+	string getTipo() const;
 };
 
 class Comercial: public Cliente {
@@ -111,14 +114,16 @@ class Comercial: public Cliente {
 public:
 	Comercial(string nome);
 	virtual ~Comercial();
-	void addViagem(Viagem viagem,int noparticipantes);
+	void addViagem(Viagem* viagem,int noparticipantes);
 	int getMedParticipantes() const;
 	float desconto();
+	string getTipo() const;
 };
 
 class Agencia {
 	string nome;
 	vector<Cliente> clientes;
+	vector<Viagem> viagens;
 public:
 	Agencia(string nome);
 	virtual ~Agencia();
@@ -126,6 +131,7 @@ public:
 	bool addCliente(Cliente cliente);
 	void sortClientes();
 	vector<Cliente> getClientes();
+	bool addViagem(Viagem viagem);
 };
 #endif /* SRC_AGENCIA_H_ */
 

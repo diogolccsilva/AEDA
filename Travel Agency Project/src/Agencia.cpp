@@ -43,6 +43,10 @@ void Agencia::sortClientes(){
 
 }
 
+bool Agencia::addViagem(Viagem viagem){
+	viagens.push_back(viagem);
+}
+
 /* Class: Cliente
  *
  *
@@ -73,8 +77,13 @@ bool Cliente::operator ==(const Cliente cliente){
 	return false;
 }
 
-vector<Viagem> Cliente::getViagens() const{
+vector<Viagem*> Cliente::getViagens() const{
 	return viagens;
+}
+
+ostream & operator<<(ostream & o, const Cliente & c){
+	o << "Nome: " << c.getNome() << ";\n" << "Tipo: " << c.getTipo() << ";\n" << "No de Viagens: " << c.getNoViagens() << ";\n";
+	return o;
 }
 
 /* Class: Particular
@@ -91,6 +100,10 @@ Particular::~Particular() {
 	// TODO Auto-generated destructor stub
 }
 
+string Particular::getTipo() const{
+	return "particular";
+}
+
 /* Class: Comercial
  *
  *
@@ -105,7 +118,11 @@ Comercial::~Comercial() {
 	// TODO Auto-generated destructor stub
 }
 
-void Comercial::addViagem(Viagem viagem,int noparticipantes){
+string Comercial::getTipo() const{
+	return "comercial";
+}
+
+void Comercial::addViagem(Viagem* viagem,int noparticipantes){
 	viagens.push_back(viagem);
 	this->noparticipantes += noparticipantes;
 }
@@ -236,7 +253,7 @@ Pais::~Pais() {
 	// TODO Auto-generated destructor stub
 }
 
-void Pais::AddCidade(Cidade *cidade) {
+void Pais::addCidade(Cidade cidade) {
 	cidades.push_back(cidade);
 }
 
@@ -275,4 +292,3 @@ Alojamento::Alojamento(string tipo, string nome):tipo(tipo),nome(nome) {
 Alojamento::~Alojamento() {
 	// TODO Auto-generated destructor stub
 }
-
