@@ -11,6 +11,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <ctime>
 
 using namespace std;
 
@@ -33,8 +34,9 @@ public:
 };
 
 class Alojamento {
+	string tipo,nome;
 public:
-	Alojamento();
+	Alojamento(string tipo,string nome);
 	virtual ~Alojamento();
 
 };
@@ -74,12 +76,18 @@ class Viagem {
 	Alojamento alojamento;
 	Itinerario itinerario;
 	float preco;
+	tm data;
 public:
+<<<<<<< HEAD
 	Viagem(Itinerario itinerario,Alojamento alojamento,float preco);
+=======
+	Viagem(Itinerario itinerario,Alojamento alojamento,float preco,tm date);
+>>>>>>> origin/master
 	virtual ~Viagem();
 	float getPreco() const;
 	Itinerario getItinerario();
 	Alojamento getAlojamento();
+
 };
 
 class Cliente {
@@ -95,6 +103,7 @@ public:
 	bool operator ==(const Cliente cliente);
 	virtual void addViagem(Viagem viagem);
 	vector<Viagem> getViagens() const;
+	int getNoViagens() const;
 };
 
 class Particular: public Cliente {

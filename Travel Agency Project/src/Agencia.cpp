@@ -73,6 +73,10 @@ vector<Viagem> Cliente::getViagens() const{
 	return viagens;
 }
 
+int Cliente::getNoViagens() const{
+	return viagens.size();
+}
+
 /* Class: Particular
  *
  *
@@ -116,7 +120,11 @@ int Comercial::getMedParticipantes() const{
  *
  */
 
+<<<<<<< HEAD
 Viagem::Viagem(Itinerario itinerario,Alojamento alojamento,float preco):itinerario(itinerario),alojamento(alojamento),preco(preco) {
+=======
+Viagem::Viagem(Itinerario Itinerario,Alojamento alojamento,float preco,tm data):Itinerario(Itinerario),alojamento(alojamento),preco(preco),data(data) {
+>>>>>>> origin/master
 	// TODO Auto-generated constructor stub
 }
 
@@ -136,7 +144,7 @@ Alojamento Viagem::getAlojamento(){
 	return alojamento;
 }
 
-/* Class: Itenerario
+/* Class: Itinerario
  *
  *
  *
@@ -247,7 +255,7 @@ string Cidade::getNome() const{
  *
  */
 
-Alojamento::Alojamento() {
+Alojamento::Alojamento(string tipo, string nome):tipo(tipo),nome(nome) {
 	// TODO Auto-generated constructor stub
 }
 
