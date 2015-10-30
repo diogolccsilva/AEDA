@@ -101,11 +101,13 @@ public:
 
 class Comercial: public Cliente {
 	int noparticipantes;
+
 public:
 	Comercial(string nome,int noviagens=0);
 	virtual ~Comercial();
 	void addViagem(Viagem viagem,int noparticipantes);
 	int getMedParticipantes() const;
+	float Desconto();
 };
 
 class Agencia {

@@ -110,8 +110,25 @@ int Comercial::getMedParticipantes() const{
 	return noparticipantes/viagens.size();
 }
 
+float Comercial::Desconto(){
+
+	float desconto=0;
+
+	if(noviagens > 5 && getMedParticipantes()>10)
+	{
+		desconto = 0.5;
+	}
+
+	if (noviagens > 5 && getMedParticipantes() > 15)
+	{
+		desconto=0.10;
+	}
+
+	return desconto;
+}
+
 /* Class: Viagem
- *
+ *>
  *
  *
  */
