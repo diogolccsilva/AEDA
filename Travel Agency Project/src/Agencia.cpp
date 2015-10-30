@@ -69,6 +69,10 @@ bool Cliente::operator ==(const Cliente cliente){
 	return false;
 }
 
+vector<Viagem> Cliente::getViagens() const{
+	return viagens;
+}
+
 /* Class: Particular
  *
  *
@@ -89,12 +93,21 @@ Particular::~Particular() {
  *
  */
 
-Comercial::Comercial(string nome,int noviagens):Cliente(nome,noviagens) {
+Comercial::Comercial(string nome,int noviagens):Cliente(nome,noviagens),noparticipantes(0) {
 	// TODO Auto-generated constructor stub
 }
 
 Comercial::~Comercial() {
 	// TODO Auto-generated destructor stub
+}
+
+void Comercial::addViagem(Viagem viagem,int noparticipantes){
+	viagens.push_back(viagem);
+	this->noparticipantes += noparticipantes;
+}
+
+int Comercial::getMedParticipantes() const{
+	return noparticipantes/viagens.size();
 }
 
 /* Class: Viagem

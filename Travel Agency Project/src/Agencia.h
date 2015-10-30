@@ -81,6 +81,7 @@ public:
 class Cliente {
 	int noviagens;
 	string nome;
+protected:
 	vector<Viagem> viagens;
 public:
 	Cliente(string nome,int noviagens = 0);
@@ -88,7 +89,8 @@ public:
 	int getNoviagens() const;
 	string getNome() const;
 	bool operator ==(const Cliente cliente);
-	void addViagem(Viagem viagem);
+	virtual void addViagem(Viagem viagem);
+	vector<Viagem> getViagens() const;
 };
 
 class Particular: public Cliente {
@@ -102,6 +104,8 @@ class Comercial: public Cliente {
 public:
 	Comercial(string nome,int noviagens=0);
 	virtual ~Comercial();
+	void addViagem(Viagem viagem,int noparticipantes);
+	int getMedParticipantes() const;
 };
 
 class Agencia {
