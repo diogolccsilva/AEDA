@@ -11,6 +11,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <ctime>
 
 using namespace std;
 
@@ -33,8 +34,9 @@ public:
 };
 
 class Alojamento {
+	string tipo,nome;
 public:
-	Alojamento();
+	Alojamento(string tipo,string nome);
 	virtual ~Alojamento();
 };
 
@@ -53,13 +55,13 @@ public:
 
 };
 
-class Itenerario {
+class Itinerario {
 	Cidade origem,destino;
 	vector<Troco> trocos;
 public:
-	Itenerario(Cidade origem,Cidade destino);
+	Itinerario(Cidade origem,Cidade destino);
 	void AddTroco(Troco troco);
-	virtual ~Itenerario();
+	virtual ~Itinerario();
 	vector<Troco> getTrocos();
 	Cidade getOrigem();
 	Cidade getDestino();
@@ -68,14 +70,16 @@ public:
 
 class Viagem {
 	Alojamento alojamento;
-	Itenerario itenerario;
+	Itinerario itinerario;
 	float preco;
+	tm data;
 public:
-	Viagem(Itenerario itenerario,Alojamento alojamento,float preco);
+	Viagem(Itinerario itinerario,Alojamento alojamento,float preco,tm date);
 	virtual ~Viagem();
 	float getPreco() const;
-	Itenerario getItenerario();
+	Itinerario getItinerario();
 	Alojamento getAlojamento();
+
 };
 
 class Cliente {
@@ -91,6 +95,7 @@ public:
 	bool operator ==(const Cliente cliente);
 	virtual void addViagem(Viagem viagem);
 	vector<Viagem> getViagens() const;
+	int getNoViagens() const;
 };
 
 class Particular: public Cliente {
