@@ -9,6 +9,36 @@ void thisIsATest() {
 	ASSERTM("start writing tests", false);	
 }
 
+void test_Cidade(){
+
+	Cidade c1("Paris");
+	Cidade c2 ("Oslo");
+	Cidade c3 ("Tokio");
+	Cidade c4 ("Sidney");
+
+	ASSERT_EQUAL("Paris",c1.getNome());
+	ASSERT_EQUAL("Oslo",c2.getNome());
+	ASSERT_EQUAL("Tokio",c3.getNome());
+	ASSERT_EQUAL("Sidney",c4.getNome());
+}
+
+void test_Pais(){
+
+	Pais p1("França");
+	Pais p2 ("Noruega");
+	Pais p3 ("Japao");
+	Pais p4 ("Autralia");
+
+	ASSERT_EQUAL("França",p1.getNome());
+	ASSERT_EQUAL("Noruega",p2.getNome());
+	ASSERT_EQUAL("Japao",p3.getNome());
+	ASSERT_EQUAL("Australia",p4.getNome());
+
+	p1.addCidade("Paris");
+
+
+}
+
 void runAllTests(int argc, char const *argv[]){
 	cute::suite s;
 	//TODO add your test here
