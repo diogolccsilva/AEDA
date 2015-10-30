@@ -73,6 +73,10 @@ vector<Viagem> Cliente::getViagens() const{
 	return viagens;
 }
 
+int Cliente::getNoViagens() const{
+	return viagens.size();
+}
+
 /* Class: Particular
  *
  *
@@ -133,7 +137,7 @@ float Comercial::Desconto(){
  *
  */
 
-Viagem::Viagem(Itenerario itenerario,Alojamento alojamento,float preco):itenerario(itenerario),alojamento(alojamento),preco(preco) {
+Viagem::Viagem(Itinerario Itinerario,Alojamento alojamento,float preco,tm data):Itinerario(Itinerario),alojamento(alojamento),preco(preco),data(data) {
 	// TODO Auto-generated constructor stub
 }
 
@@ -145,37 +149,37 @@ float Viagem::getPreco() const{
 	return preco;
 }
 
-Itenerario Viagem::getItenerario(){
-	return itenerario;
+Itinerario Viagem::getItinerario(){
+	return itinerario;
 }
 
 Alojamento Viagem::getAlojamento(){
 	return alojamento;
 }
 
-/* Class: Itenerario
+/* Class: Itinerario
  *
  *
  *
  */
 
-Itenerario::Itenerario(Cidade origem,Cidade destino):origem(origem),destino(destino) {
+Itinerario::Itinerario(Cidade origem,Cidade destino):origem(origem),destino(destino) {
 	// TODO Auto-generated constructor stub
 }
 
-Itenerario::~Itenerario() {
+Itinerario::~Itinerario() {
 	// TODO Auto-generated destructor stub
 }
 
-vector<Troco> Itenerario::getTrocos(){
+vector<Troco> Itinerario::getTrocos(){
 	return trocos;
 }
 
-Cidade Itenerario::getOrigem(){
+Cidade Itinerario::getOrigem(){
 	return origem;
 }
 
-Cidade Itenerario::getDestino(){
+Cidade Itinerario::getDestino(){
 	return destino;
 }
 
@@ -253,7 +257,7 @@ string Cidade::getNome() const{
  *
  */
 
-Alojamento::Alojamento() {
+Alojamento::Alojamento(string tipo, string nome):tipo(tipo),nome(nome) {
 	// TODO Auto-generated constructor stub
 }
 
