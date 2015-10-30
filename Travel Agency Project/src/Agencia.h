@@ -125,6 +125,7 @@ public:
 	string getNome() const;
 	bool addCliente(Cliente cliente);
 	void sortClientes();
+	vector<Cliente> getClientes();
 };
 #endif /* SRC_AGENCIA_H_ */
 

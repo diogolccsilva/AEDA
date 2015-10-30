@@ -35,6 +35,10 @@ bool Agencia::addCliente(Cliente cliente){
 	return false;
 }
 
+vector<Cliente> Agencia::getClientes(){
+	return clientes;
+}
+
 void Agencia::sortClientes(){
 
 }
