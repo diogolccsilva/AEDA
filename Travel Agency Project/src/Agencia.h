@@ -87,7 +87,7 @@ public:
 	float getPreco() const;
 	Itinerario getItinerario();
 	Alojamento getAlojamento();
-
+	tm getData() const;
 };
 
 class Cliente {
