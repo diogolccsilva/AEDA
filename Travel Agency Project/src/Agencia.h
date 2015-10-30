@@ -78,11 +78,7 @@ class Viagem {
 	float preco;
 	tm data;
 public:
-<<<<<<< HEAD
-	Viagem(Itinerario itinerario,Alojamento alojamento,float preco);
-=======
 	Viagem(Itinerario itinerario,Alojamento alojamento,float preco,tm date);
->>>>>>> origin/master
 	virtual ~Viagem();
 	float getPreco() const;
 	Itinerario getItinerario();
@@ -91,36 +87,33 @@ public:
 };
 
 class Cliente {
-	int noviagens;
 	string nome;
 protected:
 	vector<Viagem> viagens;
 public:
-	Cliente(string nome,int noviagens = 0);
+	Cliente(string nome);
 	virtual ~Cliente();
-	int getNoviagens() const;
+	int getNoViagens() const;
 	string getNome() const;
 	bool operator ==(const Cliente cliente);
 	virtual void addViagem(Viagem viagem);
 	vector<Viagem> getViagens() const;
-	int getNoViagens() const;
 };
 
 class Particular: public Cliente {
 public:
-	Particular(string nome,int noviagens=0);
+	Particular(string nome);
 	virtual ~Particular();
 };
 
 class Comercial: public Cliente {
 	int noparticipantes;
-
 public:
-	Comercial(string nome,int noviagens=0);
+	Comercial(string nome);
 	virtual ~Comercial();
 	void addViagem(Viagem viagem,int noparticipantes);
 	int getMedParticipantes() const;
-	float Desconto();
+	float desconto();
 };
 
 class Agencia {

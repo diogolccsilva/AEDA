@@ -45,7 +45,7 @@ void Agencia::sortClientes(){
  *
  */
 
-Cliente::Cliente(string nome,int noviagens):nome(nome),noviagens(noviagens) {
+Cliente::Cliente(string nome):nome(nome) {
 	// TODO Auto-generated constructor stub
 }
 
@@ -53,8 +53,8 @@ Cliente::~Cliente() {
 	// TODO Auto-generated destructor stub
 }
 
-int Cliente::getNoviagens() const{
-	return noviagens;
+int Cliente::getNoViagens() const{
+	return viagens.size();
 }
 
 string Cliente::getNome() const{
@@ -73,17 +73,13 @@ vector<Viagem> Cliente::getViagens() const{
 	return viagens;
 }
 
-int Cliente::getNoViagens() const{
-	return viagens.size();
-}
-
 /* Class: Particular
  *
  *
  *
  */
 
-Particular::Particular(string nome,int noviagens):Cliente(nome,noviagens) {
+Particular::Particular(string nome):Cliente(nome) {
 	// TODO Auto-generated constructor stub
 }
 
@@ -97,7 +93,7 @@ Particular::~Particular() {
  *
  */
 
-Comercial::Comercial(string nome,int noviagens):Cliente(nome,noviagens),noparticipantes(0) {
+Comercial::Comercial(string nome):Cliente(nome),noparticipantes(0) {
 	// TODO Auto-generated constructor stub
 }
 
@@ -114,16 +110,16 @@ int Comercial::getMedParticipantes() const{
 	return noparticipantes/viagens.size();
 }
 
-float Comercial::Desconto(){
+float Comercial::desconto(){
 
 	float desconto=0;
 
-	if(noviagens > 5 && getMedParticipantes()>10)
+	if (viagens.size() > 5 && getMedParticipantes()>10)
 	{
 		desconto = 0.5;
 	}
 
-	if (noviagens > 5 && getMedParticipantes() > 15)
+	if (viagens.size() > 5 && getMedParticipantes() > 15)
 	{
 		desconto=0.10;
 	}
@@ -137,11 +133,7 @@ float Comercial::Desconto(){
  *
  */
 
-<<<<<<< HEAD
-Viagem::Viagem(Itinerario itinerario,Alojamento alojamento,float preco):itinerario(itinerario),alojamento(alojamento),preco(preco) {
-=======
-Viagem::Viagem(Itinerario Itinerario,Alojamento alojamento,float preco,tm data):Itinerario(Itinerario),alojamento(alojamento),preco(preco),data(data) {
->>>>>>> origin/master
+Viagem::Viagem(Itinerario itinerario,Alojamento alojamento,float preco,tm data):itinerario(itinerario),alojamento(alojamento),preco(preco),data(data) {
 	// TODO Auto-generated constructor stub
 }
 
