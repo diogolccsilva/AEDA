@@ -36,6 +36,7 @@ class Alojamento {
 public:
 	Alojamento();
 	virtual ~Alojamento();
+
 };
 
 class Transporte {
@@ -50,16 +51,19 @@ class Troco {
 public:
 	Troco(Cidade origem,Cidade destino,Transporte transporte);
 	virtual ~Troco();
+	Cidade getCidadeOrigem() const;
+	Cidade getCidadeDestino() const;
+	Transporte getTransporte() const;
 
 };
 
-class Itenerario {
+class Itinerario {
 	Cidade origem,destino;
 	vector<Troco> trocos;
 public:
-	Itenerario(Cidade origem,Cidade destino);
+	Itinerario(Cidade origem,Cidade destino);
 	void AddTroco(Troco troco);
-	virtual ~Itenerario();
+	virtual ~Itinerario();
 	vector<Troco> getTrocos();
 	Cidade getOrigem();
 	Cidade getDestino();
@@ -68,13 +72,13 @@ public:
 
 class Viagem {
 	Alojamento alojamento;
-	Itenerario itenerario;
+	Itinerario itinerario;
 	float preco;
 public:
-	Viagem(Itenerario itenerario,Alojamento alojamento,float preco);
+	Viagem(Itinerario itinerario,Alojamento alojamento,float preco);
 	virtual ~Viagem();
 	float getPreco() const;
-	Itenerario getItenerario();
+	Itinerario getItinerario();
 	Alojamento getAlojamento();
 };
 
