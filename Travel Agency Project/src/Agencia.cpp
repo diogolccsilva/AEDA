@@ -7,6 +7,8 @@
 
 #include "Agencia.h"
 
+int Viagem::sid = 0;
+
 /* Class: Agencia
  *
  *
@@ -25,14 +27,14 @@ string Agencia::getNome() const{
 	return nome;
 }
 
-bool Agencia::addCliente(Cliente cliente){
+bool Agencia::addCliente(Cliente c){
 	typename vector<Cliente>::const_iterator it;
-	it = find(clientes.begin(),clientes.end(),cliente);
-	if (it==clientes.end()){
-		clientes.push_back(cliente);
-		return true;
-	}
-	return false;
+	it = find(clientes.begin(),clientes.end(),c);
+	if (it!=clientes.end())
+		return false; //change to a throw eventually
+	else
+		clientes.push_back(c);
+	return true;
 }
 
 vector<Cliente> Agencia::getClientes(){
@@ -43,8 +45,14 @@ void Agencia::sortClientes(){
 
 }
 
-bool Agencia::addViagem(Viagem viagem){
-	viagens.push_back(viagem);
+bool Agencia::addViagem(Viagem v) {
+	typename vector<Viagem>::const_iterator it;
+	it = find(viagens.begin(), viagens.end(), v);
+	if (it != viagens.end())
+		return false; //change to a throw eventually
+	else
+		viagens.push_back(v);
+	return true;
 }
 
 /* Class: Cliente
@@ -122,8 +130,8 @@ string Comercial::getTipo() const{
 	return "comercial";
 }
 
-void Comercial::addViagem(Viagem* viagem,int noparticipantes){
-	viagens.push_back(viagem);
+void Comercial::addViagem(Viagem* v,int np){
+	viagens.push_back(v);
 	this->noparticipantes += noparticipantes;
 }
 
@@ -154,7 +162,7 @@ float Comercial::desconto(){
  *
  */
 
-Viagem::Viagem(Itinerario itinerario,Alojamento alojamento,float preco,tm data):itinerario(itinerario),alojamento(alojamento),preco(preco),data(data) {
+Viagem::Viagem(Itinerario itinerario,Alojamento* alojamento,float preco,tm data):itinerario(itinerario),alojamento(alojamento),preco(preco),data(data),id(sid++) {
 	// TODO Auto-generated constructor stub
 }
 
@@ -170,8 +178,20 @@ Itinerario Viagem::getItinerario(){
 	return itinerario;
 }
 
-Alojamento Viagem::getAlojamento(){
+Alojamento* Viagem::getAlojamento(){
 	return alojamento;
+}
+
+int Viagem::getId() const{
+	return id;
+}
+
+bool Viagem::operator ==(const Viagem v){
+	if (this->getId() == v.getId())
+	{
+		return true;
+	}
+	return false;
 }
 
 /* Class: Itinerario

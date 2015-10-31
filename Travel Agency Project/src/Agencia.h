@@ -29,7 +29,7 @@ class Pais {
 public:
 	Pais(string nome);
 	virtual ~Pais();
-	void addCidade(Cidade cidade);
+	void addCidade(Cidade c);
 	string getNome() const;
 };
 
@@ -73,17 +73,21 @@ public:
 };
 
 class Viagem {
-	Alojamento alojamento;
+	Alojamento* alojamento;
 	Itinerario itinerario;
 	float preco;
 	tm data;
+	int id;
+	static int sid;
 public:
-	Viagem(Itinerario itinerario,Alojamento alojamento,float preco,tm date);
+	Viagem(Itinerario itinerario,Alojamento* alojamento,float preco,tm date);
 	virtual ~Viagem();
 	float getPreco() const;
 	Itinerario getItinerario();
-	Alojamento getAlojamento();
+	Alojamento* getAlojamento();
 	tm getData() const;
+	bool operator ==(const Viagem v);
+	int getId() const;
 };
 
 class Cliente {
@@ -95,8 +99,8 @@ public:
 	virtual ~Cliente();
 	int getNoViagens() const;
 	string getNome() const;
-	bool operator ==(const Cliente cliente);
-	virtual void addViagem(Viagem viagem);
+	bool operator ==(const Cliente c);
+	virtual void addViagem(Viagem v);
 	vector<Viagem*> getViagens() const;
 	virtual string getTipo() const;
 	friend ostream & operator<<(ostream & o, const Cliente & c);
@@ -114,7 +118,7 @@ class Comercial: public Cliente {
 public:
 	Comercial(string nome);
 	virtual ~Comercial();
-	void addViagem(Viagem* viagem,int noparticipantes);
+	void addViagem(Viagem* v,int np);
 	int getMedParticipantes() const;
 	float desconto();
 	string getTipo() const;
@@ -124,14 +128,15 @@ class Agencia {
 	string nome;
 	vector<Cliente> clientes;
 	vector<Viagem> viagens;
+	vector<Alojamento> alojamentos;
 public:
 	Agencia(string nome);
 	virtual ~Agencia();
 	string getNome() const;
-	bool addCliente(Cliente cliente);
+	bool addCliente(Cliente c);
 	void sortClientes();
 	vector<Cliente> getClientes();
-	bool addViagem(Viagem viagem);
+	bool addViagem(Viagem v);
 };
 #endif /* SRC_AGENCIA_H_ */
 
