@@ -15,12 +15,24 @@
 
 using namespace std;
 
+
+class Alojamento {
+	string tipo,nome;
+	float preco;
+public:
+	Alojamento(string tipo,string nome,float preco);
+	virtual ~Alojamento();
+
+};
+
 class Cidade {
 	string nome;
+	vector<Alojamento*> alojamentos;
 public:
 	Cidade(string nome);
 	virtual ~Cidade();
 	string getNome() const;
+	bool addAlojamento(Alojamento* a);
 };
 
 class Pais {
@@ -29,16 +41,8 @@ class Pais {
 public:
 	Pais(string nome);
 	virtual ~Pais();
-	void addCidade(Cidade c);
+	bool addCidade(Cidade c);
 	string getNome() const;
-};
-
-class Alojamento {
-	string tipo,nome;
-public:
-	Alojamento(string tipo,string nome);
-	virtual ~Alojamento();
-
 };
 
 class Transporte {
@@ -56,7 +60,6 @@ public:
 	Cidade getCidadeOrigem() const;
 	Cidade getCidadeDestino() const;
 	Transporte getTransporte() const;
-
 };
 
 class Itinerario {

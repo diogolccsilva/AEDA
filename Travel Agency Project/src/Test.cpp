@@ -24,7 +24,7 @@ void test_Cidade(){
 
 void test_Pais(){
 
-	Pais p1("França");
+	Pais p1 ("França");
 	Pais p2 ("Noruega");
 	Pais p3 ("Japao");
 	Pais p4 ("Autralia");
