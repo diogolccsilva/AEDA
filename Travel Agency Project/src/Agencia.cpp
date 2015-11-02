@@ -16,7 +16,7 @@ int Viagem::sid = 0;
  */
 
 Agencia::Agencia(string nome):nome(nome) {
-	// TODO Auto-generated constructor stub
+
 }
 
 Agencia::~Agencia() {
@@ -75,11 +75,9 @@ string Cliente::getNome() const{
 	return nome;
 }
 
-bool Cliente::operator ==(const Cliente cliente){
+bool Cliente::operator==(const Cliente& cliente) const{
 	if (this->nome==cliente.nome)
-	{
 		return true;
-	}
 	return false;
 }
 
@@ -155,12 +153,12 @@ float Comercial::desconto(){
 }
 
 /* Class: Viagem
- *>
+ *
  *
  *
  */
 
-Viagem::Viagem(Itinerario itinerario,Alojamento* alojamento,float preco,tm data):itinerario(itinerario),alojamento(alojamento),preco(preco),data(data),id(sid++) {
+Viagem::Viagem(Itinerario itinerario,float preco,Alojamento* alojamento):itinerario(itinerario),alojamento(alojamento),preco(preco),id(sid++) {
 
 }
 
@@ -177,6 +175,7 @@ Itinerario Viagem::getItinerario(){
 }
 
 Alojamento* Viagem::getAlojamento(){
+	//TODO add a throw eventually for non existent alojamento
 	return alojamento;
 }
 
@@ -184,12 +183,26 @@ int Viagem::getId() const{
 	return id;
 }
 
-bool Viagem::operator ==(const Viagem v){
+bool Viagem::operator==(const Viagem& v) const{
 	if (this->getId() == v.getId())
-	{
 		return true;
-	}
 	return false;
+}
+
+bool Viagem::addAlojamento(Alojamento* a) {
+	if (!(alojamento == new Alojamento()))
+		return false; //TODO change to a throw eventually
+	alojamento = a;
+	return true;
+}
+
+void Viagem::delAlojamento() {
+	alojamento = new Alojamento();
+}
+
+bool Viagem::changeAlojamento(Alojamento* a) {
+	delAlojamento();
+	return addAlojamento(a);
 }
 
 /* Class: Itinerario
@@ -224,7 +237,7 @@ Cidade Itinerario::getDestino(){
  *
  */
 
-Troco::Troco(Cidade origem,Cidade destino,Transporte transporte):origem(origem),destino(destino),transporte(transporte) {
+Troco::Troco(Cidade origem,Cidade destino,Transporte transporte,tm data):origem(origem),destino(destino),transporte(transporte),data(data) {
 
 }
 
@@ -243,6 +256,11 @@ Cidade Troco::getCidadeDestino() const{
 Transporte Troco::getTransporte() const{
 	return transporte;
 }
+
+tm Troco::getData() const{
+	return data;
+}
+
 /* Class: Transporte
  *
  *
@@ -271,7 +289,7 @@ Pais::~Pais() {
 	// TODO Auto-generated destructor stub
 }
 
-bool Pais::addCidade(Cidade c) {
+bool Pais::addCidade(const Cidade& c) {
 	typename vector<Cidade>::const_iterator it;
 	it = find(cidades.begin(), cidades.end(), c);
 	if (it != cidades.end())
@@ -302,11 +320,30 @@ string Cidade::getNome() const{
 	return nome;
 }
 
+bool Cidade::addAlojamento(const Alojamento& a){
+	typename vector<Alojamento>::const_iterator it;
+	it = find(alojamentos.begin(), alojamentos.end(), a);
+	if (it != alojamentos.end())
+		return false; //TODO change to a throw eventually
+	alojamentos.push_back(a);
+	return true;
+}
+
+bool Cidade::operator==(const Cidade& c) const{
+	if(nome==c.nome)
+		return true;
+	return false;
+}
+
 /* Class: Alojamento
  *
  *
  *
  */
+
+Alojamento::Alojamento():tipo(""),nome(""),preco(0){
+
+}
 
 Alojamento::Alojamento(string tipo, string nome, float preco):tipo(tipo),nome(nome),preco(preco) {
 
@@ -314,4 +351,10 @@ Alojamento::Alojamento(string tipo, string nome, float preco):tipo(tipo),nome(no
 
 Alojamento::~Alojamento() {
 	// TODO Auto-generated destructor stub
+}
+
+bool Alojamento::operator==(const Alojamento& a) const{
+	if(nome==a.nome)
+		return true;
+	return false;
 }
