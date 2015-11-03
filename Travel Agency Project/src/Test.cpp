@@ -84,18 +84,18 @@ void cliente(Agencia* a){
 	char c;
 	while (c != 27 || c != '3') {
 		system("cls");
-		cout << "1-	Ver clientes;" << endl;
-		cout << "2- Adicionar Cliente;" << endl;
-		cout << "3- Voltar;" << endl;
+		cout << "1- " << endl;
+		cout << "2- " << endl;
+		cout << "3- " << endl;
 		c = getch();
 		system("cls");
 		switch (c) {
 		case '1':
-			pclientes(a);
+
 			getch();
 			break;
 		case '2':
-			addcliente(a);
+
 			break;
 		default:
 			break;
@@ -105,19 +105,20 @@ void cliente(Agencia* a){
 
 void gclientes(Agencia* a){
 	char c;
-	while (c != 27 || c != '3') {
+	while (c != 27 || c != '4') {
 		system("cls");
-		cout << "1- Gerir clientes;" << endl;
-		cout << "2- Gerir viagens;" << endl;
-		cout << "3- Gerir destinos;" << endl;
+		cout << "1-	Ver clientes;" << endl;
+		cout << "2- Adicionar Cliente;" << endl;
+		cout << "3- Remover Cliente;" << endl;
+		cout << "4- Voltar;" << endl;
 		c = getch();
 		system("cls");
 		switch (c) {
 		case '1':
-			gclientes(a);
+			pclientes(a);
 			break;
 		case '2':
-
+			addcliente(a);
 			break;
 		case '3':
 
@@ -139,7 +140,7 @@ void admin(Agencia* a){
 		system("cls");
 		switch (c) {
 		case '1':
-
+			gclientes(a);
 			break;
 		case '2':
 
