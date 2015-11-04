@@ -28,7 +28,7 @@ string Agencia::getNome() const{
 }
 
 bool Agencia::addCliente(Cliente c){
-	typename vector<Cliente>::const_iterator it;
+	vector<Cliente>::const_iterator it;
 	it = find(clientes.begin(),clientes.end(),c);
 	if (it!=clientes.end())
 		return false; //TODO change to a throw eventually
@@ -45,7 +45,7 @@ void Agencia::sortClientes(){
 }
 
 bool Agencia::addViagem(Viagem v) {
-	typename vector<Viagem>::const_iterator it;
+	vector<Viagem>::const_iterator it;
 	it = find(viagens.begin(), viagens.end(), v);
 	if (it != viagens.end())
 		return false; //TODO change to a throw eventually
@@ -76,13 +76,19 @@ string Cliente::getNome() const{
 }
 
 bool Cliente::operator==(const Cliente& cliente) const{
-	if (this->nome==cliente.nome)
-		return true;
-	return false;
+	return (nome==cliente.nome);
+}
+
+void Cliente::addViagem(Viagem* v){
+	viagens.push_back(v);
 }
 
 vector<Viagem*> Cliente::getViagens() const{
 	return viagens;
+}
+
+string Cliente::getTipo() const{
+	return "";
 }
 
 ostream & operator<<(ostream & o, const Cliente & c){
@@ -127,24 +133,24 @@ string Comercial::getTipo() const{
 }
 
 void Comercial::addViagem(Viagem* v,int np){
-	viagens.push_back(v);
+	Cliente::addViagem(v);
 	this->noparticipantes += noparticipantes;
 }
 
 int Comercial::getMedParticipantes() const{
-	return noparticipantes/viagens.size();
+	return noparticipantes/getViagens().size();
 }
 
 float Comercial::desconto(){
 
 	float desconto=0;
 
-	if (viagens.size() > 5 && getMedParticipantes()>10)
+	if (getViagens().size() > 5 && getMedParticipantes()>10)
 	{
 		desconto = 0.5;
 	}
 
-	if (viagens.size() > 5 && getMedParticipantes() > 15)
+	if (getViagens().size() > 5 && getMedParticipantes() > 15)
 	{
 		desconto=0.10;
 	}
@@ -184,9 +190,7 @@ int Viagem::getId() const{
 }
 
 bool Viagem::operator==(const Viagem& v) const{
-	if (this->getId() == v.getId())
-		return true;
-	return false;
+	return (getId() == v.getId());
 }
 
 bool Viagem::addAlojamento(Alojamento* a) {
@@ -290,7 +294,7 @@ Pais::~Pais() {
 }
 
 bool Pais::addCidade(const Cidade& c) {
-	typename vector<Cidade>::const_iterator it;
+	vector<Cidade>::const_iterator it;
 	it = find(cidades.begin(), cidades.end(), c);
 	if (it != cidades.end())
 		return false; //TODO change to a throw eventually
@@ -321,7 +325,7 @@ string Cidade::getNome() const{
 }
 
 bool Cidade::addAlojamento(const Alojamento& a){
-	typename vector<Alojamento>::const_iterator it;
+	vector<Alojamento>::const_iterator it;
 	it = find(alojamentos.begin(), alojamentos.end(), a);
 	if (it != alojamentos.end())
 		return false; //TODO change to a throw eventually
@@ -330,9 +334,7 @@ bool Cidade::addAlojamento(const Alojamento& a){
 }
 
 bool Cidade::operator==(const Cidade& c) const{
-	if(nome==c.nome)
-		return true;
-	return false;
+	return (nome==c.nome);
 }
 
 /* Class: Alojamento
@@ -354,7 +356,5 @@ Alojamento::~Alojamento() {
 }
 
 bool Alojamento::operator==(const Alojamento& a) const{
-	if(nome==a.nome)
-		return true;
-	return false;
+	return (nome==a.nome);
 }

@@ -80,7 +80,7 @@ void addcliente(Agencia* a){
 	}
 }
 
-void cliente(Agencia* a){
+void mcliente(Agencia* a){
 	char c;
 	while (c != 27 || c != '3') {
 		system("cls");
@@ -129,6 +129,14 @@ void gclientes(Agencia* a){
 	}
 }
 
+void gviagens(Agencia* a){
+
+}
+
+void gdestinos(Agencia* a){
+
+}
+
 void admin(Agencia* a){
 	char c;
 	while (c != 27 || c != '3') {
@@ -143,10 +151,10 @@ void admin(Agencia* a){
 			gclientes(a);
 			break;
 		case '2':
-
+			gviagens(a);
 			break;
 		case '3':
-
+			gdestinos(a);
 			break;
 		default:
 			break;
@@ -170,7 +178,7 @@ void manual(){
 		system("cls");
 		switch (c) {
 		case '1':
-			cliente(a);
+			mcliente(a);
 			break;
 		case '2':
 			admin(a);

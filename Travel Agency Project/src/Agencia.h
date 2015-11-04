@@ -12,6 +12,7 @@
 #include <vector>
 #include <algorithm>
 #include <ctime>
+#include <string>
 
 using namespace std;
 
@@ -99,7 +100,6 @@ public:
 
 class Cliente {
 	string nome; //nome do cliente
-protected:
 	vector<Viagem*> viagens; //totalidade de viagens do cliente (ja efetuadas e futuras)
 public:
 	Cliente(string nome);
@@ -107,7 +107,7 @@ public:
 	int getNoViagens() const;
 	string getNome() const;
 	bool operator==(const Cliente& c) const;
-	virtual void addViagem(Viagem v);
+	virtual void addViagem(Viagem* v);
 	vector<Viagem*> getViagens() const;
 	virtual string getTipo() const;
 	friend ostream & operator<<(ostream & o, const Cliente & c);
