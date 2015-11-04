@@ -91,6 +91,7 @@ string Cliente::getTipo() const{
 	return "";
 }
 
+//TODO usar templates talvez para ver se imprime o tipo direito
 ostream & operator<<(ostream & o, const Cliente & c){
 	o << "Nome: " << c.getNome() << ";\n" << "Tipo: " << c.getTipo() << ";\n" << "No de Viagens: " << c.getNoViagens() << ";\n";
 	return o;

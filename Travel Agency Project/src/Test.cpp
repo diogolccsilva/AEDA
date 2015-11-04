@@ -3,7 +3,7 @@
 #include "xml_listener.h"
 #include "cute_runner.h"
 #include "Agencia.h"
-#include <conio.h>
+
 
 void thisIsATest() {
 	ASSERTM("start writing tests", false);	
@@ -74,25 +74,27 @@ void addcliente(Agencia* a){
 		break;
 	default:
 		cout << "Tipo de cliente inexistente!" << endl;
-		getch();
+		system("pause");
 		return;
 		break;
 	}
 }
 
 void mcliente(Agencia* a){
+	string nome;
+	cout << "Nome: ";
+	cin >> nome;
 	char c;
 	while (c != 27 || c != '3') {
 		system("cls");
 		cout << "1- " << endl;
 		cout << "2- " << endl;
 		cout << "3- " << endl;
-		c = getch();
+		cin >> c;
 		system("cls");
 		switch (c) {
 		case '1':
 
-			getch();
 			break;
 		case '2':
 
@@ -107,11 +109,11 @@ void gclientes(Agencia* a){
 	char c;
 	while (c != 27 || c != '4') {
 		system("cls");
-		cout << "1-	Ver clientes;" << endl;
+		cout << "1- Ver clientes;" << endl;
 		cout << "2- Adicionar Cliente;" << endl;
 		cout << "3- Remover Cliente;" << endl;
 		cout << "4- Voltar;" << endl;
-		c = getch();
+		cin >> c;
 		system("cls");
 		switch (c) {
 		case '1':
@@ -144,7 +146,7 @@ void admin(Agencia* a){
 		cout << "1- Gerir clientes;" << endl;
 		cout << "2- Gerir viagens;" << endl;
 		cout << "3- Gerir destinos;" << endl;
-		c = getch();
+		cin >> c;
 		system("cls");
 		switch (c) {
 		case '1':
@@ -174,7 +176,7 @@ void manual(){
 		cout << "1- Cliente;" << endl;
 		cout << "2- Administrador;" << endl;
 		cout << "3- Voltar;" << endl;
-		c = getch();
+		cin >> c;
 		system("cls");
 		switch (c) {
 		case '1':
@@ -195,7 +197,7 @@ int main(int argc, char const *argv[]){
 		cout << "1- Automatico" << endl;
 		cout << "2- Manual" << endl;
 		cout << "3- Sair" << endl;
-		c=getch();
+		cin >> c;
 		system("CLS");
 		switch(c){
 		case '1': runAllTests(argc,argv);
