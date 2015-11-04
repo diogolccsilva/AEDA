@@ -84,6 +84,10 @@ void mcliente(Agencia* a){
 	string nome;
 	cout << "Nome: ";
 	cin >> nome;
+	if (a->getCliente(nome)->getNome()==""){
+		cout << "Cliente inexistente!" << endl;
+		system("pause");
+	}
 	char c;
 	while (c != 27 || c != '3') {
 		system("cls");

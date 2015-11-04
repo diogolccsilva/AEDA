@@ -102,6 +102,7 @@ class Cliente {
 	string nome; //nome do cliente
 	vector<Viagem*> viagens; //totalidade de viagens do cliente (ja efetuadas e futuras)
 public:
+	Cliente();
 	Cliente(string nome);
 	virtual ~Cliente();
 	int getNoViagens() const;
@@ -145,6 +146,7 @@ public:
 	vector<Cliente> getClientes();
 	bool addViagem(Viagem v);
 	bool addPais(Pais p);
+	Cliente* getCliente(string nome);
 };
 #endif /* SRC_AGENCIA_H_ */
 
