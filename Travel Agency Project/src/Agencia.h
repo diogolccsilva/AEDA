@@ -146,7 +146,13 @@ public:
 	vector<Cliente> getClientes();
 	bool addViagem(Viagem v);
 	bool addPais(Pais p);
-	Cliente* getCliente(string nome);
+	Cliente& getCliente(string nome);
+	class ClienteInexistente{
+		string nome;
+	public:
+		ClienteInexistente(string nome);
+	};
 };
+
 #endif /* SRC_AGENCIA_H_ */
 

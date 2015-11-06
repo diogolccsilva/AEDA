@@ -53,6 +53,18 @@ bool Agencia::addViagem(Viagem v) {
 	return true;
 }
 
+Agencia::ClienteInexistente::ClienteInexistente(string nome):nome(nome){
+
+}
+
+Cliente& Agencia::getCliente(string nome){
+	for(unsigned int i=0; i < clientes.size();i++){
+		if(clientes[i].getNome()== nome)
+			return clientes[i];
+	}
+	throw ClienteInexistente(nome);
+}
+
 /* Class: Cliente
  *
  *
@@ -99,14 +111,6 @@ string Cliente::getTipo() const{
 ostream & operator<<(ostream & o, const Cliente & c){
 	o << "Nome: " << c.getNome() << ";\n" << "Tipo: " << c.getTipo() << ";\n" << "No de Viagens: " << c.getNoViagens() << ";\n";
 	return o;
-}
-
-Cliente* Agencia::getCliente(string nome){
-	for(unsigned int i=0; i < clientes.size();i++){
-		if(clientes[i].getNome()== nome)
-			return &clientes[i];
-	}
-	return new Cliente();
 }
 
 /* Class: Particular

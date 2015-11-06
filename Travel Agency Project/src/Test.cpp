@@ -3,6 +3,7 @@
 #include "xml_listener.h"
 #include "cute_runner.h"
 #include "Agencia.h"
+#include <conio.h>
 
 
 void thisIsATest() {
@@ -53,6 +54,7 @@ void runAllTests(int argc, char const *argv[]){
 void pclientes(Agencia* a){
 	for (unsigned int i = 0;i < a->getClientes().size();i++)
 		cout << a->getClientes()[i] << endl;
+	getch();
 }
 void addcliente(Agencia* a){
 	string nome;
@@ -84,16 +86,23 @@ void mcliente(Agencia* a){
 	string nome;
 	cout << "Nome: ";
 	cin >> nome;
-	if (a->getCliente(nome)->getNome()==""){
+	Cliente c1;
+	try {
+		c1 = a->getCliente(nome);
+	}
+	catch (Agencia::ClienteInexistente &ci){
 		cout << "Cliente inexistente!" << endl;
 		system("pause");
+		return;
 	}
 	char c;
-	while (c != 27 || c != '3') {
+	cout << c1 << endl;
+	while (c != '9') {
 		system("cls");
-		cout << "1- " << endl;
-		cout << "2- " << endl;
+		cout << "1- Comprar viagem;" << endl;
+		cout << "2- Ver viagens futuras;" << endl;
 		cout << "3- " << endl;
+		cout << "9- Voltar;" << endl;
 		cin >> c;
 		system("cls");
 		switch (c) {
@@ -101,6 +110,9 @@ void mcliente(Agencia* a){
 
 			break;
 		case '2':
+
+			break;
+		case '3':
 
 			break;
 		default:
@@ -111,13 +123,13 @@ void mcliente(Agencia* a){
 
 void gclientes(Agencia* a){
 	char c;
-	while (c != 27 || c != '4') {
+	while (c != '9') {
 		system("cls");
 		cout << "1- Ver clientes;" << endl;
 		cout << "2- Adicionar Cliente;" << endl;
 		cout << "3- Remover Cliente;" << endl;
-		cout << "4- Voltar;" << endl;
-		cin >> c;
+		cout << "9- Voltar;" << endl;
+		c = getch();
 		system("cls");
 		switch (c) {
 		case '1':
@@ -127,7 +139,6 @@ void gclientes(Agencia* a){
 			addcliente(a);
 			break;
 		case '3':
-
 			break;
 		default:
 			break;
@@ -143,14 +154,20 @@ void gdestinos(Agencia* a){
 
 }
 
+void loadDestinos(Agencia* a){
+	string filename = "destinos" + a->getNome();
+
+}
+
 void admin(Agencia* a){
 	char c;
-	while (c != 27 || c != '3') {
+	while (c != '9') {
 		system("cls");
 		cout << "1- Gerir clientes;" << endl;
 		cout << "2- Gerir viagens;" << endl;
 		cout << "3- Gerir destinos;" << endl;
-		cin >> c;
+		cout << "9- Voltar;" << endl;
+		c = getch();
 		system("cls");
 		switch (c) {
 		case '1':
@@ -173,14 +190,18 @@ void manual(){
 	cout << "Nome da agencia: ";
 	cin >> nome;
 	Agencia* a = new Agencia(nome);
+	//Carregar informações para agencia
+	loadDestinos(a);
+	//loadViagens(a);
+	//loadClientes(a);
 	char c;
 	system("cls");
-	while (c!=27 || c!='3'){
+	while (c!='3'){
 		system("cls");
 		cout << "1- Cliente;" << endl;
 		cout << "2- Administrador;" << endl;
 		cout << "3- Voltar;" << endl;
-		cin >> c;
+		c=getch();
 		system("cls");
 		switch (c) {
 		case '1':
@@ -197,11 +218,11 @@ void manual(){
 
 int main(int argc, char const *argv[]){
 	char c;
-	while (c!='3' || c!=27){
+	while (c!=27){
 		cout << "1- Automatico" << endl;
 		cout << "2- Manual" << endl;
 		cout << "3- Sair" << endl;
-		cin >> c;
+		c=getch();
 		system("CLS");
 		switch(c){
 		case '1': runAllTests(argc,argv);
