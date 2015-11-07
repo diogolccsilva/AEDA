@@ -288,15 +288,6 @@ public:
 	*/
 
 	virtual ~Viagem();
-<<<<<<< HEAD
-	float getPreco() const;
-	Itinerario getItinerario() const;
-	Alojamento* getAlojamento() const;
-	bool operator==(const Viagem& v) const;
-	int getId() const;
-	bool addAlojamento(Alojamento* a);
-	void delAlojamento();
-=======
 	/**
 			   Retorna o Preco Total da Viagem
 
@@ -304,8 +295,8 @@ public:
 			    @return Preco
 	*/
 
-	float getPreco() const; //retorna o preco total da viagem (incluindo alojamento)
-<<<<<<< HEAD
+	float getPreco() const;
+
 	/**
 			   Retorna o Itinerario da Viagem
 
@@ -359,17 +350,8 @@ public:
 			   @param a Alojamento
 			   @return true, se alteracao for aplicada, caso contrario false
 	*/
-
-=======
-	Itinerario getItinerario() const; //retorna o Itinerario da viagem
-	Alojamento* getAlojamento() const; //retorna o Alojamento da viagem
-	bool operator==(const Viagem& v) const; //overload da função ==
-	int getId() const; //retorna o ID da viagem
-	bool addAlojamento(Alojamento* a); //verifica se pode adicionar alojamento
-	void delAlojamento(); //Elimina alojamento
->>>>>>> origin/master
->>>>>>> origin/master
 	bool changeAlojamento(Alojamento* a);
+
 };
 
 class Cliente {
