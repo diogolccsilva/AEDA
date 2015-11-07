@@ -66,7 +66,7 @@ Agencia::ClienteInexistente::ClienteInexistente(string nome):nome(nome){
 
 }
 
-Cliente& Agencia::getCliente(string nome){
+Cliente Agencia::getCliente(string nome) const{
 	int it=-1;
 	for(unsigned int i=0; i < clientes.size();i++){
 		if(clientes[i].getNome()== nome)
@@ -77,7 +77,7 @@ Cliente& Agencia::getCliente(string nome){
 	return clientes[it];
 }
 
-Pais& Agencia::getPais(string nome){
+Pais Agencia::getPais(string nome) const{
 	int it = -1;
 	for (unsigned int i = 0;i<paises.size();i++)
 	{
@@ -91,6 +91,44 @@ Pais& Agencia::getPais(string nome){
 
 Agencia::PaisInexistente::PaisInexistente(string nome):nome(nome){
 
+}
+
+void Agencia::loadDestinos() {
+	string filename = "../destinos" + nome + ".txt";
+	ifstream file(filename.c_str());
+	if (file.is_open()) {
+		while (!file.eof()) {
+			string pais;
+			getline(file,pais,'-');
+			pais.erase(pais.end()-1);
+			string cidade = "";
+			getline(file,cidade);
+			cidade.erase(cidade.begin());
+			addPais(Pais(pais));
+			getPais(pais).addCidade(Cidade(cidade));
+		}
+	} else {
+
+	}
+}
+
+void Agencia::loadClientes(){
+	string filename = "../destinos" + nome + ".txt";
+	ifstream file(filename.c_str());
+	if (file.is_open()) {
+		while (!file.eof()) {
+			string pais;
+			getline(file, pais, '-');
+			pais.erase(pais.end() - 1);
+			string cidade = "";
+			getline(file, cidade);
+			cidade.erase(cidade.begin());
+			addPais(Pais(pais));
+			getPais(pais).addCidade(Cidade(cidade));
+		}
+	} else {
+
+	}
 }
 
 /* Class: Cliente
@@ -355,7 +393,7 @@ bool Pais::operator==(const Pais& p) const{
 	return nome==p.nome;
 }
 
-Cidade& Pais::getCidade(string nome){
+Cidade Pais::getCidade(string nome) const{
 	int it = -1;
 	for (unsigned int i = 0;i < cidades.size();i++){
 		if (cidades[i].getNome()==nome)

@@ -13,6 +13,9 @@
 #include <algorithm>
 #include <ctime>
 #include <string>
+#include <conio.h>
+#include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -46,7 +49,7 @@ public:
 	bool addCidade(const Cidade& c);
 	string getNome() const;
 	bool operator==(const Pais& p) const;
-	Cidade& getCidade(string nome);
+	Cidade getCidade(string nome) const;
 	class CidadeInexistente{
 		string nome;
 	public:
@@ -153,18 +156,21 @@ public:
 	vector<Cliente> getClientes() const;
 	bool addViagem(Viagem v);
 	bool addPais(Pais p);
-	Cliente& getCliente(string nome);
+	Cliente getCliente(string nome) const;
 	class ClienteInexistente{
 		string nome;
 	public:
 		ClienteInexistente(string nome);
 	};
-	Pais& getPais(string nome);
+	Pais getPais(string nome) const;
 	class PaisInexistente{
 		string nome;
 	public:
 		PaisInexistente(string nome);
 	};
+	void loadDestinos();
+	void loadViagens();
+	void loadClientes();
 };
 
 #endif /* SRC_AGENCIA_H_ */

@@ -3,9 +3,6 @@
 #include "xml_listener.h"
 #include "cute_runner.h"
 #include "Agencia.h"
-#include <conio.h>
-#include <fstream>
-#include <sstream>
 
 
 void thisIsATest() {
@@ -152,44 +149,32 @@ void gviagens(Agencia* a){
 
 }
 
-void gdestinos(Agencia* a){
+void pdestinos(Agencia* a){
 
 }
 
-void loadDestinos(Agencia* a){
-	string filename = "destinos" + a->getNome() + ".txt";
-	cout << filename.c_str() << endl;
-	getch();
-	ifstream file(filename.c_str());
-	if (file.is_open()){
-		cout << "entrou" << endl;
-		getch();
-		while (!file.eof()){
-			string line;
-			getline(file,line);
-			istringstream instr(line);
-			string temp;
-			string pais="";
-			instr >> temp;
-			while (temp!="-"){
-				pais=pais+temp;
-				instr >> temp;
-			}
-			string cidade = "";
-			instr >> temp;
-			while (temp != "-") {
-				cidade = cidade + temp;
-				instr >> temp;
-			}
-			a->addPais(Pais(pais));
-			a->getPais(pais).addCidade(Cidade(cidade));
-			cout << a->getPais(pais).getNome() << " - " << a->getPais(pais).getCidade(cidade).getNome();
-			getch();
+void gdestinos(Agencia* a){
+	char c;
+	while (c != '9') {
+		system("cls");
+		cout << "1- Ver destinos;" << endl;
+		cout << "2- Adicionar destino;" << endl;
+		cout << "3- Remover destno;" << endl;
+		cout << "9- Voltar;" << endl;
+		c = getch();
+		system("cls");
+		switch (c) {
+		case '1':
+			pdestinos(a);
+			break;
+		case '2':
+			//adddestino(a);
+			break;
+		case '3':
+			break;
+		default:
+			break;
 		}
-	}
-	else{
-		cout << "wtf you doing?" << endl;
-		getch();
 	}
 }
 
@@ -225,7 +210,7 @@ void manual(){
 	cin >> nome;
 	Agencia* a = new Agencia(nome);
 	//Carregar informações para agencia
-	loadDestinos(a);
+	a->loadDestinos();
 	//loadViagens(a);
 	//loadClientes(a);
 	char c;
