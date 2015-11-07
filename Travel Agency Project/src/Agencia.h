@@ -191,19 +191,19 @@ class Viagem {
 public:
 	Viagem(Itinerario itinerario,float preco,int id = sid++,Alojamento* alojamento = new Alojamento());
 	virtual ~Viagem();
-	float getPreco() const; //retorna o preco total da viagem (incluindo alojamento)
-	Itinerario getItinerario() const; //retorna o Itinerario da viagem
-	Alojamento* getAlojamento() const; //retorna o Alojamento da viagem
-	bool operator==(const Viagem& v) const; //overload da função ==
-	int getId() const; //retorna o ID da viagem
-	bool addAlojamento(Alojamento* a); //verifica se pode adicionar alojamento
-	void delAlojamento(); //Elimina alojamento
+	float getPreco() const;
+	Itinerario getItinerario() const;
+	Alojamento* getAlojamento() const;
+	bool operator==(const Viagem& v) const;
+	int getId() const;
+	bool addAlojamento(Alojamento* a);
+	void delAlojamento();
 	bool changeAlojamento(Alojamento* a);
 };
 
 class Cliente {
-	string nome; //nome do cliente
-	vector<Viagem*> viagens; //totalidade de viagens do cliente (ja efetuadas e futuras)
+	string nome;
+	vector<Viagem*> viagens;
 public:
 	/**
 	 Construtor base de Cliente
