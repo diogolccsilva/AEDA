@@ -52,7 +52,7 @@ void runAllTests(int argc, char const *argv[]){
 
 void pclientes(Agencia* a){
 	for (unsigned int i = 0;i < a->getClientes().size();i++)
-		cout << a->getClientes()[i] << endl;
+		cout << (*a->getClientes()[i]) << endl;
 	getch();
 }
 void addcliente(Agencia* a){
@@ -63,15 +63,11 @@ void addcliente(Agencia* a){
 	cout << "Tipo ('P' ou 'C'): ";
 	cin >> tipo;
 	switch (tipo){
-	case 'P':{
-			Particular p(nome);
-			a->addCliente(p);
-		}
+	case 'P':
+		a->addCliente(new Particular(nome));
 		break;
-	case 'C':{
-			Comercial c(nome);
-			a->addCliente(c);
-		}
+	case 'C':
+		a->addCliente(new Comercial(nome));
 		break;
 	default:
 		cout << "Tipo de cliente inexistente!" << endl;
@@ -85,7 +81,7 @@ void mcliente(Agencia* a){
 	string nome;
 	cout << "Nome: ";
 	cin >> nome;
-	Cliente c1;
+	Cliente* c1;
 	try {
 		c1 = a->getCliente(nome);
 	}

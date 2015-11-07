@@ -120,7 +120,7 @@ public:
 	bool operator==(const Cliente& c) const;
 	virtual void addViagem(Viagem* v);
 	vector<Viagem*> getViagens() const;
-	virtual string getTipo() const;
+	virtual string getTipo() const = 0;
 	friend ostream & operator<<(ostream & o, const Cliente & c);
 };
 
@@ -144,19 +144,19 @@ public:
 
 class Agencia {
 	string nome;
-	vector<Cliente> clientes; //clientes da agencia
+	vector<Cliente*> clientes; //clientes da agencia
 	vector<Viagem> viagens; //totalidade de viagens da agencia (ja efetuadas e futuras)
 	vector<Pais> paises; //paises para os quais faz viagens
 public:
 	Agencia(string nome);
 	virtual ~Agencia();
 	string getNome() const;
-	bool addCliente(Cliente c);
+	bool addCliente(Cliente* c);
 	void sortClientes();
-	vector<Cliente> getClientes() const;
+	vector<Cliente*> getClientes() const;
 	bool addViagem(Viagem v);
 	bool addPais(Pais p);
-	Cliente getCliente(string nome) const;
+	Cliente* getCliente(string nome) const;
 	class ClienteInexistente{
 		string nome;
 	public:
