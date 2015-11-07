@@ -96,7 +96,7 @@ void mcliente(Agencia* a){
 	}
 	char c;
 	cout << c1 << endl;
-	while (c != '9') {
+	while (c!=27 && c!='9') {
 		system("cls");
 		cout << "1- Comprar viagem;" << endl;
 		cout << "2- Ver viagens futuras;" << endl;
@@ -122,7 +122,7 @@ void mcliente(Agencia* a){
 
 void gclientes(Agencia* a){
 	char c;
-	while (c != '9') {
+	while (c!=27 && c!='9') {
 		system("cls");
 		cout << "1- Ver clientes;" << endl;
 		cout << "2- Adicionar Cliente;" << endl;
@@ -155,7 +155,7 @@ void pdestinos(Agencia* a){
 
 void gdestinos(Agencia* a){
 	char c;
-	while (c != '9') {
+	while (c!=27 && c!='9') {
 		system("cls");
 		cout << "1- Ver destinos;" << endl;
 		cout << "2- Adicionar destino;" << endl;
@@ -180,7 +180,7 @@ void gdestinos(Agencia* a){
 
 void admin(Agencia* a){
 	char c;
-	while (c != '9') {
+	while (c!=27 && c!='9') {
 		system("cls");
 		cout << "1- Gerir clientes;" << endl;
 		cout << "2- Gerir viagens;" << endl;
@@ -212,10 +212,10 @@ void manual(){
 	//Carregar informações para agencia
 	a->loadDestinos();
 	//loadViagens(a);
-	//loadClientes(a);
+	a->loadClientes();
 	char c;
 	system("cls");
-	while (c!='3'){
+	while (c!=27 && c!='3'){
 		system("cls");
 		cout << "1- Cliente;" << endl;
 		cout << "2- Administrador;" << endl;
@@ -237,7 +237,7 @@ void manual(){
 
 int main(int argc, char const *argv[]){
 	char c;
-	while (c!=27){
+	while (c!=27 && c!=3){
 		cout << "1- Automatico" << endl;
 		cout << "2- Manual" << endl;
 		cout << "3- Sair" << endl;

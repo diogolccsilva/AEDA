@@ -113,18 +113,37 @@ void Agencia::loadDestinos() {
 }
 
 void Agencia::loadClientes(){
-	string filename = "../destinos" + nome + ".txt";
+	string filename = "../clientes" + nome + ".txt";
+	cout << filename << endl;
+	getch();
 	ifstream file(filename.c_str());
 	if (file.is_open()) {
 		while (!file.eof()) {
-			string pais;
-			getline(file, pais, '-');
-			pais.erase(pais.end() - 1);
-			string cidade = "";
-			getline(file, cidade);
-			cidade.erase(cidade.begin());
-			addPais(Pais(pais));
-			getPais(pais).addCidade(Cidade(cidade));
+			string nome = "";
+			getline(file, nome, '-');
+			nome.erase(nome.end() - 1);
+			string tipo = "";
+			getline(file, tipo, '-');
+			tipo.erase(tipo.begin());
+			tipo.erase(tipo.end()-1);
+			cout << "Nome: " << nome << " Tipo: " << tipo << endl;
+			getch();
+			if (tipo=="P"){
+				addCliente(Particular(nome));
+				cout << "Cliente: " << nome << endl;
+				getch();
+			}
+			else if (tipo=="C"){
+				string noparticipantes = "";
+				getline(file, noparticipantes, '-');
+				noparticipantes.erase(noparticipantes.begin());
+				noparticipantes.erase(noparticipantes.end()-1);
+				addCliente(Comercial(nome,atoi(noparticipantes.c_str())));
+				cout << "Cliente: " << nome << endl;
+				getch();
+			}
+			string temp;
+			getline(file,temp);
 		}
 	} else {
 
@@ -203,7 +222,7 @@ string Particular::getTipo() const{
  *
  */
 
-Comercial::Comercial(string nome):Cliente(nome),noparticipantes(0) {
+Comercial::Comercial(string nome,int noparticipantes):Cliente(nome),noparticipantes(noparticipantes) {
 
 }
 
@@ -259,11 +278,11 @@ float Viagem::getPreco() const{
 	return preco;
 }
 
-Itinerario Viagem::getItinerario(){
+Itinerario Viagem::getItinerario() const{
 	return itinerario;
 }
 
-Alojamento* Viagem::getAlojamento(){
+Alojamento* Viagem::getAlojamento() const{
 	//TODO add a throw eventually for non existent alojamento
 	return alojamento;
 }

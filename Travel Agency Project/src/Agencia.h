@@ -92,15 +92,15 @@ public:
 class Viagem {
 	Itinerario itinerario;
 	Alojamento* alojamento;
-	float preco; //apenas o preço da viagem, para obter o preço total adicionar o preço do alojamento
+	float preco; //apenas o preco da viagem, para obter o preco total adicionar o preco do alojamento
 	int id;
 	static int sid;
 public:
 	Viagem(Itinerario itinerario,float preco,Alojamento* alojamento = new Alojamento());
 	virtual ~Viagem();
-	float getPreco() const;
-	Itinerario getItinerario();
-	Alojamento* getAlojamento();
+	float getPreco() const; //retorna o preco total da viagem (incluindo alojamento)
+	Itinerario getItinerario() const;
+	Alojamento* getAlojamento() const;
 	bool operator==(const Viagem& v) const;
 	int getId() const;
 	bool addAlojamento(Alojamento* a);
@@ -134,7 +134,7 @@ public:
 class Comercial: public Cliente {
 	int noparticipantes;
 public:
-	Comercial(string nome);
+	Comercial(string nome,int noparticipantes = 0);
 	virtual ~Comercial();
 	void addViagem(Viagem* v,int np);
 	int getMedParticipantes() const;
@@ -145,7 +145,7 @@ public:
 class Agencia {
 	string nome;
 	vector<Cliente> clientes; //clientes da agencia
-	vector<Viagem> viagens; //totalidade de viagens da agência (já efetuadas e futuras)
+	vector<Viagem> viagens; //totalidade de viagens da agencia (ja efetuadas e futuras)
 	vector<Pais> paises; //paises para os quais faz viagens
 public:
 	Agencia(string nome);
