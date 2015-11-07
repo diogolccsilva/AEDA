@@ -96,7 +96,7 @@ class Viagem {
 	int id;
 	static int sid;
 public:
-	Viagem(Itinerario itinerario,float preco,Alojamento* alojamento = new Alojamento());
+	Viagem(Itinerario itinerario,float preco,int id = sid++,Alojamento* alojamento = new Alojamento());
 	virtual ~Viagem();
 	float getPreco() const; //retorna o preco total da viagem (incluindo alojamento)
 	Itinerario getItinerario() const;

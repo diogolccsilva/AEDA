@@ -119,7 +119,34 @@ void Agencia::loadViagens() {
 	ifstream file(filename.c_str());
 	if (file.is_open()) {
 		while (!file.eof()) {
+			string id;
+			getline(file, id, '-');
+			id.erase(id.end() - 1);
+			string preco;
+			getline(file, preco, ';');
+			preco.erase(preco.end() - 1);
+			string itinerario;
+			getline(file, itinerario, '-');
+			itinerario.erase(itinerario.begin());
+			itinerario.erase(itinerario.end() - 1);
+			istringstream istream(itinerario);
+			string temp="";
+			getline(istream,temp,';');
+			string pais="", cidade="";
+			Cidade origem = getPais(pais).getCidade(cidade);
+			Cidade destino = getPais(pais).getCidade(cidade)
+			while(!istream.eof()){
 
+			}
+			string transporte;
+			getline(file, transporte, '-');
+			transporte.erase(transporte.end() - 1);
+			string data;
+			getline(file, data, '-');
+			data.erase(transporte.end() - 1);
+			string alojamento;
+			getline(file, alojamento);
+			alojamento.erase(transporte.begin());
 		}
 	} else {
 
@@ -270,8 +297,8 @@ float Comercial::desconto() {
  *
  */
 
-Viagem::Viagem(Itinerario itinerario, float preco, Alojamento* alojamento) :
-		itinerario(itinerario), alojamento(alojamento), preco(preco), id(sid++) {
+Viagem::Viagem(Itinerario itinerario, float preco, int id, Alojamento* alojamento) :
+		itinerario(itinerario), alojamento(alojamento), preco(preco), id(id) {
 
 }
 
