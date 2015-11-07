@@ -36,7 +36,7 @@ bool Agencia::addCliente(Cliente c){
 	return true;
 }
 
-vector<Cliente> Agencia::getClientes(){
+vector<Cliente> Agencia::getClientes() const{
 	return clientes;
 }
 
@@ -53,16 +53,44 @@ bool Agencia::addViagem(Viagem v) {
 	return true;
 }
 
+bool Agencia::addPais(Pais p){
+	vector<Pais>::const_iterator it;
+	it = find(paises.begin(), paises.end(), p);
+	if (it != paises.end())
+		return false; //TODO change to a throw eventually
+	paises.push_back(p);
+	return true;
+}
+
 Agencia::ClienteInexistente::ClienteInexistente(string nome):nome(nome){
 
 }
 
 Cliente& Agencia::getCliente(string nome){
+	int it=-1;
 	for(unsigned int i=0; i < clientes.size();i++){
 		if(clientes[i].getNome()== nome)
-			return clientes[i];
+			it = i;
 	}
-	throw ClienteInexistente(nome);
+	if (it == -1)
+		throw ClienteInexistente(nome);
+	return clientes[it];
+}
+
+Pais& Agencia::getPais(string nome){
+	int it = -1;
+	for (unsigned int i = 0;i<paises.size();i++)
+	{
+		if (nome==paises[i].getNome())
+			it=i;
+	}
+	if(it==-1)
+		throw PaisInexistente(nome);
+	return paises[it];
+}
+
+Agencia::PaisInexistente::PaisInexistente(string nome):nome(nome){
+
 }
 
 /* Class: Cliente
@@ -323,6 +351,25 @@ string Pais::getNome() const{
 	return nome;
 }
 
+bool Pais::operator==(const Pais& p) const{
+	return nome==p.nome;
+}
+
+Cidade& Pais::getCidade(string nome){
+	int it = -1;
+	for (unsigned int i = 0;i < cidades.size();i++){
+		if (cidades[i].getNome()==nome)
+			it=i;
+	}
+	if (it==-1)
+		throw CidadeInexistente(nome);
+	return cidades[it];
+}
+
+Pais::CidadeInexistente::CidadeInexistente(string nome):nome(nome){
+
+}
+
 /* Class: Cidade
  *
  *
@@ -351,7 +398,7 @@ bool Cidade::addAlojamento(const Alojamento& a){
 }
 
 bool Cidade::operator==(const Cidade& c) const{
-	return (nome==c.nome);
+	return nome==c.nome;
 }
 
 /* Class: Alojamento

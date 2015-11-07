@@ -4,6 +4,8 @@
 #include "cute_runner.h"
 #include "Agencia.h"
 #include <conio.h>
+#include <fstream>
+#include <sstream>
 
 
 void thisIsATest() {
@@ -155,8 +157,40 @@ void gdestinos(Agencia* a){
 }
 
 void loadDestinos(Agencia* a){
-	string filename = "destinos" + a->getNome();
-
+	string filename = "destinos" + a->getNome() + ".txt";
+	cout << filename.c_str() << endl;
+	getch();
+	ifstream file(filename.c_str());
+	if (file.is_open()){
+		cout << "entrou" << endl;
+		getch();
+		while (!file.eof()){
+			string line;
+			getline(file,line);
+			istringstream instr(line);
+			string temp;
+			string pais="";
+			instr >> temp;
+			while (temp!="-"){
+				pais=pais+temp;
+				instr >> temp;
+			}
+			string cidade = "";
+			instr >> temp;
+			while (temp != "-") {
+				cidade = cidade + temp;
+				instr >> temp;
+			}
+			a->addPais(Pais(pais));
+			a->getPais(pais).addCidade(Cidade(cidade));
+			cout << a->getPais(pais).getNome() << " - " << a->getPais(pais).getCidade(cidade).getNome();
+			getch();
+		}
+	}
+	else{
+		cout << "wtf you doing?" << endl;
+		getch();
+	}
 }
 
 void admin(Agencia* a){

@@ -45,6 +45,13 @@ public:
 	virtual ~Pais();
 	bool addCidade(const Cidade& c);
 	string getNome() const;
+	bool operator==(const Pais& p) const;
+	Cidade& getCidade(string nome);
+	class CidadeInexistente{
+		string nome;
+	public:
+		CidadeInexistente(string nome);
+	};
 };
 
 class Transporte {
@@ -143,7 +150,7 @@ public:
 	string getNome() const;
 	bool addCliente(Cliente c);
 	void sortClientes();
-	vector<Cliente> getClientes();
+	vector<Cliente> getClientes() const;
 	bool addViagem(Viagem v);
 	bool addPais(Pais p);
 	Cliente& getCliente(string nome);
@@ -151,6 +158,12 @@ public:
 		string nome;
 	public:
 		ClienteInexistente(string nome);
+	};
+	Pais& getPais(string nome);
+	class PaisInexistente{
+		string nome;
+	public:
+		PaisInexistente(string nome);
 	};
 };
 
