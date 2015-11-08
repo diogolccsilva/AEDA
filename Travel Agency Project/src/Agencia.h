@@ -20,7 +20,7 @@
 using namespace std;
 
 class Alojamento {
-	string tipo,nome;
+	string tipo, nome;
 	float preco;
 public:
 	/**
@@ -36,7 +36,7 @@ public:
 	 @param preco Preco do Alojamento
 	 @return
 	 */
-	Alojamento(string tipo,string nome,float preco);
+	Alojamento(string tipo, string nome, float preco);
 	/**
 	 Destrutor Alojamento
 	 @param void
@@ -56,39 +56,39 @@ class Cidade {
 	vector<Alojamento> alojamentos;
 public:
 	/**
-	   Construtor de Cidade
+	 Construtor de Cidade
 
-	    @param Nome da Cidade
-	    @return
-	*/
+	 @param Nome da Cidade
+	 @return
+	 */
 	Cidade(string nome);
 	/**
-	    Destrutor de Cidade
+	 Destrutor de Cidade
 
-	    @param void
-	    @return
-	*/
+	 @param void
+	 @return
+	 */
 	virtual ~Cidade();
 	/**
-	    Retorna o Nome da Cidade
+	 Retorna o Nome da Cidade
 
-	    @param void
-	    @return Nome da Cidade
-	*/
+	 @param void
+	 @return Nome da Cidade
+	 */
 	string getNome() const;
 	/**
-	    Verifica a possibilidade de adicionar um Alojamento ao vetor alojamentos
+	 Verifica a possibilidade de adicionar um Alojamento ao vetor alojamentos
 
-	    @param Alojamento
-	    @return true se for possivel adicionar o Alojamento , caso contrario false
-	*/
+	 @param Alojamento
+	 @return true se for possivel adicionar o Alojamento , caso contrario false
+	 */
 	bool addAlojamento(const Alojamento& a);
 	/**
-	    Overload do operador ==
+	 Overload do operador ==
 
-	    @param  a Alojamento
-	    @return true se o Alojamento a e igual a um Alojamento, caso contrario false
-	*/
+	 @param  a Alojamento
+	 @return true se o Alojamento a e igual a um Alojamento, caso contrario false
+	 */
 	bool operator==(const Cidade& c) const;
 };
 
@@ -137,7 +137,7 @@ public:
 	 @param void
 	 @return
 	 */
-	class CidadeInexistente{
+	class CidadeInexistente {
 		string nome;
 	public:
 		/**
@@ -152,85 +152,76 @@ public:
 class Transporte {
 	string tipo;
 public:
-<<<<<<< HEAD
+	/**
+	 Construtor de Transporte
+
+	 @param tipo string
+	 @return
+	 */
 	Transporte(string tipo);
-=======
 	/**
-	    Construtor de Transporte
+	 Destrutor de Transporte
 
-	    @param void
-	    @return
-	*/
-	Transporte();
-	/**
-	    Destrutor de Transporte
-
-	    @param void
-	    @return
-	*/
->>>>>>> origin/master
+	 @param void
+	 @return
+	 */
 	virtual ~Transporte();
 };
 
 class Troco {
-	Cidade* origem,destino;
+	Cidade* origem, destino;
 	Transporte transporte;
 	tm data;
 public:
 	/**
-	    Construtor de Troco
+	 Construtor de Troco
 
-	    @param origem Cidade
-	    @param destino Cidade
-	    @param transporte Transporte
-	    @param data tm
-	    @return
-	*/
-	Troco(Cidade origem,Cidade destino,Transporte transporte,tm data);
+	 @param origem Cidade
+	 @param destino Cidade
+	 @param transporte Transporte
+	 @param data tm
+	 @return
+	 */
+	Troco(Cidade origem, Cidade destino, Transporte transporte, tm data);
 	/**
-	    Destrutor de Troco
+	 Destrutor de Troco
 
-	    @param void
-	    @return
-	*/
+	 @param void
+	 @return
+	 */
 	virtual ~Troco();
-<<<<<<< HEAD
+	/**
+	 Retorna a Cidade de Origem do Troco
+
+	 @param void
+	 @return Cidade de  Origem do Troco
+	 */
 	Cidade* getCidadeOrigem() const;
+	/**
+	 Retorna a Cidade de Destino do Troco
+
+	 @param void
+	 @return Cidade de Destino do Troco
+	 */
 	Cidade* getCidadeDestino() const;
-=======
 	/**
-	    Retorna a Cidade de Origem do Troco
+	 Retorna o Transporte utizado
 
-	    @param void
-	    @return Cidade de  Origem do Troco
-	*/
-	Cidade getCidadeOrigem() const;
-	/**
-		    Retorna a Cidade de Destino do Troco
-
-		    @param void
-		    @return Cidade de Destino do Troco
-		*/
-	Cidade getCidadeDestino() const;
-	/**
-		    Retorna o Transporte utizado
-
-		    @param void
-		    @return Transporte
-		*/
->>>>>>> origin/master
+	 @param void
+	 @return Transporte
+	 */
 	Transporte getTransporte() const;
 	/**
-		    Retorna a Data em que o Troco foi executado
+	 Retorna a Data em que o Troco foi executado
 
-		    @param void
-		    @return Data
-		*/
+	 @param void
+	 @return Data
+	 */
 	tm getData() const;
 };
 
 class Itinerario {
-	Cidade* origem,destino;
+	Cidade* origem, destino;
 	vector<Troco> trocos;
 public:
 	/**
@@ -239,22 +230,18 @@ public:
 	 @param destino Cidade de Destino
 	 @return
 	 */
-	Itinerario(Cidade origem,Cidade destino);
-<<<<<<< HEAD
-	void addTroco(Troco troco);
-=======
+	Itinerario(Cidade origem, Cidade destino);
 	/**
 	 Adiciona um novo troco
 	 @param troco Novo troco
 	 @return
 	 */
-	void AddTroco(Troco troco);
+	void addTroco(Troco troco);
 	/**
 	 Destrutor de Itinerario
 	 @param
 	 @return
 	 */
->>>>>>> origin/master
 	virtual ~Itinerario();
 	/**
 	 Get do vetor de Trocos
@@ -285,85 +272,78 @@ class Viagem {
 	static int sid;
 public:
 	/**
-		   Construtor de Viagem
+	 Construtor de Viagem
 
-		    @param itinerario Itinerario
-		    @param preco float
-		    @param id int
-		    @param alojamento Alojamento
-		    @return
-	*/
-	Viagem(Itinerario itinerario,float preco,int id = sid++,Alojamento* alojamento = new Alojamento());
+	 @param itinerario Itinerario
+	 @param preco float
+	 @param id int
+	 @param alojamento Alojamento
+	 @return
+	 */
+	Viagem(Itinerario itinerario, float preco, int id = sid++,
+			Alojamento* alojamento = new Alojamento());
 	/**
-			   Destrutor de Viagem
+	 Destrutor de Viagem
 
-			   @param void
-		       @return
-	*/
-
+	 @param void
+	 @return
+	 */
 	virtual ~Viagem();
 	/**
-			   Retorna o Preco Total da Viagem
+	 Retorna o Preco Total da Viagem
 
-			    @param void
-			    @return Preco
-	*/
-
+	 @param void
+	 @return Preco
+	 */
 	float getPreco() const;
-
 	/**
-			   Retorna o Itinerario da Viagem
+	 Retorna o Itinerario da Viagem
 
-			    @param void
-			    @return Itinerario
-	*/
-
+	 @param void
+	 @return Itinerario
+	 */
 	Itinerario getItinerario() const;
 	/**
-			   Retorna o Alojamento, se este existir
+	 Retorna o Alojamento, se este existir
 
-			    @param void
-			    @return Alojamento
-	*/
-
+	 @param void
+	 @return Alojamento
+	 */
 	Alojamento* getAlojamento() const;
 	/**
-			   Overload do operador ==
+	 Overload do operador ==
 
-			    @param v Viagem
-			    @return true se a Viagem v é igual a uma Viagem , caso contrario false
-	*/
+	 @param v Viagem
+	 @return true se a Viagem v é igual a uma Viagem , caso contrario false
+	 */
 	bool operator==(const Viagem& v) const;
 	/**
-			   Retorna o Id da Viagem
+	 Retorna o Id da Viagem
 
-			    @param void
-			    @return Id da Viagem
-	*/
-
+	 @param void
+	 @return Id da Viagem
+	 */
 	int getId() const;
 	/**
-			  Adiciona um Alojamento as caracteristicas de viagem, uma vez que este nao e obrigatorio
+	 Adiciona um Alojamento as caracteristicas de viagem, uma vez que este nao e obrigatorio
 
-			   @param alojamento Alojamento
-			   @return
-	*/
-
+	 @param alojamento Alojamento
+	 @return
+	 */
 	bool addAlojamento(Alojamento* a);
 	/**
-			   Elimina o Alojamento
+	 Elimina o Alojamento
 
-			    @param void
-			    @return
-		*/
-
+	 @param void
+	 @return
+	 */
 	void delAlojamento();
 	/**
-			   Altera o Alojamento da Viagem
+	 Altera o Alojamento da Viagem
 
-			   @param a Alojamento
-			   @return true, se alteracao for aplicada, caso contrario false
-	*/
+	 @param a Alojamento
+	 @return true, se alteracao for aplicada, caso contrario false
+	 */
 	bool changeAlojamento(Alojamento* a);
 
 };
@@ -466,7 +446,7 @@ public:
 	 @param noparticipantes Numero de Participantes do Cliente
 	 @return
 	 */
-	Comercial(string nome,int noparticipantes = 0);
+	Comercial(string nome, int noparticipantes = 0);
 	/**
 	 Destrutor
 	 @param void
@@ -479,7 +459,7 @@ public:
 	 @param np Numero de Participantes
 	 @return
 	 */
-	void addViagem(Viagem* v,int np);
+	void addViagem(Viagem* v, int np);
 	/**
 	 Get da Media de Participantes
 	 @param void
@@ -509,11 +489,11 @@ public:
 	Agencia(string nome);
 	virtual ~Agencia();
 	/**
-	    Retorna o nome da agencia
+	 Retorna o nome da agencia
 
-	    @param void
-	    @return string nome
-	*/
+	 @param void
+	 @return string nome
+	 */
 	string getNome() const;
 	bool addCliente(Cliente* c);
 	void sortClientes();
@@ -521,13 +501,13 @@ public:
 	bool addViagem(Viagem v);
 	bool addPais(Pais p);
 	Cliente* getCliente(string nome) const;
-	class ClienteInexistente{
+	class ClienteInexistente {
 		string nome;
 	public:
 		ClienteInexistente(string nome);
 	};
 	Pais getPais(string nome) const;
-	class PaisInexistente{
+	class PaisInexistente {
 		string nome;
 	public:
 		PaisInexistente(string nome);
