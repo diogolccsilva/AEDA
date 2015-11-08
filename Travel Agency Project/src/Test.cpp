@@ -118,8 +118,9 @@ void gclientes(Agencia* a) {
 	while (c != 27 && c != '9') {
 		system("cls");
 		cout << "1- Ver clientes;" << endl;
-		cout << "2- Adicionar Cliente;" << endl;
-		cout << "3- Remover Cliente;" << endl;
+		cout << "2- Adicionar cliente;" << endl;
+		cout << "3- Remover cliente;" << endl;
+		cout << "4- Guardar clientes" << endl;
 		cout << "9- Voltar;" << endl;
 		c = getch();
 		system("cls");
@@ -131,6 +132,9 @@ void gclientes(Agencia* a) {
 			addcliente(a);
 			break;
 		case '3':
+			break;
+		case '4':
+			a->saveClientes();
 			break;
 		default:
 			break;

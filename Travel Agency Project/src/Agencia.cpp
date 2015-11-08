@@ -229,7 +229,6 @@ void Agencia::loadViagens() {
 			for (unsigned int i = 0; i < vc.size() - 1; i++) {
 				iti.addTroco(Troco(vc[i], vc[i + 1], vt[i], vd[i]));
 			}
-			getch();
 			//Ler alojamento
 			string alojamento;
 			getline(file, alojamento);
@@ -265,7 +264,12 @@ void Agencia::loadClientes() {
 			while (!svids.eof()) {
 				string id = "";
 				getline(svids, id, ' ');
-				getCliente(nome)->addViagem(getViagem(atoi(id.c_str())));
+				try{
+					getCliente(nome)->addViagem(getViagem(atoi(id.c_str())));
+				}
+				catch (Agencia::ViagemInexistente &vi){
+					//should work still
+				}
 			}
 		}
 		file.close();
@@ -369,6 +373,24 @@ void Agencia::saveClientes() {
 		remove(filename.c_str());
 	}
 	ofstream file(filename.c_str());
+	for (unsigned int i = 0; i < clientes.size(); i++) {
+		if (i != 0) {
+			file << endl;
+		}
+		file << clientes[i]->getNome() << "-";
+		if (clientes[i]->getTipo() == "Comercial") {
+			file << "C" << "-";
+			file << clientes[i]->getNoParticipantes() << "-";
+		} else if (clientes[i]->getTipo() == "Particular") {
+			file << "P" << "-";
+		}
+		for (unsigned int j = 0; j < clientes[i]->getViagens().size(); j++) {
+			if (j != 0) {
+				file << " ";
+			}
+			file << clientes[i]->getViagens()[j]->getId();
+		}
+	}
 }
 
 /* Class: Cliente
@@ -437,6 +459,10 @@ string Particular::getTipo() const {
 	return "Particular";
 }
 
+int Particular::getNoParticipantes() const {
+	return 0;
+}
+
 /* Class: Comercial
  *
  *
@@ -454,6 +480,10 @@ Comercial::~Comercial() {
 
 string Comercial::getTipo() const {
 	return "Comercial";
+}
+
+int Comercial::getNoParticipantes() const {
+	return noparticipantes;
 }
 
 void Comercial::addViagem(Viagem* v, int np) {

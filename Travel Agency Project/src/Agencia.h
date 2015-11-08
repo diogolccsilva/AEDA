@@ -422,6 +422,7 @@ public:
 	 @return 0
 	 */
 	virtual string getTipo() const = 0;
+	virtual int getNoParticipantes() const = 0;
 	/**
 	 Overload do operador << da classe Cliente
 	 @param o Parâmetro de saída
@@ -451,6 +452,7 @@ public:
 	 @return Tipo de Cliente
 	 */
 	string getTipo() const;
+	int getNoParticipantes() const;
 };
 
 class Comercial: public Cliente {
@@ -476,6 +478,7 @@ public:
 	 @return
 	 */
 	void addViagem(Viagem* v, int np);
+	int getNoParticipantes() const;
 	/**
 	 Get da Media de Participantes
 	 @param void
