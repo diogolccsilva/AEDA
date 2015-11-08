@@ -154,13 +154,32 @@ void pdestinos(Agencia* a){
 	getch();
 }
 
+void adddestino(Agencia* a){
+	cout << "Pais: ";
+	string pais = "";
+	cin >> pais;
+	try{
+		a->getPais(pais);
+	}
+	catch(Agencia::PaisInexistente &pi){
+		a->addPais(Pais(pais));
+	}
+	cout << "Cidade: ";
+	string cidade = "";
+	cin >> cidade;
+	a->getPais(pais).addCidade(Cidade(cidade));
+	cout << "Destino " << pais << "," << cidade << " adicionado!" << endl;
+	getch();
+}
+
 void gdestinos(Agencia* a){
 	char c;
 	while (c!=27 && c!='9') {
 		system("cls");
 		cout << "1- Ver destinos;" << endl;
 		cout << "2- Adicionar destino;" << endl;
-		cout << "3- Remover destno;" << endl;
+		cout << "3- Remover destino;" << endl;
+		cout << "4- Guardar destinos;" << endl;
 		cout << "9- Voltar;" << endl;
 		c = getch();
 		system("cls");
@@ -169,9 +188,12 @@ void gdestinos(Agencia* a){
 			pdestinos(a);
 			break;
 		case '2':
-			//adddestino(a);
+			adddestino(a);
 			break;
 		case '3':
+			break;
+		case '4':
+			a->saveDestinos();
 			break;
 		default:
 			break;
@@ -296,6 +318,3 @@ int main(int argc, char const *argv[]){
 	}
     return 0;
 }
-
-
-

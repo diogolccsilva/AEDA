@@ -1,9 +1,12 @@
 Portugal-Porto
 Portugal-Lisboa
+Portugal-Faro
 Espanha-Madrid
 Espanha-Barcelona
 Espanha-Sevilha
 Reino Unido-Londres
 Reino Unido-Manchester
 Franca-Paris
+Franca-Lyon
 Italia-Roma
+Italia-Pisa

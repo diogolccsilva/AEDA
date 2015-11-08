@@ -16,6 +16,7 @@
 #include <conio.h>
 #include <fstream>
 #include <sstream>
+#include <cstdio>
 
 using namespace std;
 
@@ -533,6 +534,10 @@ public:
 	void loadAlojamentos();
 	void loadViagens();
 	void loadClientes();
+	void saveDestinos();
+	void saveAlojamentos();
+	void saveViagens();
+	void saveClientes();
 };
 
 #endif /* SRC_AGENCIA_H_ */
