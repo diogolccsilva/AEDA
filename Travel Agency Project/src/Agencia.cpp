@@ -99,7 +99,7 @@ Agencia::PaisInexistente::PaisInexistente(string nome) :
 
 }
 
-string Agencia::PaisInexistente::getNome() const{
+string Agencia::PaisInexistente::getNome() const {
 	return this->nome;
 }
 
@@ -129,7 +129,7 @@ void Agencia::loadDestinos() {
 			string cidade = "";
 			getline(file, cidade);
 			addPais(Pais(pais));
-			getPais(pais).addCidade(Cidade(cidade));
+			getPais(pais).addCidade(Cidade(cidade, pais));
 		}
 		file.close();
 	} else {
@@ -171,7 +171,7 @@ void Agencia::loadViagens() {
 			getline(file, id, '-');
 			//Ler preco
 			string preco;
-			getline(file, preco, ';');
+			getline(file, preco, '-');
 			//Ler itinerario/trocos
 			string itinerario;
 			getline(file, itinerario, '-');
@@ -229,6 +229,7 @@ void Agencia::loadViagens() {
 			for (unsigned int i = 0; i < vc.size() - 1; i++) {
 				iti.addTroco(Troco(vc[i], vc[i + 1], vt[i], vd[i]));
 			}
+			getch();
 			//Ler alojamento
 			string alojamento;
 			getline(file, alojamento);
@@ -324,14 +325,41 @@ void Agencia::saveViagens() {
 		remove(filename.c_str());
 	}
 	ofstream file(filename.c_str());
-	for (unsigned int i = 0;i<viagens.size();i++){
-		if (i!=0){
+	for (unsigned int i = 0; i < viagens.size(); i++) {
+		if (i != 0) {
 			file << endl;
 		}
-		file << viagens[i].getId() << viagens[i].getPreco();
-		for (unsigned int j = 0;j<viagens[i].getItinerario().getTrocos().size();j++){
-
+		file << viagens[i].getId() << "-" << viagens[i].getPreco() << "-";
+		vector<Troco> trocos = viagens[i].getItinerario().getTrocos();
+		file << trocos[0].getCidadeOrigem()->getPais() << ","
+				<< trocos[0].getCidadeOrigem()->getNome() << ";";
+		for (unsigned int j = 0; j < trocos.size(); j++) {
+			if (j != 0) {
+				file << ";";
+			}
+			file << trocos[j].getCidadeDestino()->getPais() << ","
+					<< trocos[j].getCidadeDestino()->getNome();
 		}
+		file << "-";
+		for (unsigned int j = 0; j < trocos.size(); j++) {
+			if (j != 0) {
+				file << ";";
+			}
+			file << trocos[j].getTransporte().getTipo();
+		}
+		file << "-";
+		for (unsigned int j = 0; j < trocos.size(); j++) {
+			if (j != 0) {
+				file << ";";
+			}
+			file << trocos[j].getData().tm_mday << "/"
+					<< trocos[j].getData().tm_mon + 1 << "/"
+					<< trocos[j].getData().tm_year - 100 << " "
+					<< trocos[j].getData().tm_hour << ":"
+					<< trocos[j].getData().tm_min;
+		}
+		file << "-";
+		file << viagens[i].getAlojamento()->getNome();
 	}
 }
 
@@ -582,6 +610,10 @@ Transporte::~Transporte() {
 	// TODO Auto-generated destructor stub
 }
 
+string Transporte::getTipo() const {
+	return tipo;
+}
+
 /* Class: Pais
  *
  *
@@ -644,8 +676,8 @@ string Pais::CidadeInexistente::getNome() const {
  *
  */
 
-Cidade::Cidade(string nome) :
-		nome(nome) {
+Cidade::Cidade(string nome, string pais) :
+		nome(nome), pais(pais) {
 
 }
 
@@ -655,6 +687,10 @@ Cidade::~Cidade() {
 
 string Cidade::getNome() const {
 	return nome;
+}
+
+string Cidade::getPais() const {
+	return pais;
 }
 
 bool Cidade::addAlojamento(const Alojamento& a) {

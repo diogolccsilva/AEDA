@@ -57,6 +57,7 @@ public:
 
 class Cidade {
 	string nome;
+	string pais;
 	vector<Alojamento> alojamentos;
 public:
 	/**
@@ -65,7 +66,7 @@ public:
 	 @param Nome da Cidade
 	 @return
 	 */
-	Cidade(string nome);
+	Cidade(string nome,string pais);
 	/**
 	 Destrutor de Cidade
 
@@ -80,6 +81,7 @@ public:
 	 @return Nome da Cidade
 	 */
 	string getNome() const;
+	string getPais() const;
 	/**
 	 Verifica a possibilidade de adicionar um Alojamento ao vetor alojamentos
 
@@ -172,6 +174,7 @@ public:
 	 @return
 	 */
 	Transporte(string tipo);
+	string getTipo() const;
 	/**
 	 Destrutor de Transporte
 
