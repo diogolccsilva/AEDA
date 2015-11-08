@@ -149,7 +149,16 @@ void gclientes(Agencia* a) {
 
 void pviagens(Agencia* a) {
 	vector<Viagem> vv = a->getViagens();
-	for (unsigned int i = 0;i<)
+	for (unsigned int i = 0;i<vv.size();i++){
+		Cidade* origem = vv[i].getItinerario().getOrigem();
+		Cidade* destino = vv[i].getItinerario().getDestino();
+		cout << "ID: " << vv[i].getId() << endl;
+		cout << "Origem: " << origem->getPais() << "," << origem->getNome() << endl;
+		cout << "Destino: " << destino->getPais() << "," << destino->getNome() << endl;
+		cout << "Preco: " << vv[i].getPreco() << endl;
+		cout << endl;
+	}
+	getch();
 }
 
 void addviagem(Agencia* a) {
@@ -267,7 +276,7 @@ void gviagens(Agencia* a) {
 		system("cls");
 		switch (c) {
 		case '1':
-			//pviagens(a);
+			pviagens(a);
 			break;
 		case '2':
 			addviagem(a);
