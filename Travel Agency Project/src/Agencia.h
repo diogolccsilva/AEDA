@@ -66,7 +66,7 @@ public:
 	 @param Nome da Cidade
 	 @return
 	 */
-	Cidade(string nome,string pais);
+	Cidade(string nome, string pais);
 	/**
 	 Destrutor de Cidade
 
@@ -423,6 +423,8 @@ public:
 	 */
 	virtual string getTipo() const = 0;
 	virtual int getNoParticipantes() const = 0;
+	virtual float desconto() const = 0;
+	virtual int getMedParticipantes() const = 0;
 	/**
 	 Overload do operador << da classe Cliente
 	 @param o Parâmetro de saída
@@ -453,6 +455,8 @@ public:
 	 */
 	string getTipo() const;
 	int getNoParticipantes() const;
+	float desconto() const;
+	int getMedParticipantes() const;
 };
 
 class Comercial: public Cliente {
@@ -490,7 +494,7 @@ public:
 	 @param
 	 @return Desconto
 	 */
-	float desconto();
+	float desconto() const;
 	/**
 	 Get do Tipo de Cliente
 	 @param void

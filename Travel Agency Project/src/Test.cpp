@@ -53,6 +53,7 @@ void pclientes(Agencia* a) {
 		cout << (*a->getClientes()[i]) << endl;
 	getch();
 }
+
 void addcliente(Agencia* a) {
 	string nome;
 	char tipo;
@@ -75,6 +76,10 @@ void addcliente(Agencia* a) {
 	}
 }
 
+void cpviagens(Agencia* a) {
+
+}
+
 void mcliente(Agencia* a) {
 	string nome;
 	cout << "Nome: ";
@@ -84,7 +89,7 @@ void mcliente(Agencia* a) {
 		c1 = a->getCliente(nome);
 	} catch (Agencia::ClienteInexistente &ci) {
 		cout << "Cliente inexistente!" << endl;
-		system("pause");
+		getch();
 		return;
 	}
 	char c;
@@ -95,14 +100,14 @@ void mcliente(Agencia* a) {
 		cout << "2- Ver viagens futuras;" << endl;
 		cout << "3- " << endl;
 		cout << "9- Voltar;" << endl;
-		cin >> c;
+		c = getch();
 		system("cls");
 		switch (c) {
 		case '1':
 
 			break;
 		case '2':
-
+			cpviagens(a);
 			break;
 		case '3':
 
@@ -142,6 +147,10 @@ void gclientes(Agencia* a) {
 	}
 }
 
+void addviagem(Agencia* a){
+
+}
+
 void gviagens(Agencia* a) {
 	char c;
 	while (c != 27 && c != '9') {
@@ -155,10 +164,10 @@ void gviagens(Agencia* a) {
 		system("cls");
 		switch (c) {
 		case '1':
-
+			//pviagens(a);
 			break;
 		case '2':
-
+			addviagem(a);
 			break;
 		case '3':
 

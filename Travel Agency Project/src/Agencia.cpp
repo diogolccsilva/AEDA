@@ -21,7 +21,10 @@ Agencia::Agencia(string nome) :
 }
 
 Agencia::~Agencia() {
-	// TODO Auto-generated destructor stub
+	nome.~basic_string();
+	clientes.~vector();
+	viagens.~vector();
+	paises.~vector();
 }
 
 string Agencia::getNome() const {
@@ -264,10 +267,9 @@ void Agencia::loadClientes() {
 			while (!svids.eof()) {
 				string id = "";
 				getline(svids, id, ' ');
-				try{
+				try {
 					getCliente(nome)->addViagem(getViagem(atoi(id.c_str())));
-				}
-				catch (Agencia::ViagemInexistente &vi){
+				} catch (Agencia::ViagemInexistente &vi) {
 					//should work still
 				}
 			}
@@ -410,7 +412,8 @@ Cliente::Cliente(string nome) :
 }
 
 Cliente::~Cliente() {
-	// TODO Auto-generated destructor stub
+	nome.~basic_string();
+	viagens.~vector();
 }
 
 int Cliente::getNoViagens() const {
@@ -452,7 +455,7 @@ Particular::Particular(string nome) :
 }
 
 Particular::~Particular() {
-	// TODO Auto-generated destructor stub
+	Cliente::~Cliente();
 }
 
 string Particular::getTipo() const {
@@ -460,6 +463,14 @@ string Particular::getTipo() const {
 }
 
 int Particular::getNoParticipantes() const {
+	return 0;
+}
+
+float Particular::desconto() const {
+	return 0;
+}
+
+int Particular::getMedParticipantes() const {
 	return 0;
 }
 
@@ -475,7 +486,7 @@ Comercial::Comercial(string nome, int noparticipantes) :
 }
 
 Comercial::~Comercial() {
-	// TODO Auto-generated destructor stub
+	Cliente::~Cliente();
 }
 
 string Comercial::getTipo() const {
@@ -495,19 +506,14 @@ int Comercial::getMedParticipantes() const {
 	return noparticipantes / getViagens().size();
 }
 
-float Comercial::desconto() {
-
-	float desconto = 0;
-
+float Comercial::desconto() const {
 	if (getViagens().size() > 5 && getMedParticipantes() > 10) {
-		desconto = 0.5;
+		return 0.5;
 	}
-
 	if (getViagens().size() > 5 && getMedParticipantes() > 15) {
-		desconto = 0.10;
+		return 0.10;
 	}
-
-	return desconto;
+	return 0;
 }
 
 /* Class: Viagem
@@ -773,7 +779,8 @@ Alojamento::Alojamento(string tipo, string nome, float preco) :
 }
 
 Alojamento::~Alojamento() {
-	// TODO Auto-generated destructor stub
+	tipo.~basic_string();
+	nome.~basic_string();
 }
 
 string Alojamento::getNome() const {
