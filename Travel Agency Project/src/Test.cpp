@@ -147,8 +147,38 @@ void gclientes(Agencia* a) {
 	}
 }
 
-void addviagem(Agencia* a){
-
+void addviagem(Agencia* a) {
+	cout << "Numero de trocos: ";
+	int nt;
+	cin >> nt;
+	vector<Troco> trocos;
+	for (unsigned int i = 0; i < nt; i++) {
+		cout << "Troco 1:" << endl;
+		cout << "Origem: ";
+		string origem = "";
+		cin >> origem;
+		cout << "Destino: ";
+		string destino = "";
+		cin >> destino;
+		cout << "Transporte: ";
+		string transporte = "";
+		cin >> transporte;
+		cin.ignore();
+		cout << "Data (DD/MM/AA HH:MM): ";
+		string d,m,a,h,min;
+		getline(cin,d,'/');
+		getline(cin,m,'/');
+		getline(cin,a,' ');
+		getline(cin,h,':');
+		getline(cin,min);
+		cout << d << "/" << m << "/" << a << " " << h << ":" << min << endl;
+		tm data;
+		data.tm_mday = atoi(d.c_str());
+		data.tm_mon = atoi(m.c_str())-1;
+		data.tm_year = atoi(a.c_str())+100;
+		data.tm_hour = atoi(h.c_str());
+		data.tm_min = atoi(min.c_str());
+	}
 }
 
 void gviagens(Agencia* a) {

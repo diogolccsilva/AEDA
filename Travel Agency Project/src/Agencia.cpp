@@ -165,6 +165,7 @@ void Agencia::loadAlojamentos() {
 }
 
 void Agencia::loadViagens() {
+	int vid = 0;
 	string filename = "../viagens" + nome + ".txt";
 	ifstream file(filename.c_str());
 	if (file.is_open()) {
@@ -172,6 +173,9 @@ void Agencia::loadViagens() {
 			//Ler id
 			string id;
 			getline(file, id, '-');
+			if (vid < atoi(id.c_str())) {
+				vid = atoi(id.c_str());
+			}
 			//Ler preco
 			string preco;
 			getline(file, preco, '-');
@@ -235,14 +239,20 @@ void Agencia::loadViagens() {
 			//Ler alojamento
 			string alojamento;
 			getline(file, alojamento);
-			addViagem(
-					Viagem(iti, atof(preco.c_str()), atoi(id.c_str()),
-							iti.getDestino()->getAlojamento(alojamento)));
+			try {
+				addViagem(
+						Viagem(iti, atof(preco.c_str()), atoi(id.c_str()),
+								iti.getDestino()->getAlojamento(alojamento)));
+			} catch (Cidade::AlojamentoInexistente &ai) {
+				cout << "Alojamento " << ai.getNome() << " " << endl;
+			}
+
 		}
 		file.close();
 	} else {
 
 	}
+	Viagem::sid = vid;
 }
 
 void Agencia::loadClientes() {
@@ -760,6 +770,10 @@ bool Cidade::operator==(const Cidade& c) const {
 Cidade::AlojamentoInexistente::AlojamentoInexistente(string nome) :
 		nome(nome) {
 
+}
+
+string Alojamento::getNome() const{
+	return this->nome;
 }
 
 /* Class: Alojamento

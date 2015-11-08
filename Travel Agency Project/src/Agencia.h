@@ -102,6 +102,7 @@ public:
 		string nome;
 	public:
 		AlojamentoInexistente(string nome);
+		string getNome() const;
 	};
 };
 
@@ -285,8 +286,8 @@ class Viagem {
 	Alojamento* alojamento;
 	float preco; //apenas o preco da viagem, para obter o preco total adicionar o preco do alojamento
 	int id;
-	static int sid;
 public:
+	static int sid;
 	/**
 	 Construtor de Viagem
 
@@ -361,7 +362,6 @@ public:
 	 @return true, se alteracao for aplicada, caso contrario false
 	 */
 	bool changeAlojamento(Alojamento* a);
-
 };
 
 class Cliente {
