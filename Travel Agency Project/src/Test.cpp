@@ -148,7 +148,8 @@ void gclientes(Agencia* a) {
 }
 
 void pviagens(Agencia* a) {
-
+	vector<Viagem> vv = a->getViagens();
+	for (unsigned int i = 0;i<)
 }
 
 void addviagem(Agencia* a) {

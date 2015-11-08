@@ -41,6 +41,10 @@ vector<Cliente*> Agencia::getClientes() const {
 	return clientes;
 }
 
+vector<Viagem> Agencia::getViagens() const{
+	return viagens;
+}
+
 bool Agencia::addViagem(Viagem v) {
 	vector<Viagem>::const_iterator it;
 	it = find(viagens.begin(), viagens.end(), v);
