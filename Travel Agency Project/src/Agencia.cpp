@@ -455,7 +455,7 @@ Particular::Particular(string nome) :
 }
 
 Particular::~Particular() {
-	Cliente::~Cliente();
+
 }
 
 string Particular::getTipo() const {
@@ -486,7 +486,7 @@ Comercial::Comercial(string nome, int noparticipantes) :
 }
 
 Comercial::~Comercial() {
-	Cliente::~Cliente();
+
 }
 
 string Comercial::getTipo() const {
