@@ -45,6 +45,8 @@ public:
 	 */
 	virtual ~Alojamento();
 	string getNome() const;
+	string getTipo() const;
+	float getPreco() const;
 	/**
 	 Overload do operador == em Alojamento
 	 @param a Alojamento por referencia
@@ -94,7 +96,7 @@ public:
 	 @return true se o Alojamento a e igual a um Alojamento, caso contrario false
 	 */
 	bool operator==(const Cidade& c) const;
-	class AlojamentoInexistente{
+	class AlojamentoInexistente {
 		string nome;
 	public:
 		AlojamentoInexistente(string nome);
@@ -523,9 +525,10 @@ public:
 		string nome;
 	public:
 		PaisInexistente(string nome);
+		string getNome() const;
 	};
 	Viagem* getViagem(int id);
-	class ViagemInexistente{
+	class ViagemInexistente {
 		int id;
 	public:
 		ViagemInexistente(int id);

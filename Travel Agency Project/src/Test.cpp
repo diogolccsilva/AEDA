@@ -4,65 +4,63 @@
 #include "cute_runner.h"
 #include "Agencia.h"
 
-
 void thisIsATest() {
-	ASSERTM("start writing tests", false);	
+	ASSERTM("start writing tests", false);
 }
 
-void test_Cidade(){
+void test_Cidade() {
 
 	Cidade c1("Paris");
-	Cidade c2 ("Oslo");
-	Cidade c3 ("Tokio");
-	Cidade c4 ("Sidney");
+	Cidade c2("Oslo");
+	Cidade c3("Tokio");
+	Cidade c4("Sidney");
 
-	ASSERT_EQUAL("Paris",c1.getNome());
-	ASSERT_EQUAL("Oslo",c2.getNome());
-	ASSERT_EQUAL("Tokio",c3.getNome());
-	ASSERT_EQUAL("Sidney",c4.getNome());
+	ASSERT_EQUAL("Paris", c1.getNome());
+	ASSERT_EQUAL("Oslo", c2.getNome());
+	ASSERT_EQUAL("Tokio", c3.getNome());
+	ASSERT_EQUAL("Sidney", c4.getNome());
 }
 
-void test_Pais(){
+void test_Pais() {
 
-	Pais p1 ("França");
-	Pais p2 ("Noruega");
-	Pais p3 ("Japao");
-	Pais p4 ("Autralia");
+	Pais p1("França");
+	Pais p2("Noruega");
+	Pais p3("Japao");
+	Pais p4("Autralia");
 
-	ASSERT_EQUAL("França",p1.getNome());
-	ASSERT_EQUAL("Noruega",p2.getNome());
-	ASSERT_EQUAL("Japao",p3.getNome());
-	ASSERT_EQUAL("Australia",p4.getNome());
+	ASSERT_EQUAL("França", p1.getNome());
+	ASSERT_EQUAL("Noruega", p2.getNome());
+	ASSERT_EQUAL("Japao", p3.getNome());
+	ASSERT_EQUAL("Australia", p4.getNome());
 
 	//p1.addCidade("Paris");
 
-
 }
 
-void runAllTests(int argc, char const *argv[]){
+void runAllTests(int argc, char const *argv[]) {
 	cute::suite s;
 	//TODO add your test here
 	s.push_back(CUTE(thisIsATest));
 	s.push_back(CUTE(test_Cidade));
 	s.push_back(CUTE(test_Pais));
-	cute::xml_file_opener xmlfile(argc,argv);
-	cute::xml_listener<cute::ide_listener<> >  lis(xmlfile.out);
-	cute::makeRunner(lis,argc,argv)(s, "AllTests");
+	cute::xml_file_opener xmlfile(argc, argv);
+	cute::xml_listener<cute::ide_listener<> > lis(xmlfile.out);
+	cute::makeRunner(lis, argc, argv)(s, "AllTests");
 }
 
-void pclientes(Agencia* a){
-	for (unsigned int i = 0;i < a->getClientes().size();i++)
+void pclientes(Agencia* a) {
+	for (unsigned int i = 0; i < a->getClientes().size(); i++)
 		cout << (*a->getClientes()[i]) << endl;
 	getch();
 }
-void addcliente(Agencia* a){
+void addcliente(Agencia* a) {
 	string nome;
 	char tipo;
 	cout << "Nome: ";
 	cin >> nome;
 	cout << "Tipo ('P' ou 'C'): ";
 	cin >> tipo;
-	switch (tipo){
+	switch (tipo) {
 	case 'P':
 		a->addCliente(new Particular(nome));
 		break;
@@ -77,22 +75,21 @@ void addcliente(Agencia* a){
 	}
 }
 
-void mcliente(Agencia* a){
+void mcliente(Agencia* a) {
 	string nome;
 	cout << "Nome: ";
 	cin >> nome;
 	Cliente* c1;
 	try {
 		c1 = a->getCliente(nome);
-	}
-	catch (Agencia::ClienteInexistente &ci){
+	} catch (Agencia::ClienteInexistente &ci) {
 		cout << "Cliente inexistente!" << endl;
 		system("pause");
 		return;
 	}
 	char c;
 	cout << c1 << endl;
-	while (c!=27 && c!='9') {
+	while (c != 27 && c != '9') {
 		system("cls");
 		cout << "1- Comprar viagem;" << endl;
 		cout << "2- Ver viagens futuras;" << endl;
@@ -116,9 +113,9 @@ void mcliente(Agencia* a){
 	}
 }
 
-void gclientes(Agencia* a){
+void gclientes(Agencia* a) {
 	char c;
-	while (c!=27 && c!='9') {
+	while (c != 27 && c != '9') {
 		system("cls");
 		cout << "1- Ver clientes;" << endl;
 		cout << "2- Adicionar Cliente;" << endl;
@@ -141,27 +138,28 @@ void gclientes(Agencia* a){
 	}
 }
 
-void gviagens(Agencia* a){
+void gviagens(Agencia* a) {
 
 }
 
-void pdestinos(Agencia* a){
-	for (unsigned int i = 0; i<a->getPaises().size();i++){
-		for(unsigned int j=0;j<a->getPaises()[i].getCidades().size();j++){
-			cout << a->getPaises()[i].getNome() << "," <<a->getPaises()[i].getCidades()[j].getNome() << endl;
+void pdestinos(Agencia* a) {
+	for (unsigned int i = 0; i < a->getPaises().size(); i++) {
+		for (unsigned int j = 0; j < a->getPaises()[i].getCidades().size();
+				j++) {
+			cout << a->getPaises()[i].getNome() << ","
+					<< a->getPaises()[i].getCidades()[j].getNome() << endl;
 		}
 	}
 	getch();
 }
 
-void adddestino(Agencia* a){
+void adddestino(Agencia* a) {
 	cout << "Pais: ";
 	string pais = "";
 	cin >> pais;
-	try{
+	try {
 		a->getPais(pais);
-	}
-	catch(Agencia::PaisInexistente &pi){
+	} catch (Agencia::PaisInexistente &pi) {
 		a->addPais(Pais(pais));
 	}
 	cout << "Cidade: ";
@@ -172,9 +170,9 @@ void adddestino(Agencia* a){
 	getch();
 }
 
-void gdestinos(Agencia* a){
+void gdestinos(Agencia* a) {
 	char c;
-	while (c!=27 && c!='9') {
+	while (c != 27 && c != '9') {
 		system("cls");
 		cout << "1- Ver destinos;" << endl;
 		cout << "2- Adicionar destino;" << endl;
@@ -201,24 +199,67 @@ void gdestinos(Agencia* a){
 	}
 }
 
-void palojamentos(Agencia* a){
-	for (unsigned int i = 0; i<a->getPaises().size();i++){
-		for(unsigned int j=0;j<a->getPaises()[i].getCidades().size();j++){
-			for (unsigned int k=0;k<a->getPaises()[i].getCidades()[j].getAlojamentos().size();k++){
-				cout << a->getPaises()[i].getNome() << "," << a->getPaises()[i].getCidades()[j].getNome() << " - " << a->getPaises()[i].getCidades()[j].getAlojamentos()[k].getNome() << endl;
+void palojamentos(Agencia* a) {
+	for (unsigned int i = 0; i < a->getPaises().size(); i++) {
+		for (unsigned int j = 0; j < a->getPaises()[i].getCidades().size();
+				j++) {
+			for (unsigned int k = 0;
+					k
+							< a->getPaises()[i].getCidades()[j].getAlojamentos().size();
+					k++) {
+				cout << a->getPaises()[i].getNome() << ","
+						<< a->getPaises()[i].getCidades()[j].getNome() << " - "
+						<< a->getPaises()[i].getCidades()[j].getAlojamentos()[k].getNome()
+						<< endl;
 			}
 		}
 	}
 	getch();
 }
 
-void galojamentos(Agencia* a){
+void addalojamento(Agencia* a) {
+	cout << "Pais: ";
+	string pais = "";
+	cin >> pais;
+	try {
+		a->getPais(pais);
+	} catch (Agencia::PaisInexistente &pi) {
+		cout << "Pais " << pi.getNome() << " nao existe!" << endl;
+		getch();
+		return;
+	}
+	cout << "Cidade: ";
+	string cidade = "";
+	cin >> cidade;
+	cin.ignore();
+	try {
+		a->getPais(pais).getCidade(cidade);
+	} catch (Pais::CidadeInexistente &ci) {
+		cout << "Cidade " << ci.getNome() << " nao existe!" << endl;
+		getch();
+		return;
+	}
+	cout << "Nome: ";
+	string nome = "";
+	getline(cin,nome);
+	cout << "Tipo: ";
+	string tipo = "";
+	cin >> tipo;
+	cout << "Preco: ";
+	float preco = 0;
+	cin >> preco;
+	a->getPais(pais).getCidade(cidade)->addAlojamento(Alojamento(tipo,nome,preco));
+	getch();
+}
+
+void galojamentos(Agencia* a) {
 	char c;
-	while (c!=27 && c!='9') {
+	while (c != 27 && c != '9') {
 		system("cls");
 		cout << "1- Ver alojamentos;" << endl;
 		cout << "2- Adicionar alojamento;" << endl;
 		cout << "3- Remover alojamento;" << endl;
+		cout << "4- Guardar alojamentos;" << endl;
 		cout << "9- Voltar;" << endl;
 		c = getch();
 		system("cls");
@@ -227,9 +268,12 @@ void galojamentos(Agencia* a){
 			palojamentos(a);
 			break;
 		case '2':
-
+			addalojamento(a);
 			break;
 		case '3':
+			break;
+		case '4':
+			a->saveAlojamentos();
 			break;
 		default:
 			break;
@@ -237,9 +281,9 @@ void galojamentos(Agencia* a){
 	}
 }
 
-void admin(Agencia* a){
+void admin(Agencia* a) {
 	char c;
-	while (c!=27 && c!='9') {
+	while (c != 27 && c != '9') {
 		system("cls");
 		cout << "1- Gerir clientes;" << endl;
 		cout << "2- Gerir viagens;" << endl;
@@ -267,7 +311,7 @@ void admin(Agencia* a){
 	}
 }
 
-void manual(){
+void manual() {
 	string nome;
 	cout << "Nome da agencia: ";
 	cin >> nome;
@@ -279,12 +323,12 @@ void manual(){
 	a->loadClientes();
 	char c;
 	system("cls");
-	while (c!=27 && c!='3'){
+	while (c != 27 && c != '3') {
 		system("cls");
 		cout << "1- Cliente;" << endl;
 		cout << "2- Administrador;" << endl;
 		cout << "3- Voltar;" << endl;
-		c=getch();
+		c = getch();
 		system("cls");
 		switch (c) {
 		case '1':
@@ -299,22 +343,24 @@ void manual(){
 	}
 }
 
-int main(int argc, char const *argv[]){
+int main(int argc, char const *argv[]) {
 	char c;
-	while (c!=27 && c!=3){
+	while (c != 27 && c != 3) {
 		cout << "1- Automatico" << endl;
 		cout << "2- Manual" << endl;
 		cout << "3- Sair" << endl;
-		c=getch();
+		c = getch();
 		system("CLS");
-		switch(c){
-		case '1': runAllTests(argc,argv);
+		switch (c) {
+		case '1':
+			runAllTests(argc, argv);
 			break;
-		case '2': manual();
+		case '2':
+			manual();
 			break;
 		default:
 			break;
 		}
 	}
-    return 0;
+	return 0;
 }

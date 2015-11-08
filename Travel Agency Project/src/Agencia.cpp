@@ -99,6 +99,10 @@ Agencia::PaisInexistente::PaisInexistente(string nome) :
 
 }
 
+string Agencia::PaisInexistente::getNome() const{
+	return this->nome;
+}
+
 Viagem* Agencia::getViagem(int id) {
 	int it = -1;
 	for (unsigned int i = 0; i < viagens.size(); i++) {
@@ -269,18 +273,19 @@ void Agencia::loadClientes() {
 	}
 }
 
-void Agencia::saveDestinos(){
+void Agencia::saveDestinos() {
 	string filename = "../destinos" + nome + ".txt";
-	if (ifstream(filename.c_str())){
+	if (ifstream(filename.c_str())) {
 		remove(filename.c_str());
 	}
 	ofstream file(filename.c_str());
-	for (unsigned int i=0;i<paises.size();i++){
-		for (unsigned int j=0;j<paises[i].getCidades().size();j++){
-			if (!(i == 0 && j == 0)){
+	for (unsigned int i = 0; i < paises.size(); i++) {
+		for (unsigned int j = 0; j < paises[i].getCidades().size(); j++) {
+			if (!(i == 0 && j == 0)) {
 				file << endl;
 			}
-			file << paises[i].getNome() << "-" << paises[i].getCidades()[j].getNome();
+			file << paises[i].getNome() << "-"
+					<< paises[i].getCidades()[j].getNome();
 		}
 	}
 	file.close();
@@ -292,6 +297,25 @@ void Agencia::saveAlojamentos() {
 		remove(filename.c_str());
 	}
 	ofstream file(filename.c_str());
+	for (unsigned int i = 0; i < paises.size(); i++) {
+		for (unsigned int j = 0; j < paises[i].getCidades().size(); j++) {
+			for (unsigned int k = 0;
+					k < paises[i].getCidades()[j].getAlojamentos().size();
+					k++) {
+				if (!(i == 0 && j == 0 && k == 0)) {
+					file << endl;
+				}
+				file << paises[i].getCidades()[j].getAlojamentos()[k].getNome()
+						<< "-"
+						<< paises[i].getCidades()[j].getAlojamentos()[k].getTipo()
+						<< "-"
+						<< paises[i].getCidades()[j].getAlojamentos()[k].getPreco()
+						<< "-" << paises[i].getNome() << ","
+						<< paises[i].getCidades()[j].getNome();
+			}
+		}
+	}
+	file.close();
 }
 
 void Agencia::saveViagens() {
@@ -300,6 +324,15 @@ void Agencia::saveViagens() {
 		remove(filename.c_str());
 	}
 	ofstream file(filename.c_str());
+	for (unsigned int i = 0;i<viagens.size();i++){
+		if (i!=0){
+			file << endl;
+		}
+		file << viagens[i].getId() << viagens[i].getPreco();
+		for (unsigned int j = 0;j<viagens[i].getItinerario().getTrocos().size();j++){
+
+		}
+	}
 }
 
 void Agencia::saveClientes() {
@@ -679,6 +712,14 @@ Alojamento::~Alojamento() {
 
 string Alojamento::getNome() const {
 	return nome;
+}
+
+string Alojamento::getTipo() const {
+	return tipo;
+}
+
+float Alojamento::getPreco() const {
+	return preco;
 }
 
 bool Alojamento::operator==(const Alojamento& a) const {
