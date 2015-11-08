@@ -44,13 +44,29 @@ public:
 	 @return
 	 */
 	virtual ~Alojamento();
+	/**
+	 Get do Nome do Alojamento
+	 @param void
+	 @return Nome do Alojamento
+	 */
 	string getNome() const;
+	/**
+	 Get do Tipo de Alojamento
+	 @param void
+	 @param Tipo de Alojamento
+	 */
 	string getTipo() const;
+	/**
+	 Get do Preco do Alojamento
+	 @param void
+	 @return Preco do Alojamento
+	 */
 	float getPreco() const;
 	/**
-	 Overload do operador == em Alojamento
+	 Compara dois alojamentos
 	 @param a Alojamento por referencia
-	 @return Alojamento e, ou nao, igual
+	 @return true se for igual
+	 @return false se for diferente
 	 */
 	bool operator==(const Alojamento& a) const;
 };
@@ -75,12 +91,18 @@ public:
 	 */
 	virtual ~Cidade();
 	/**
-	 Retorna o Nome da Cidade
+	 Get do Nome da Cidade
 
 	 @param void
 	 @return Nome da Cidade
 	 */
 	string getNome() const;
+	/**
+	 Get do Pais da Cidade
+
+	 @param void
+	 @return Pais da Cidade
+	 */
 	string getPais() const;
 	/**
 	 Verifica a possibilidade de adicionar um Alojamento ao vetor alojamentos
@@ -89,19 +111,43 @@ public:
 	 @return true se for possivel adicionar o Alojamento , caso contrario false
 	 */
 	bool addAlojamento(const Alojamento& a);
+	/**
+	 Get do Apontador para Alojamento
+	 @param nome Nome do Alojamento
+	 @return Alojamento por apontador
+	 */
 	Alojamento* getAlojamento(string nome);
+	/**
+	 Get do vetor de Alojamentos existentes
+	 @param void
+	 @return Vetor de Alojamentos existentes
+	 */
 	vector<Alojamento> getAlojamentos();
 	/**
-	 Overload do operador ==
+	 Compara as duas cidades
 
-	 @param  a Alojamento
-	 @return true se o Alojamento a e igual a um Alojamento, caso contrario false
+	 @param  c Cidade
+	 @return true se as cidades forem iguais
+	 @return false se as cidades forem diferentes
 	 */
 	bool operator==(const Cidade& c) const;
 	class AlojamentoInexistente {
 		string nome;
 	public:
+		/**
+		 Construtor da excecao AlojamentoInexistente
+		 @param nome Nome do Alojamento Inexistente
+		 @return
+		 */
 		AlojamentoInexistente(string nome);
+<<<<<<< HEAD
+=======
+		/**
+		 Get do Nome do Alojamento Inexistente
+		 @param void
+		 @return Nome do Alojamento
+		 */
+>>>>>>> origin/master
 		string getNome() const;
 	};
 };
@@ -146,6 +192,11 @@ public:
 	 @return Nome da cidade
 	 */
 	Cidade* getCidade(string nome);
+	/**
+	 Get do vetor com as Cidades
+	 @param void
+	 @return Vetor com as Cidades
+	 */
 	vector<Cidade> getCidades() const;
 	/**
 	 Classe da excecao Cidade Inexistente
@@ -161,6 +212,11 @@ public:
 		 @return
 		 */
 		CidadeInexistente(string nome);
+		/**
+		 Get do Nome da Cidade Inexistente
+		 @param void
+		 @return Nome da Cidade Inexistente
+		 */
 		string getNome() const;
 	};
 };
@@ -175,6 +231,11 @@ public:
 	 @return
 	 */
 	Transporte(string tipo);
+	/**
+	 Get do Tipo de Transporte
+	 @param void
+	 @return Tipo de Transporte
+	 */
 	string getTipo() const;
 	/**
 	 Destrutor de Transporte
@@ -422,8 +483,23 @@ public:
 	 @return 0
 	 */
 	virtual string getTipo() const = 0;
+	/**
+	 Get do Numero Participantes no Cliente Comercial
+	 @param void
+	 @return Numero de Participantes
+	 */
 	virtual int getNoParticipantes() const = 0;
+	/**
+	 Calculo do desconto do Cliente
+	 @param void
+	 @return Desconto do cliente
+	 */
 	virtual float desconto() const = 0;
+	/**
+	 Calculo da media de participantes do Cliente Comercial
+	 @param void
+	 @return Media de Participantes
+	 */
 	virtual int getMedParticipantes() const = 0;
 	/**
 	 Overload do operador << da classe Cliente
@@ -454,8 +530,23 @@ public:
 	 @return Tipo de Cliente
 	 */
 	string getTipo() const;
+	/**
+	 Get do Numero de Participantes no Cliente Particular
+	 @param void
+	 @return Numero de Participantes
+	 */
 	int getNoParticipantes() const;
+	/**
+	 Calculo do desconto do Cliente
+	 @param void
+	 @return Desconto
+	 */
 	float desconto() const;
+	/**
+	 Get do Numero Medio de Participantes do Cliente
+	 @param void
+	 @return Numero Medio de Participantes
+	 */
 	int getMedParticipantes() const;
 };
 
@@ -482,6 +573,11 @@ public:
 	 @return
 	 */
 	void addViagem(Viagem* v, int np);
+	/**
+	 Get do Numero de Participantes no Cliente Comercial
+	 @param void
+	 @return Numero de Participantes
+	 */
 	int getNoParticipantes() const;
 	/**
 	 Get da Media de Participantes
@@ -509,7 +605,17 @@ class Agencia {
 	vector<Viagem> viagens; //totalidade de viagens da agencia (ja efetuadas e futuras)
 	vector<Pais> paises; //paises para os quais faz viagens
 public:
+	/**
+	 Construtor da classe Agencia
+	 @param nome Nome da Agencia
+	 @return
+	 */
 	Agencia(string nome);
+	/**
+	 Destrutor da classe Agencia
+	 @param void
+	 @return
+	 */
 	virtual ~Agencia();
 	/**
 	 Retorna o nome da agencia
@@ -518,38 +624,141 @@ public:
 	 @return string nome
 	 */
 	string getNome() const;
+	/**
+	 Funcao booleana para verificar se pode adicionar cliente
+	 @param c Apontador para um Cliente
+	 @return true se poder adicionar
+	 @return false se nao poder adicionar
+	 */
 	bool addCliente(Cliente* c);
 	void sortClientes();
+	/**
+	 Get do vetor de Clientes por apontador
+	 @param void
+	 @return vetor de apontadores para Clientes
+	 */
 	vector<Cliente*> getClientes() const;
+	/**
+	 Funcao booleana para verificar se pode adicionar viagem
+	 @param v Viagem
+	 @return true se poder adicionar
+	 @return false se nao poder adicionar
+	 */
 	bool addViagem(Viagem v);
+	/**
+	 Funcao booleana para verificar se pode adicionar Pais
+	 @param p Pais
+	 @return true se poder adicionar
+	 @return false se nao poder adicionar
+	 */
 	bool addPais(Pais p);
+	/**
+	 Get do vetor dos Paises
+	 @param void
+	 @return vetor dos Paises
+	 */
 	vector<Pais> getPaises() const;
+	/**
+	 Get do apontador para Cliente
+	 @param nome Nome do Cliente
+	 @return Apontador para cliente
+	 */
 	Cliente* getCliente(string nome) const;
 	class ClienteInexistente {
 		string nome;
 	public:
+		/**
+		 Construtor da excecao para Cliente Inexistente
+		 @param nome Nome do Cliente Inexistente
+		 @return
+		 */
 		ClienteInexistente(string nome);
 	};
+	/**
+	 Get do Pais por referencia
+	 @param nome Nome do Pais
+	 @return Pais por referencia
+	 */
 	Pais& getPais(string nome);
 	class PaisInexistente {
 		string nome;
 	public:
+		/**
+		 Construtor da excecao Pais Inexistente
+		 @param nome Nome do Pais Inexistente
+		 @return
+		 */
 		PaisInexistente(string nome);
+		/**
+		 Get do Nome do Pais Inexistente
+		 @param void
+		 @return Nome do Pais Inexistente
+		 */
 		string getNome() const;
 	};
+	/**
+	 Get do apontador para uma Viagem
+	 @param id ID da Viagem
+	 @return Apontador para Viagem
+	 */
 	Viagem* getViagem(int id);
 	class ViagemInexistente {
 		int id;
 	public:
+		/**
+		 Construtor da excecao Viagem Inexistente
+		 @param id ID da Viagem Inexistente
+		 @return
+		 */
 		ViagemInexistente(int id);
 	};
+	/**
+	Load do ficheiro destinos para saber o Pais e a Cidade
+	@param void
+	@return
+	 */
 	void loadDestinos();
+	/**
+	 Load do ficheiro alojamentos para saber o nome, tipo, preco e pais
+	 @param void
+	 @return
+	 */
 	void loadAlojamentos();
+	/**
+	 Load do ficheiro viagens para saber o id, o preco e o itinerario
+	 @param void
+	 @return
+	 */
 	void loadViagens();
+	/**
+	 Load do ficheiro clientes para saber o nome e o tipo
+	 @param void
+	 @return
+	 */
 	void loadClientes();
+	/**
+	 Atualizacao do ficheiro destinos
+	 @param void
+	 @return
+	 */
 	void saveDestinos();
+	/**
+	 Atualizacao do ficheiro alojamentos
+	 @param void
+	 @return
+	 */
 	void saveAlojamentos();
+	/**
+	 Atualizacao do ficheiro Viagens
+	 @param void
+	 @return
+	 */
 	void saveViagens();
+	/**
+	 Atualizacao do ficheiro clientes
+	 @param void
+	 @return
+	 */
 	void saveClientes();
 };
 
