@@ -147,37 +147,109 @@ void gclientes(Agencia* a) {
 	}
 }
 
+void pviagens(Agencia* a) {
+
+}
+
 void addviagem(Agencia* a) {
 	cout << "Numero de trocos: ";
-	int nt;
+	unsigned int nt;
 	cin >> nt;
+	cin.ignore();
 	vector<Troco> trocos;
 	for (unsigned int i = 0; i < nt; i++) {
-		cout << "Troco 1:" << endl;
-		cout << "Origem: ";
-		string origem = "";
-		cin >> origem;
-		cout << "Destino: ";
-		string destino = "";
-		cin >> destino;
+		cout << "Troco " << i + 1 << ":" << endl;
+		string cidade = "";
+		string pais = "";
+		cout << "Origem (Pais,Cidade): ";
+		Cidade* origem;
+		getline(cin, pais, ',');
+		getline(cin, cidade);
+		try {
+			origem = a->getPais(pais).getCidade(cidade);
+		} catch (Agencia::PaisInexistente &pi) {
+			cout << "Pais " << pi.getNome() << " inexistente!" << endl;
+			getch();
+			return;
+		} catch (Pais::CidadeInexistente &ci) {
+			cout << "Cidade " << ci.getNome() << " inexistente!" << endl;
+			getch();
+			return;
+		}
+		cout << "Destino (Pais,Cidade): ";
+		Cidade* destino;
+		getline(cin, pais, ',');
+		getline(cin, cidade);
+		try {
+			destino = a->getPais(pais).getCidade(cidade);
+		} catch (Agencia::PaisInexistente &pi) {
+			cout << "Pais " << pi.getNome() << " inexistente!" << endl;
+			getch();
+			return;
+		} catch (Pais::CidadeInexistente &ci) {
+			cout << "Cidade " << ci.getNome() << " inexistente!" << endl;
+			getch();
+			return;
+		}
 		cout << "Transporte: ";
 		string transporte = "";
 		cin >> transporte;
 		cin.ignore();
 		cout << "Data (DD/MM/AA HH:MM): ";
-		string d,m,a,h,min;
-		getline(cin,d,'/');
-		getline(cin,m,'/');
-		getline(cin,a,' ');
-		getline(cin,h,':');
-		getline(cin,min);
-		cout << d << "/" << m << "/" << a << " " << h << ":" << min << endl;
+		string d, m, a, h, min;
+		getline(cin, d, '/');
+		getline(cin, m, '/');
+		getline(cin, a, ' ');
+		getline(cin, h, ':');
+		getline(cin, min);
 		tm data;
 		data.tm_mday = atoi(d.c_str());
-		data.tm_mon = atoi(m.c_str())-1;
-		data.tm_year = atoi(a.c_str())+100;
+		data.tm_mon = atoi(m.c_str()) - 1;
+		data.tm_year = atoi(a.c_str()) + 100;
 		data.tm_hour = atoi(h.c_str());
 		data.tm_min = atoi(min.c_str());
+		trocos.push_back(Troco(origem, destino, Transporte(transporte), data));
+	}
+	Itinerario iti(trocos[0].getCidadeOrigem(),
+			trocos[trocos.size() - 1].getCidadeDestino());
+	for (unsigned int i = 0; i < trocos.size(); i++) {
+		iti.addTroco(trocos[i]);
+	}
+	cout << "Preco: ";
+	float preco;
+	cin >> preco;
+	cout << "Alojamento? (y/n): ";
+	char check;
+	cin >> check;
+	cin.ignore();
+	if (check == 'y') {
+		cout << "Nome: ";
+		string alojamento = "";
+		getline(cin, alojamento);
+		Alojamento* al;
+		try {
+			al = trocos[trocos.size() - 1].getCidadeDestino()->getAlojamento(
+					alojamento);
+		} catch (Cidade::AlojamentoInexistente &ai) {
+			cout << "Alojamento " << ai.getNome() << " inexistente!" << endl;
+			getch();
+			return;
+		}
+		Viagem v(iti, preco + al->getPreco(), al);
+		if(a->addViagem(v))
+			cout << "Viagem adicionada! ID: " << v.getId() << endl;
+		else{
+			cout << "Erro!" << endl;
+		}
+		getch();
+	} else {
+		Viagem v(iti, preco);
+		if(a->addViagem(v))
+			cout << "Viagem adicionada! ID: " << v.getId() << endl;
+		else{
+			cout << "Erro!" << endl;
+		}
+		getch();
 	}
 }
 
@@ -212,11 +284,11 @@ void gviagens(Agencia* a) {
 }
 
 void pdestinos(Agencia* a) {
-	for (unsigned int i = 0; i < a->getPaises().size(); i++) {
-		for (unsigned int j = 0; j < a->getPaises()[i].getCidades().size();
-				j++) {
-			cout << a->getPaises()[i].getNome() << ","
-					<< a->getPaises()[i].getCidades()[j].getNome() << endl;
+	vector<Pais> vp = a->getPaises();
+	for (unsigned int i = 0; i < vp.size(); i++) {
+		vector<Cidade> vc = vp[i].getCidades();
+		for (unsigned int j = 0; j < vc.size(); j++) {
+			cout << vp[i].getNome() << "," << vc[j].getNome() << endl;
 		}
 	}
 	getch();

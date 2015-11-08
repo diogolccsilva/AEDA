@@ -351,12 +351,12 @@ public:
 
 	 @param itinerario Itinerario
 	 @param preco float
-	 @param id int
 	 @param alojamento Alojamento
+	 @param id int
 	 @return
 	 */
-	Viagem(Itinerario itinerario, float preco, int id = sid++,
-			Alojamento* alojamento = new Alojamento());
+	Viagem(Itinerario itinerario, float preco, Alojamento* alojamento =
+			new Alojamento(), int id = sid);
 	/**
 	 Destrutor de Viagem
 
@@ -628,7 +628,6 @@ public:
 	 @return false se nao poder adicionar
 	 */
 	bool addCliente(Cliente* c);
-	void sortClientes();
 	/**
 	 Get do vetor de Clientes por apontador
 	 @param void
@@ -710,9 +709,9 @@ public:
 		ViagemInexistente(int id);
 	};
 	/**
-	Load do ficheiro destinos para saber o Pais e a Cidade
-	@param void
-	@return
+	 Load do ficheiro destinos para saber o Pais e a Cidade
+	 @param void
+	 @return
 	 */
 	void loadDestinos();
 	/**
@@ -760,4 +759,3 @@ public:
 };
 
 #endif /* SRC_AGENCIA_H_ */
-

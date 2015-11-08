@@ -21,10 +21,7 @@ Agencia::Agencia(string nome) :
 }
 
 Agencia::~Agencia() {
-	nome.~basic_string();
-	clientes.~vector();
-	viagens.~vector();
-	paises.~vector();
+
 }
 
 string Agencia::getNome() const {
@@ -42,10 +39,6 @@ bool Agencia::addCliente(Cliente* c) {
 
 vector<Cliente*> Agencia::getClientes() const {
 	return clientes;
-}
-
-void Agencia::sortClientes() {
-
 }
 
 bool Agencia::addViagem(Viagem v) {
@@ -157,6 +150,7 @@ void Agencia::loadAlojamentos() {
 			getline(file, cidade);
 			getPais(pais).getCidade(cidade)->addAlojamento(
 					Alojamento(tipo, nome, atof(preco.c_str())));
+
 		}
 		file.close();
 	} else {
@@ -195,6 +189,8 @@ void Agencia::loadViagens() {
 					vc.push_back(getPais(pais).getCidade(cidade));
 				} catch (Pais::CidadeInexistente &ci) {
 					cout << "Cidade " << ci.getNome() << " nao existe!" << endl;
+					getch();
+					//should never happen
 				}
 			}
 			Itinerario iti(vc[0], vc[vc.size() - 1]);
@@ -241,10 +237,14 @@ void Agencia::loadViagens() {
 			getline(file, alojamento);
 			try {
 				addViagem(
-						Viagem(iti, atof(preco.c_str()), atoi(id.c_str()),
-								iti.getDestino()->getAlojamento(alojamento)));
+						Viagem(iti, atof(preco.c_str()),
+								iti.getDestino()->getAlojamento(alojamento),
+								atoi(id.c_str())));
 			} catch (Cidade::AlojamentoInexistente &ai) {
-				cout << "Alojamento " << ai.getNome() << " " << endl;
+				addViagem(
+						Viagem(iti, atof(preco.c_str()),
+								new Alojamento(),
+								atoi(id.c_str())));
 			}
 
 		}
@@ -252,7 +252,7 @@ void Agencia::loadViagens() {
 	} else {
 
 	}
-	Viagem::sid = vid;
+	Viagem::sid = vid+1;
 }
 
 void Agencia::loadClientes() {
@@ -422,8 +422,7 @@ Cliente::Cliente(string nome) :
 }
 
 Cliente::~Cliente() {
-	nome.~basic_string();
-	viagens.~vector();
+
 }
 
 int Cliente::getNoViagens() const {
@@ -532,10 +531,10 @@ float Comercial::desconto() const {
  *
  */
 
-Viagem::Viagem(Itinerario itinerario, float preco, int id,
-		Alojamento* alojamento) :
+Viagem::Viagem(Itinerario itinerario, float preco, Alojamento* alojamento,
+		int id) :
 		itinerario(itinerario), alojamento(alojamento), preco(preco), id(id) {
-
+	sid++;
 }
 
 Viagem::~Viagem() {
@@ -772,7 +771,7 @@ Cidade::AlojamentoInexistente::AlojamentoInexistente(string nome) :
 
 }
 
-string Cidade::AlojamentoInexistente::getNome() const{
+string Cidade::AlojamentoInexistente::getNome() const {
 	return this->nome;
 }
 
@@ -793,8 +792,7 @@ Alojamento::Alojamento(string tipo, string nome, float preco) :
 }
 
 Alojamento::~Alojamento() {
-	tipo.~basic_string();
-	nome.~basic_string();
+
 }
 
 string Alojamento::getNome() const {
