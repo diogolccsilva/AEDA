@@ -635,9 +635,9 @@ public:
 	 */
 	vector<Cliente*> getClientes() const;
 	/**
-	 Get do vetor de Viagens por apontador
+	 Get do vetor de Viagens
 	 @param void
-	 @return Vetor de apontadores para Viagens
+	 @return Vetor de Viagens
 	 */
 	vector<Viagem> getViagens() const;
 	/**
