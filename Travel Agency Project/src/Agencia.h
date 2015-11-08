@@ -58,30 +58,31 @@ public:
 };
 
 class Transporte {
+	string tipo;
 public:
-	Transporte();
+	Transporte(string tipo);
 	virtual ~Transporte();
 };
 
 class Troco {
-	Cidade origem,destino;
+	Cidade* origem,destino;
 	Transporte transporte;
 	tm data;
 public:
 	Troco(Cidade origem,Cidade destino,Transporte transporte,tm data);
 	virtual ~Troco();
-	Cidade getCidadeOrigem() const;
-	Cidade getCidadeDestino() const;
+	Cidade* getCidadeOrigem() const;
+	Cidade* getCidadeDestino() const;
 	Transporte getTransporte() const;
 	tm getData() const;
 };
 
 class Itinerario {
-	Cidade origem,destino;
+	Cidade* origem,destino;
 	vector<Troco> trocos;
 public:
 	Itinerario(Cidade origem,Cidade destino);
-	void AddTroco(Troco troco);
+	void addTroco(Troco troco);
 	virtual ~Itinerario();
 	vector<Troco> getTrocos();
 	Cidade getOrigem();
@@ -150,6 +151,12 @@ class Agencia {
 public:
 	Agencia(string nome);
 	virtual ~Agencia();
+	/**
+	    Retorna o nome da agencia
+
+	    @param void
+	    @return string nome
+	*/
 	string getNome() const;
 	bool addCliente(Cliente* c);
 	void sortClientes();

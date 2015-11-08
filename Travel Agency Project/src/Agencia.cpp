@@ -130,20 +130,27 @@ void Agencia::loadViagens() {
 			itinerario.erase(itinerario.begin());
 			itinerario.erase(itinerario.end() - 1);
 			istringstream istream(itinerario);
-			string temp="";
-			getline(istream,temp,';');
-			string pais="", cidade="";
-			Cidade origem = getPais(pais).getCidade(cidade);
-			Cidade destino = getPais(pais).getCidade(cidade)
-			while(!istream.eof()){
-
+			vector<Cidade> vc;
+			while (!istream.eof()) {
+				string temp = "";
+				getline(istream, temp, ';');
+				istringstream tempstream(temp);
+				string pais = "", cidade = "";
+				getline(tempstream, pais, ',');
+				getline(tempstream, cidade);
+				vc.push_back(getPais(pais).getCidade(cidade));
 			}
+			Itinerario i(vc[0],vc[vc.size()-1]);
 			string transporte;
 			getline(file, transporte, '-');
 			transporte.erase(transporte.end() - 1);
 			string data;
 			getline(file, data, '-');
 			data.erase(transporte.end() - 1);
+			Cidade origem = vc[0], destino = vc[1];
+			for (unsigned int i = 1;i<vc.size();i++){
+				Troco t()
+			}
 			string alojamento;
 			getline(file, alojamento);
 			alojamento.erase(transporte.begin());
@@ -297,7 +304,8 @@ float Comercial::desconto() {
  *
  */
 
-Viagem::Viagem(Itinerario itinerario, float preco, int id, Alojamento* alojamento) :
+Viagem::Viagem(Itinerario itinerario, float preco, int id,
+		Alojamento* alojamento) :
 		itinerario(itinerario), alojamento(alojamento), preco(preco), id(id) {
 
 }
@@ -358,6 +366,10 @@ Itinerario::~Itinerario() {
 	// TODO Auto-generated destructor stub
 }
 
+void Itinerario::addTroco(Troco troco){
+	trocos.push_back(troco);
+}
+
 vector<Troco> Itinerario::getTrocos() {
 	return trocos;
 }
@@ -385,11 +397,11 @@ Troco::~Troco() {
 	// TODO Auto-generated destructor stub
 }
 
-Cidade Troco::getCidadeOrigem() const {
+Cidade* Troco::getCidadeOrigem() const {
 	return origem;
 }
 
-Cidade Troco::getCidadeDestino() const {
+Cidade* Troco::getCidadeDestino() const {
 	return destino;
 }
 
@@ -407,7 +419,7 @@ tm Troco::getData() const {
  *
  */
 
-Transporte::Transporte() {
+Transporte::Transporte(string tipo):tipo(tipo) {
 	// TODO Auto-generated constructor stub
 }
 
