@@ -634,7 +634,11 @@ public:
 	 @return vetor de apontadores para Clientes
 	 */
 	vector<Cliente*> getClientes() const;
-	!!!!!!!!!!!!!!!!!!!!!!
+	/**
+	 Get do vetor de Viagens por apontador
+	 @param void
+	 @return Vetor de apontadores para Viagens
+	 */
 	vector<Viagem> getViagens() const;
 	/**
 	 Funcao booleana para verificar se pode adicionar viagem
