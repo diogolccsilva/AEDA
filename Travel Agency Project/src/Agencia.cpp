@@ -772,7 +772,7 @@ Cidade::AlojamentoInexistente::AlojamentoInexistente(string nome) :
 
 }
 
-string Alojamento::getNome() const{
+string Cidade::AlojamentoInexistente::getNome() const{
 	return this->nome;
 }
 
