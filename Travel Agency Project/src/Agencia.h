@@ -140,14 +140,11 @@ public:
 		 @return
 		 */
 		AlojamentoInexistente(string nome);
-<<<<<<< HEAD
-=======
 		/**
 		 Get do Nome do Alojamento Inexistente
 		 @param void
 		 @return Nome do Alojamento
 		 */
->>>>>>> origin/master
 		string getNome() const;
 	};
 };
