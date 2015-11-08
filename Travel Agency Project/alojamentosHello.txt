@@ -1,0 +1,3 @@
+Hotel Paris-Hotel-100-Franca,Paris
+Hotel Madrid-Hotel-69-Espanha,Madrid
+Hotel Roma-Hotel-89-Italia,Roma

@@ -64,6 +64,10 @@ bool Agencia::addPais(Pais p) {
 	return true;
 }
 
+vector<Pais> Agencia::getPaises() const{
+	return paises;
+}
+
 Agencia::ClienteInexistente::ClienteInexistente(string nome) :
 		nome(nome) {
 
@@ -80,7 +84,7 @@ Cliente* Agencia::getCliente(string nome) const {
 	return clientes[it];
 }
 
-Pais Agencia::getPais(string nome) const {
+Pais& Agencia::getPais(string nome){
 	int it = -1;
 	for (unsigned int i = 0; i < paises.size(); i++) {
 		if (nome == paises[i].getNome())
@@ -96,19 +100,55 @@ Agencia::PaisInexistente::PaisInexistente(string nome) :
 
 }
 
+Viagem* Agencia::getViagem(int id){
+	int it = -1;
+	for (unsigned int i = 0; i < viagens.size(); i++) {
+		if (viagens[i].getId() == id)
+			it = i;
+	}
+	if (it == -1)
+		throw ViagemInexistente(id);
+	return &viagens[it];
+}
+
+Agencia::ViagemInexistente::ViagemInexistente(int id) :
+		id(id) {
+
+}
+
 void Agencia::loadDestinos() {
 	string filename = "../destinos" + nome + ".txt";
 	ifstream file(filename.c_str());
 	if (file.is_open()) {
 		while (!file.eof()) {
-			string pais;
+			string pais = "";
 			getline(file, pais, '-');
-			pais.erase(pais.end() - 1);
 			string cidade = "";
 			getline(file, cidade);
-			cidade.erase(cidade.begin());
 			addPais(Pais(pais));
 			getPais(pais).addCidade(Cidade(cidade));
+		}
+	} else {
+
+	}
+}
+
+void Agencia::loadAlojamentos(){
+	string filename = "../alojamentos" + nome + ".txt";
+	ifstream file(filename.c_str());
+	if (file.is_open()) {
+		while (!file.eof()) {
+			string nome = "";
+			getline(file, nome, '-');
+			string tipo = "";
+			getline(file, tipo, '-');
+			string preco = "";
+			getline(file, preco, '-');
+			string pais = "";
+			getline(file, pais, ',');
+			string cidade = "";
+			getline(file, cidade);
+			getPais(pais).getCidade(cidade)->addAlojamento(Alojamento(tipo,nome,atof(preco.c_str())));
 		}
 	} else {
 
@@ -120,18 +160,17 @@ void Agencia::loadViagens() {
 	ifstream file(filename.c_str());
 	if (file.is_open()) {
 		while (!file.eof()) {
+			//Ler id
 			string id;
 			getline(file, id, '-');
-			id.erase(id.end() - 1);
+			//Ler preco
 			string preco;
 			getline(file, preco, ';');
-			preco.erase(preco.end() - 1);
+			//Ler itinerario/trocos
 			string itinerario;
 			getline(file, itinerario, '-');
-			itinerario.erase(itinerario.begin());
-			itinerario.erase(itinerario.end() - 1);
 			istringstream istream(itinerario);
-			vector<Cidade> vc;
+			vector<Cidade*> vc;
 			while (!istream.eof()) {
 				string temp = "";
 				getline(istream, temp, ';');
@@ -139,22 +178,56 @@ void Agencia::loadViagens() {
 				string pais = "", cidade = "";
 				getline(tempstream, pais, ',');
 				getline(tempstream, cidade);
-				vc.push_back(getPais(pais).getCidade(cidade));
+				try{
+					vc.push_back(getPais(pais).getCidade(cidade));
+				}
+				catch (Pais::CidadeInexistente &ci){
+					cout << "Cidade " << ci.getNome() << " nao existe!" << endl;
+				}
 			}
-			Itinerario i(vc[0],vc[vc.size()-1]);
-			string transporte;
-			getline(file, transporte, '-');
-			transporte.erase(transporte.end() - 1);
-			string data;
-			getline(file, data, '-');
-			data.erase(transporte.end() - 1);
-			Cidade origem = vc[0], destino = vc[1];
-			for (unsigned int i = 1;i<vc.size();i++){
-				Troco t()
+			Itinerario iti(vc[0],vc[vc.size()-1]);
+			//Ler transportes
+			string transportes;
+			getline(file, transportes, '-');
+			istringstream tstream(transportes);
+			vector<string> vt;
+			while (!tstream.eof()) {
+				string temp = "";
+				getline(tstream, temp, ';');
+				vt.push_back(temp);
 			}
+			//Ler datas
+			string datas;
+			getline(file, datas, '-');
+			istringstream dstream(datas);
+			vector<tm> vd;
+			while (!dstream.eof()) {
+				tm nd;
+				string dia = "";
+				getline(dstream, dia, '/');
+				nd.tm_mday=atoi(dia.c_str());
+				string mes = "";
+				getline(dstream, mes, '/');
+				nd.tm_mon=atoi(mes.c_str())-1;
+				string ano = "";
+				getline(dstream, ano, ' ');
+				nd.tm_year=atoi(ano.c_str())+100;
+				string hora = "";
+				getline(dstream, hora, ':');
+				nd.tm_hour=atoi(hora.c_str());
+				string minuto = "";
+				getline(dstream, minuto, ';');
+				nd.tm_min=atoi(minuto.c_str());
+				vd.push_back(nd);
+			}
+			//Adicionar os trocos
+			for (unsigned int i = 0;i<vc.size()-1;i++){
+				iti.addTroco(Troco(vc[i],vc[i+1],vt[i],vd[i]));
+			}
+			//Ler alojamento
 			string alojamento;
 			getline(file, alojamento);
-			alojamento.erase(transporte.begin());
+			addViagem(Viagem(iti,atof(preco.c_str()),atoi(id.c_str()),iti.getDestino()->getAlojamento(alojamento)));
 		}
 	} else {
 
@@ -168,22 +241,24 @@ void Agencia::loadClientes() {
 		while (!file.eof()) {
 			string nome = "";
 			getline(file, nome, '-');
-			nome.erase(nome.end() - 1);
 			string tipo = "";
 			getline(file, tipo, '-');
-			tipo.erase(tipo.begin());
-			tipo.erase(tipo.end() - 1);
 			if (tipo == "P") {
 				addCliente(new Particular(nome));
 			} else if (tipo == "C") {
-				string noparticipantes = "";
-				getline(file, noparticipantes, '-');
-				noparticipantes.erase(noparticipantes.begin());
-				noparticipantes.erase(noparticipantes.end() - 1);
-				addCliente(new Comercial(nome, atoi(noparticipantes.c_str())));
+				string nop = "";
+				getline(file, nop, '-');
+				addCliente(new Comercial(nome, atoi(nop.c_str())));
 			}
-			string temp;
-			getline(file, temp);
+			string vids = "";
+			getline(file, vids);
+			istringstream svids(vids);
+			while (!svids.eof()){
+				string id ="";
+				getline(svids,id,' ');
+				getCliente(nome)->addViagem(getViagem(atoi(id.c_str())));
+
+			}
 		}
 	} else {
 
@@ -358,7 +433,7 @@ bool Viagem::changeAlojamento(Alojamento* a) {
  *
  */
 
-Itinerario::Itinerario(Cidade origem, Cidade destino) :
+Itinerario::Itinerario(Cidade* origem, Cidade* destino) :
 		origem(origem), destino(destino) {
 
 }
@@ -375,11 +450,11 @@ vector<Troco> Itinerario::getTrocos() {
 	return trocos;
 }
 
-Cidade Itinerario::getOrigem() {
+Cidade* Itinerario::getOrigem() const{
 	return origem;
 }
 
-Cidade Itinerario::getDestino() {
+Cidade* Itinerario::getDestino() const{
 	return destino;
 }
 
@@ -389,7 +464,7 @@ Cidade Itinerario::getDestino() {
  *
  */
 
-Troco::Troco(Cidade origem, Cidade destino, Transporte transporte, tm data) :
+Troco::Troco(Cidade* origem, Cidade* destino, Transporte transporte, tm data) :
 		origem(origem), destino(destino), transporte(transporte), data(data) {
 
 }
@@ -460,7 +535,7 @@ bool Pais::operator==(const Pais& p) const {
 	return nome == p.nome;
 }
 
-Cidade Pais::getCidade(string nome) const {
+Cidade* Pais::getCidade(string nome){
 	int it = -1;
 	for (unsigned int i = 0; i < cidades.size(); i++) {
 		if (cidades[i].getNome() == nome)
@@ -468,12 +543,20 @@ Cidade Pais::getCidade(string nome) const {
 	}
 	if (it == -1)
 		throw CidadeInexistente(nome);
-	return cidades[it];
+	return &cidades[it];
+}
+
+vector<Cidade> Pais::getCidades() const{
+	return cidades;
 }
 
 Pais::CidadeInexistente::CidadeInexistente(string nome) :
 		nome(nome) {
 
+}
+
+string Pais::CidadeInexistente::getNome() const{
+	return this->nome;
 }
 
 /* Class: Cidade
@@ -504,8 +587,27 @@ bool Cidade::addAlojamento(const Alojamento& a) {
 	return true;
 }
 
+Alojamento* Cidade::getAlojamento(string nome){
+	int it = -1;
+	for (unsigned int i = 0; i < alojamentos.size(); i++) {
+		if (alojamentos[i].getNome() == nome)
+			it = i;
+	}
+	if (it == -1)
+		throw AlojamentoInexistente(nome);
+	return &alojamentos[it];
+}
+
+vector<Alojamento> Cidade::getAlojamentos(){
+	return alojamentos;
+}
+
 bool Cidade::operator==(const Cidade& c) const {
 	return nome == c.nome;
+}
+
+Cidade::AlojamentoInexistente::AlojamentoInexistente(string nome):nome(nome){
+
 }
 
 /* Class: Alojamento
@@ -526,6 +628,10 @@ Alojamento::Alojamento(string tipo, string nome, float preco) :
 
 Alojamento::~Alojamento() {
 	// TODO Auto-generated destructor stub
+}
+
+string Alojamento::getNome() const{
+	return nome;
 }
 
 bool Alojamento::operator==(const Alojamento& a) const {

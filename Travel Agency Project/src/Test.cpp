@@ -146,7 +146,12 @@ void gviagens(Agencia* a){
 }
 
 void pdestinos(Agencia* a){
-
+	for (unsigned int i = 0; i<a->getPaises().size();i++){
+		for(unsigned int j=0;j<a->getPaises()[i].getCidades().size();j++){
+			cout << a->getPaises()[i].getNome() << "," <<a->getPaises()[i].getCidades()[j].getNome() << endl;
+		}
+	}
+	getch();
 }
 
 void gdestinos(Agencia* a){
@@ -174,6 +179,42 @@ void gdestinos(Agencia* a){
 	}
 }
 
+void palojamentos(Agencia* a){
+	for (unsigned int i = 0; i<a->getPaises().size();i++){
+		for(unsigned int j=0;j<a->getPaises()[i].getCidades().size();j++){
+			for (unsigned int k=0;k<a->getPaises()[i].getCidades()[j].getAlojamentos().size();k++){
+				cout << a->getPaises()[i].getNome() << "," << a->getPaises()[i].getCidades()[j].getNome() << " - " << a->getPaises()[i].getCidades()[j].getAlojamentos()[k].getNome() << endl;
+			}
+		}
+	}
+	getch();
+}
+
+void galojamentos(Agencia* a){
+	char c;
+	while (c!=27 && c!='9') {
+		system("cls");
+		cout << "1- Ver alojamentos;" << endl;
+		cout << "2- Adicionar alojamento;" << endl;
+		cout << "3- Remover alojamento;" << endl;
+		cout << "9- Voltar;" << endl;
+		c = getch();
+		system("cls");
+		switch (c) {
+		case '1':
+			palojamentos(a);
+			break;
+		case '2':
+
+			break;
+		case '3':
+			break;
+		default:
+			break;
+		}
+	}
+}
+
 void admin(Agencia* a){
 	char c;
 	while (c!=27 && c!='9') {
@@ -181,6 +222,7 @@ void admin(Agencia* a){
 		cout << "1- Gerir clientes;" << endl;
 		cout << "2- Gerir viagens;" << endl;
 		cout << "3- Gerir destinos;" << endl;
+		cout << "4- Gerir alojamentos;" << endl;
 		cout << "9- Voltar;" << endl;
 		c = getch();
 		system("cls");
@@ -193,6 +235,9 @@ void admin(Agencia* a){
 			break;
 		case '3':
 			gdestinos(a);
+			break;
+		case '4':
+			galojamentos(a);
 			break;
 		default:
 			break;
@@ -207,7 +252,8 @@ void manual(){
 	Agencia* a = new Agencia(nome);
 	//Carregar informações para agencia
 	a->loadDestinos();
-	//loadViagens(a);
+	a->loadAlojamentos();
+	a->loadViagens();
 	a->loadClientes();
 	char c;
 	system("cls");

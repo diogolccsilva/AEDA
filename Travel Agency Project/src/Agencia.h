@@ -43,6 +43,7 @@ public:
 	 @return
 	 */
 	virtual ~Alojamento();
+	string getNome() const;
 	/**
 	 Overload do operador == em Alojamento
 	 @param a Alojamento por referencia
@@ -83,6 +84,8 @@ public:
 	 @return true se for possivel adicionar o Alojamento , caso contrario false
 	 */
 	bool addAlojamento(const Alojamento& a);
+	Alojamento* getAlojamento(string nome);
+	vector<Alojamento> getAlojamentos();
 	/**
 	 Overload do operador ==
 
@@ -90,6 +93,11 @@ public:
 	 @return true se o Alojamento a e igual a um Alojamento, caso contrario false
 	 */
 	bool operator==(const Cidade& c) const;
+	class AlojamentoInexistente{
+		string nome;
+	public:
+		AlojamentoInexistente(string nome);
+	};
 };
 
 class Pais {
@@ -131,7 +139,8 @@ public:
 	 @param nome Nome da cidade
 	 @return Nome da cidade
 	 */
-	Cidade getCidade(string nome) const;
+	Cidade* getCidade(string nome);
+	vector<Cidade> getCidades() const;
 	/**
 	 Classe da excecao Cidade Inexistente
 	 @param void
@@ -146,6 +155,7 @@ public:
 		 @return
 		 */
 		CidadeInexistente(string nome);
+		string getNome() const;
 	};
 };
 
@@ -169,7 +179,7 @@ public:
 };
 
 class Troco {
-	Cidade* origem, destino;
+	Cidade* origem, *destino;
 	Transporte transporte;
 	tm data;
 public:
@@ -182,7 +192,7 @@ public:
 	 @param data tm
 	 @return
 	 */
-	Troco(Cidade origem, Cidade destino, Transporte transporte, tm data);
+	Troco(Cidade* origem, Cidade* destino, Transporte transporte, tm data);
 	/**
 	 Destrutor de Troco
 
@@ -221,7 +231,7 @@ public:
 };
 
 class Itinerario {
-	Cidade* origem, destino;
+	Cidade *origem, *destino;
 	vector<Troco> trocos;
 public:
 	/**
@@ -230,7 +240,7 @@ public:
 	 @param destino Cidade de Destino
 	 @return
 	 */
-	Itinerario(Cidade origem, Cidade destino);
+	Itinerario(Cidade* origem, Cidade* destino);
 	/**
 	 Adiciona um novo troco
 	 @param troco Novo troco
@@ -254,13 +264,13 @@ public:
 	 @param void
 	 @return Cidade Origem do Troco
 	 */
-	Cidade getOrigem();
+	Cidade* getOrigem() const;
 	/**
 	 Get da cidade Destino do Troco
 	 @param void
 	 @return Cidade Destino do Troco
 	 */
-	Cidade getDestino();
+	Cidade* getDestino() const;
 
 };
 
@@ -500,19 +510,27 @@ public:
 	vector<Cliente*> getClientes() const;
 	bool addViagem(Viagem v);
 	bool addPais(Pais p);
+	vector<Pais> getPaises() const;
 	Cliente* getCliente(string nome) const;
 	class ClienteInexistente {
 		string nome;
 	public:
 		ClienteInexistente(string nome);
 	};
-	Pais getPais(string nome) const;
+	Pais& getPais(string nome);
 	class PaisInexistente {
 		string nome;
 	public:
 		PaisInexistente(string nome);
 	};
+	Viagem* getViagem(int id);
+	class ViagemInexistente{
+		int id;
+	public:
+		ViagemInexistente(int id);
+	};
 	void loadDestinos();
+	void loadAlojamentos();
 	void loadViagens();
 	void loadClientes();
 };

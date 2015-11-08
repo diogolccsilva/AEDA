@@ -1,9 +1,9 @@
-Portugal - Porto
-Portugal - Lisboa
-Espanha - Madrid
-Espanha - Barcelona
-Espanha - Sevilha
-Reino Unido - Londres
-Reino Unido - Manchester
-Franca - Paris
-Italia - Roma
+Portugal-Porto
+Portugal-Lisboa
+Espanha-Madrid
+Espanha-Barcelona
+Espanha-Sevilha
+Reino Unido-Londres
+Reino Unido-Manchester
+Franca-Paris
+Italia-Roma
