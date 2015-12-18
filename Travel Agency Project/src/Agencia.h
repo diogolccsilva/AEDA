@@ -423,7 +423,7 @@ public:
 };
 
 class Cliente {
-	string nome;
+	string nome, email, morada;
 	vector<Viagem*> viagens;
 public:
 	/**
@@ -437,7 +437,7 @@ public:
 	 @param nome Nome do Cliente
 	 @return
 	 */
-	Cliente(string nome);
+	Cliente(string nome, string email, string morada);
 	/**
 	 Destrutor de Cliente
 	 @param void
@@ -514,7 +514,7 @@ public:
 	 @param nome Nome do Cliente
 	 @return
 	 */
-	Particular(string nome);
+	Particular(string nome, string email, string morada);
 	/**
 	 Destrutor
 	 @param void
@@ -556,7 +556,8 @@ public:
 	 @param noparticipantes Numero de Participantes do Cliente
 	 @return
 	 */
-	Comercial(string nome, int noparticipantes = 0);
+	Comercial(string nome, string email, string morada,
+			int noparticipantes = 0);
 	/**
 	 Destrutor
 	 @param void

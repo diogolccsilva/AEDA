@@ -55,18 +55,22 @@ void pclientes(Agencia* a) {
 }
 
 void addcliente(Agencia* a) {
-	string nome;
+	string nome, email, morada;
 	char tipo;
 	cout << "Nome: ";
 	cin >> nome;
+	cout << "Email: ";
+	cin >> nome;
+	cout << "Morada: ";
+	cin >> morada;
 	cout << "Tipo ('P' ou 'C'): ";
 	cin >> tipo;
 	switch (tipo) {
 	case 'P':
-		a->addCliente(new Particular(nome));
+		a->addCliente(new Particular(nome, email, morada));
 		break;
 	case 'C':
-		a->addCliente(new Comercial(nome));
+		a->addCliente(new Comercial(nome, email, morada));
 		break;
 	default:
 		cout << "Tipo de cliente inexistente!" << endl;
@@ -149,12 +153,14 @@ void gclientes(Agencia* a) {
 
 void pviagens(Agencia* a) {
 	vector<Viagem> vv = a->getViagens();
-	for (unsigned int i = 0;i<vv.size();i++){
+	for (unsigned int i = 0; i < vv.size(); i++) {
 		Cidade* origem = vv[i].getItinerario().getOrigem();
 		Cidade* destino = vv[i].getItinerario().getDestino();
 		cout << "ID: " << vv[i].getId() << endl;
-		cout << "Origem: " << origem->getPais() << "," << origem->getNome() << endl;
-		cout << "Destino: " << destino->getPais() << "," << destino->getNome() << endl;
+		cout << "Origem: " << origem->getPais() << "," << origem->getNome()
+				<< endl;
+		cout << "Destino: " << destino->getPais() << "," << destino->getNome()
+				<< endl;
 		cout << "Preco: " << vv[i].getPreco() << endl;
 		cout << endl;
 	}
@@ -246,17 +252,17 @@ void addviagem(Agencia* a) {
 			return;
 		}
 		Viagem v(iti, preco + al->getPreco(), al);
-		if(a->addViagem(v))
+		if (a->addViagem(v))
 			cout << "Viagem adicionada! ID: " << v.getId() << endl;
-		else{
+		else {
 			cout << "Erro!" << endl;
 		}
 		getch();
 	} else {
 		Viagem v(iti, preco);
-		if(a->addViagem(v))
+		if (a->addViagem(v))
 			cout << "Viagem adicionada! ID: " << v.getId() << endl;
-		else{
+		else {
 			cout << "Erro!" << endl;
 		}
 		getch();

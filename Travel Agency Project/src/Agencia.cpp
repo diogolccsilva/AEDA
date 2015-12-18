@@ -41,7 +41,7 @@ vector<Cliente*> Agencia::getClientes() const {
 	return clientes;
 }
 
-vector<Viagem> Agencia::getViagens() const{
+vector<Viagem> Agencia::getViagens() const {
 	return viagens;
 }
 
@@ -246,8 +246,7 @@ void Agencia::loadViagens() {
 								atoi(id.c_str())));
 			} catch (Cidade::AlojamentoInexistente &ai) {
 				addViagem(
-						Viagem(iti, atof(preco.c_str()),
-								new Alojamento(),
+						Viagem(iti, atof(preco.c_str()), new Alojamento(),
 								atoi(id.c_str())));
 			}
 
@@ -256,7 +255,7 @@ void Agencia::loadViagens() {
 	} else {
 
 	}
-	Viagem::sid = vid+1;
+	Viagem::sid = vid + 1;
 }
 
 void Agencia::loadClientes() {
@@ -266,14 +265,18 @@ void Agencia::loadClientes() {
 		while (!file.eof()) {
 			string nome = "";
 			getline(file, nome, '-');
+			string email = "";
+			getline(file, email, '-');
+			string morada = "";
+			getline(file, morada, '-');
 			string tipo = "";
 			getline(file, tipo, '-');
 			if (tipo == "P") {
-				addCliente(new Particular(nome));
+				addCliente(new Particular(nome, email, morada));
 			} else if (tipo == "C") {
 				string nop = "";
 				getline(file, nop, '-');
-				addCliente(new Comercial(nome, atoi(nop.c_str())));
+				addCliente(new Comercial(nome,email,morada, atoi(nop.c_str())));
 			}
 			string vids = "";
 			getline(file, vids);
@@ -416,12 +419,12 @@ void Agencia::saveClientes() {
  */
 
 Cliente::Cliente() :
-		nome("") {
+		nome(""), email(""), morada("") {
 
 }
 
-Cliente::Cliente(string nome) :
-		nome(nome) {
+Cliente::Cliente(string nome, string email, string morada) :
+		nome(nome), email(email), morada(morada) {
 
 }
 
@@ -462,8 +465,8 @@ ostream & operator<<(ostream & o, const Cliente & c) {
  *
  */
 
-Particular::Particular(string nome) :
-		Cliente(nome) {
+Particular::Particular(string nome, string email, string morada) :
+		Cliente(nome, email, morada) {
 
 }
 
@@ -493,8 +496,9 @@ int Particular::getMedParticipantes() const {
  *
  */
 
-Comercial::Comercial(string nome, int noparticipantes) :
-		Cliente(nome), noparticipantes(noparticipantes) {
+Comercial::Comercial(string nome, string email, string morada,
+		int noparticipantes) :
+		Cliente(nome, email, morada), noparticipantes(noparticipantes) {
 
 }
 
