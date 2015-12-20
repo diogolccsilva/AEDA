@@ -9,7 +9,7 @@
 #ifndef SRC_CIDADE_H_
 #define SRC_CIDADE_H_
 
-#include "Agencia.h"
+#include "Alojamento.h"
 
 class Cidade {
 	string nome;
@@ -88,5 +88,5 @@ public:
 		string getNome() const;
 	};
 };
-#endif SRC_CIDADE_H_
 
+#endif SRC_CIDADE_H_

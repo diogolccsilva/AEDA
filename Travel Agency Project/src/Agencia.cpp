@@ -273,11 +273,11 @@ void Agencia::loadClientes() {
 			string tipo = "";
 			getline(file, tipo, '-');
 			if (tipo == "P") {
-				addCliente(new Particular(nome, email, morada));
+				this->addCliente(new Particular(nome, email, morada));
 			} else if (tipo == "C") {
 				string nop = "";
 				getline(file, nop, '-');
-				addCliente(new Comercial(nome,email,morada, atoi(nop.c_str())));
+				this->addCliente(new Comercial(nome,email,morada, atoi(nop.c_str())));
 			}
 			string vids = "";
 			getline(file, vids);

@@ -9,7 +9,10 @@
 #ifndef SRC_TRANSPORTE_H_
 #define SRC_TRANSPORTE_H_
 
-#include "Agencia.h"
+#include <string>
+#include <iostream>
+
+using namespace std;
 
 class Transporte {
 	string tipo;

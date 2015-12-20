@@ -8,7 +8,11 @@
 #ifndef SRC_ALOJAMENTO_H_
 #define SRC_ALOJAMENTO_H_
 
-#include "Agencia.h"
+#include <string>
+#include <iostream>
+#include <vector>
+
+using namespace std;
 
 class Alojamento {
 	string tipo, nome;

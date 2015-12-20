@@ -8,7 +8,7 @@
 #ifndef SRC_PAIS_H_
 #define SRC_PAIS_H_
 
-#include "Agencia.h"
+#include "Cidade.h"
 
 class Pais {
 	vector<Cidade> cidades;

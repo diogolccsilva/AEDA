@@ -8,7 +8,8 @@
 #ifndef SRC_TROCO_H_
 #define SRC_TROCO_H_
 
-#include "Agencia.h"
+#include "Transporte.h"
+#include "Cidade.h"
 
 class Troco {
 	Cidade* origem, *destino;

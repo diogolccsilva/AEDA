@@ -9,7 +9,7 @@
 #ifndef SRC_ITINERARIO_H_
 #define SRC_ITINERARIO_H_
 
-#include "Agencia.h"
+#include "Troco.h"
 
 class Itinerario {
 	Cidade *origem, *destino;

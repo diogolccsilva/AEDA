@@ -3,6 +3,7 @@
 #include "xml_listener.h"
 #include "cute_runner.h"
 #include "Agencia.h"
+#include "Itinerario.h"
 
 void thisIsATest() {
 	ASSERTM("start writing tests", false);

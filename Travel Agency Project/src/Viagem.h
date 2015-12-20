@@ -8,7 +8,8 @@
 #ifndef SRC_VIAGEM_H_
 #define SRC_VIAGEM_H_
 
-#include "Agencia.h"
+#include "Itinerario.h"
+#include "Alojamento.h"
 
 class Viagem {
 	Itinerario itinerario;

@@ -18,17 +18,9 @@
 #include <sstream>
 #include <cstdio>
 
-#include "Alojamento.h"
-#include "Cidade.h"
 #include "Cliente.h"
-#include "Comercial.h"
-#include "Itinerario.h"
 #include "Pais.h"
-#include "Transporte.h"
-#include "Troco.h"
 #include "Viagem.h"
-
-
 
 using namespace std;
 

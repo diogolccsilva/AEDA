@@ -8,7 +8,7 @@
 #ifndef SRC_CLIENTE_H_
 #define SRC_CLIENTE_H_
 
-#include "Agencia.h"
+#include "Viagem.h"
 
 class Cliente {
 	string nome, email, morada;
