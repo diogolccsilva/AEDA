@@ -8,7 +8,7 @@
 #ifndef SRC_PARTICULAR_H_
 #define SRC_PARTICULAR_H_
 
-#include "Agencia.h"
+#include "Cliente.h"
 
 class Particular: public Cliente {
 public:

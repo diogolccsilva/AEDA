@@ -8,6 +8,7 @@
 #ifndef SRC_COMERCIAL_H_
 #define SRC_COMERCIAL_H_
 
+#include "Cliente.h"
 #include "Agencia.h"
 
 class Comercial: public Cliente {

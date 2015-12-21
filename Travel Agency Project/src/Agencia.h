@@ -21,8 +21,8 @@
 #include "Cliente.h"
 #include "Pais.h"
 #include "Viagem.h"
-
-using namespace std;
+#include "Particular.h"
+#include "Comercial.h"
 
 class Agencia {
 	string nome;

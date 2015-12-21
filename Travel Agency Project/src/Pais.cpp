@@ -6,7 +6,7 @@
  */
 
 #include "Pais.h"
-
+#include <algorithm>
 /* Class: Pais
  *
  *

@@ -6,6 +6,7 @@
  */
 
 #include "Cidade.h"
+#include <algorithm>
 
 /* Class: Cidade
  *
