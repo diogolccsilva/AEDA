@@ -199,6 +199,11 @@ public:
 	//retorna o destino com o nome nome, mais barato
 	Destino* getDestino(string nome) const;
 	static tm* getTempo_Info();
+	void imprimeClientes();
+	void procurarClienteEmail(string e);
+	void procurarClienteNome(string n);
+	void procurarClienteMorada(string m);
+	void addClienteAntigo(Cliente *c);
 };
 
 #endif SRC_AGENCIA_H_

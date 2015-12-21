@@ -422,6 +422,7 @@ tm* Agencia::getTempo_Info() {
 	return tempo_info;
 }
 
+<<<<<<< HEAD
 Agencia::DestinoInexistente::DestinoInexistente(string nome) :
 		nome(nome) {
 
@@ -444,5 +445,55 @@ Destino* Agencia::getDestino(string nome) const {
 		it.advance();
 	}
 	throw DestinoInexistente(nome);
+=======
+void Agencia::imprimeClientes() {
+	tr1::unordered_set<Cliente*, hstr, hstr>::iterator it;
+
+	for (it = clientesantigos.begin(); it != clientesantigos.end(); it++) {
+		cout << "Nome:" << (*it)->getNome() << " Email:" << (*it)->getEmail()
+				<< " Morada:" << (*it)->getMorada() << endl;
+	}
+}
+
+void Agencia::procurarClienteEmail(string e) {
+	tr1::unordered_set<Cliente*, hstr, hstr>::iterator it;
+
+	for (it = clientesantigos.begin(); it != clientesantigos.end(); it++) {
+		if ((*it)->getEmail() == e) {
+			cout << "Nome:" << (*it)->getNome() << " Morada:"
+					<< (*it)->getMorada() << endl;
+		}
+	}
+
+}
+
+void Agencia::procurarClienteMorada(string m) {
+	tr1::unordered_set<Cliente*, hstr, hstr>::iterator it;
+
+	for (it = clientesantigos.begin(); it != clientesantigos.end(); it++) {
+		if ((*it)->getMorada() == m) {
+			cout << "Nome:" << (*it)->getNome() << " Email:"
+					<< (*it)->getEmail() << endl;
+		}
+	}
+
+}
+
+void Agencia::procurarClienteNome(string n) {
+	tr1::unordered_set<Cliente*, hstr, hstr>::iterator it;
+
+	for (it = clientesantigos.begin(); it != clientesantigos.end(); it++) {
+		if ((*it)->getNome() == n) {
+			cout << "Morada:" << (*it)->getMorada() << " Email:"
+					<< (*it)->getEmail() << endl;
+		}
+	}
+
+}
+
+void Agencia::addClienteAntigo(Cliente* c) {
+	clientesantigos.insert(c);
+
+>>>>>>> origin/master
 }
 
