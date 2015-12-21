@@ -9,10 +9,11 @@
 #define SRC_VIAGEM_H_
 
 #include "Itinerario.h"
+#include "Destino.h"
 
 class Viagem {
 	Itinerario itinerario;
-	Alojamento* alojamento;
+	Destino* destino;
 	float preco; //apenas o preco da viagem, para obter o preco total adicionar o preco do alojamento
 	int id;
 public:
@@ -26,8 +27,7 @@ public:
 	 @param id int
 	 @return
 	 */
-	Viagem(Itinerario itinerario, float preco, Alojamento* alojamento =
-			new Alojamento(), int id = sid);
+	Viagem(Itinerario itinerario, Destino* destino, float preco, int id = sid);
 	/**
 	 Destrutor de Viagem
 

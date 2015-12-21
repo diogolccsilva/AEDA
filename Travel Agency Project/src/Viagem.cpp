@@ -15,9 +15,9 @@ int Viagem::sid = 0;
  *
  */
 
-Viagem::Viagem(Itinerario itinerario, float preco, Alojamento* alojamento,
-		int id) :
-		itinerario(itinerario), alojamento(alojamento), preco(preco), id(id) {
+Viagem::Viagem(Itinerario itinerario, Destino* destino, float preco, int id) :
+		itinerario(itinerario), preco(preco), id(id), destino(
+				destino) {
 	sid++;
 }
 
@@ -35,7 +35,7 @@ Itinerario Viagem::getItinerario() const {
 
 Alojamento* Viagem::getAlojamento() const {
 	//TODO add a throw eventually for non existent alojamento
-	return alojamento;
+	return destino->getAlojamento();
 }
 
 int Viagem::getId() const {
@@ -47,14 +47,14 @@ bool Viagem::operator==(const Viagem& v) const {
 }
 
 bool Viagem::addAlojamento(Alojamento* a) {
-	if (!(alojamento == new Alojamento()))
+	if (!(getAlojamento() == new Alojamento()))
 		return false; //TODO change to a throw eventually
-	alojamento = a;
+	//alojamento = a;
 	return true;
 }
 
 void Viagem::delAlojamento() {
-	alojamento = new Alojamento();
+	//alojamento = new Alojamento();
 }
 
 bool Viagem::changeAlojamento(Alojamento* a) {

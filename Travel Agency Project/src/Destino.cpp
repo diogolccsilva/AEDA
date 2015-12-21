@@ -7,11 +7,11 @@
 
 #include "Destino.h"
 
-Destino::Destino():cidade(){
+Destino::Destino():cidade(),alojamento(){
 
 }
 
-Destino::Destino(Cidade* c): cidade(c) {
+Destino::Destino(Cidade* c,Alojamento* alojamento): cidade(c),alojamento(alojamento) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -27,4 +27,12 @@ bool Destino::operator<(const Destino &d1) const{
 		if(alojamento<d1.alojamento)
 			return true;
 	return false;
+}
+
+Cidade* Destino::getCidade() const{
+	return cidade;
+}
+
+Alojamento* Destino::getAlojamento() const{
+	return alojamento;
 }

@@ -252,7 +252,8 @@ void addviagem(Agencia* a) {
 			getch();
 			return;
 		}
-		Viagem v(iti, preco + al->getPreco(), al);
+		//TODO: FIX THIS SHIT
+		Viagem v(iti,new Destino(), preco + al->getPreco());
 		if (a->addViagem(v))
 			cout << "Viagem adicionada! ID: " << v.getId() << endl;
 		else {
@@ -260,7 +261,8 @@ void addviagem(Agencia* a) {
 		}
 		getch();
 	} else {
-		Viagem v(iti, preco);
+		//TODO: FIX THIS SHIT x2
+		Viagem v(iti,new Destino(), preco);
 		if (a->addViagem(v))
 			cout << "Viagem adicionada! ID: " << v.getId() << endl;
 		else {

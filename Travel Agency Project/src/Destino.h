@@ -12,12 +12,14 @@
 
 class Destino {
 	Cidade* cidade;
-	Alojamento alojamento;
+	Alojamento* alojamento;
 public:
 	Destino();
-	Destino(Cidade* c);
+	Destino(Cidade* c,Alojamento* alojamento = new Alojamento());
 	virtual ~Destino();
 	bool operator<(const Destino &d1) const;
+	Cidade* getCidade() const;
+	Alojamento* getAlojamento() const;
 };
 
 #endif /* SRC_DESTINO_H_ */

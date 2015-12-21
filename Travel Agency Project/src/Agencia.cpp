@@ -17,7 +17,7 @@ tm* Agencia::tempo_info = localtime(&tempo_local);
  */
 
 Agencia::Agencia(string nome) :
-		nome(nome),destinos(Destino(NULL)) {
+		nome(nome), destinos(Destino(NULL)) {
 
 }
 
@@ -241,16 +241,19 @@ void Agencia::loadViagens() {
 			//Ler alojamento
 			string alojamento;
 			getline(file, alojamento);
-			try {
-				addViagem(
-						Viagem(iti, atof(preco.c_str()),
-								iti.getDestino()->getAlojamento(alojamento),
-								atoi(id.c_str())));
-			} catch (Cidade::AlojamentoInexistente &ai) {
-				addViagem(
-						Viagem(iti, atof(preco.c_str()), new Alojamento(),
-								atoi(id.c_str())));
+			Alojamento* a;
+			try{
+				a = iti.getDestino()->getAlojamento(alojamento);
+			} catch(Cidade::AlojamentoInexistente &ai){
+				a = new Alojamento();
 			}
+			Destino* d;
+			try {
+				d = getDestino(iti.getDestino()->getNome());
+			} catch (DestinoInexistente &di) {
+				d = addDestino(Destino(iti.getDestino(),a));
+			}
+			addViagem(Viagem(iti, d, atof(preco.c_str()),atoi(id.c_str())));
 
 		}
 		file.close();
@@ -278,7 +281,8 @@ void Agencia::loadClientes() {
 			} else if (tipo == "C") {
 				string nop = "";
 				getline(file, nop, '-');
-				this->addCliente(new Comercial(nome,email,morada, atoi(nop.c_str())));
+				this->addCliente(
+						new Comercial(nome, email, morada, atoi(nop.c_str())));
 			}
 			string vids = "";
 			getline(file, vids);
@@ -414,24 +418,31 @@ void Agencia::saveClientes() {
 	}
 }
 
-tm* Agencia::getTempo_Info(){
+tm* Agencia::getTempo_Info() {
 	return tempo_info;
 }
 
+Agencia::DestinoInexistente::DestinoInexistente(string nome) :
+		nome(nome) {
 
+}
 
+string Agencia::DestinoInexistente::getNome() const{
+	return nome;
+}
 
+Destino* Agencia::addDestino(Destino d1){
+	destinos.insert(d1);
+	return &d1;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
+Destino* Agencia::getDestino(string nome) const {
+	BSTItrIn<Destino> it(destinos);
+	while (!it.isAtEnd()) {
+		if (it.retrieve().getCidade()->getNome() == nome)
+			return &it.retrieve();
+		it.advance();
+	}
+	throw DestinoInexistente(nome);
+}
 

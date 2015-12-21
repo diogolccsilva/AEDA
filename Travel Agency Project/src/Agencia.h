@@ -22,7 +22,7 @@ class Agencia {
 	vector<Viagem> viagens; //totalidade de viagens da agencia (ja efetuadas e futuras)
 	vector<Pais> paises; //paises para os quais faz viagens
 	BST<Destino> destinos; //destinos para os quais a agência faz viagens
-	tr1::unordered_set<Cliente*,hstr,hstr> clientesantigos;
+	tr1::unordered_set<Cliente*, hstr, hstr> clientesantigos;
 public:
 	/**
 	 Construtor da classe Agencia
@@ -184,6 +184,20 @@ public:
 	 @return
 	 */
 	void saveClientes();
+	class DestinoInexistente {
+		string nome;
+	public:
+		/**
+		 Construtor da excecao para Destino Inexistente
+		 @param nome Nome do Destino Inexistente
+		 @return
+		 */
+		DestinoInexistente(string nome);
+		string getNome() const;
+	};
+	Destino* addDestino(Destino d1);
+	//retorna o destino com o nome nome, mais barato
+	Destino* getDestino(string nome) const;
 	static tm* getTempo_Info();
 };
 
