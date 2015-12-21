@@ -93,4 +93,4 @@ public:
 	bool changeAlojamento(Alojamento* a);
 };
 
-#endif SRC_VIAGEM_H_
+#endif // SRC_VIAGEM_H_

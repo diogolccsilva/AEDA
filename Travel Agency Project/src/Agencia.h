@@ -9,16 +9,18 @@
 #define SRC_AGENCIA_H_
 
 #include "Cliente.h"
-#include "Pais.h"
+#include "Destino.h"
 #include "Viagem.h"
 #include "Particular.h"
 #include "Comercial.h"
 
 class Agencia {
+	static time_t tempo_local;
 	string nome;
 	vector<Cliente*> clientes; //clientes da agencia
 	vector<Viagem> viagens; //totalidade de viagens da agencia (ja efetuadas e futuras)
 	vector<Pais> paises; //paises para os quais faz viagens
+	BST<Destino> destinos; //destinos para os quais a agência faz viagens
 public:
 	/**
 	 Construtor da classe Agencia

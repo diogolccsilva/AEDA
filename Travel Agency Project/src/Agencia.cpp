@@ -7,7 +7,7 @@
 
 #include "Agencia.h"
 
-int Viagem::sid = 0;
+time_t Agencia::tempo_local = time(0);
 
 /* Class: Agencia
  *
@@ -16,7 +16,7 @@ int Viagem::sid = 0;
  */
 
 Agencia::Agencia(string nome) :
-		nome(nome) {
+		nome(nome),destinos(Destino(NULL,NULL)) {
 
 }
 

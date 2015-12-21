@@ -55,6 +55,6 @@ public:
 
 };
 
-#endif SRC_ITINERARIO_H_
+#endif // SRC_ITINERARIO_H_
 
 

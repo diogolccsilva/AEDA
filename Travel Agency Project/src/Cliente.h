@@ -95,4 +95,4 @@ public:
 	friend ostream & operator<<(ostream & o, const Cliente & c);
 };
 
-#endif SRC_CLIENTE_H_
+#endif // SRC_CLIENTE_H_

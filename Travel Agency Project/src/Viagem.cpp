@@ -7,6 +7,8 @@
 
 #include "Viagem.h"
 
+int Viagem::sid = 0;
+
 /* Class: Viagem
  *
  *

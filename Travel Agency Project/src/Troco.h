@@ -63,7 +63,7 @@ public:
 	tm getData() const;
 };
 
-#endif SRC_TROCO_H_
+#endif // SRC_TROCO_H_
 
 
 

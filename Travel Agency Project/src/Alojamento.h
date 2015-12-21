@@ -18,6 +18,8 @@
 #include <sstream>
 #include <cstdio>
 
+#include "BST.h"
+
 using namespace std;
 
 class Alojamento {
@@ -70,4 +72,4 @@ public:
 	 */
 	bool operator==(const Alojamento& a) const;
 };
-#endif SRC_ALOJAMENTO_H_
+#endif // SRC_ALOJAMENTO_H_

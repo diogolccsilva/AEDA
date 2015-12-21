@@ -504,10 +504,10 @@ void manual() {
 
 int main(int argc, char const *argv[]) {
 	char c;
-	while (c != 27 && c != 3) {
-		cout << "1- Automatico" << endl;
-		cout << "2- Manual" << endl;
-		cout << "3- Sair" << endl;
+	while (c != 27 && c != '3') {
+		cout << "1- Automatico;" << endl;
+		cout << "2- Manual;" << endl;
+		cout << "3- Sair." << endl;
 		c = getch();
 		system("CLS");
 		switch (c) {

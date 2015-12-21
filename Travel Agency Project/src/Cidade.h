@@ -89,4 +89,4 @@ public:
 	};
 };
 
-#endif SRC_CIDADE_H_
+#endif // SRC_CIDADE_H_

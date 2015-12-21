@@ -60,4 +60,4 @@ public:
 	string getTipo() const;
 };
 
-#endif SRC_COMERCIAL_H_
+#endif // SRC_COMERCIAL_H_
