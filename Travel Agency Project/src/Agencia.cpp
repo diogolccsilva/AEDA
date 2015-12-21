@@ -17,7 +17,7 @@ tm* Agencia::tempo_info = localtime(&tempo_local);
  */
 
 Agencia::Agencia(string nome) :
-		nome(nome),destinos(Destino(NULL,NULL)) {
+		nome(nome),destinos(Destino(NULL)) {
 
 }
 
@@ -131,6 +131,7 @@ void Agencia::loadDestinos() {
 			getline(file, cidade);
 			addPais(Pais(pais));
 			getPais(pais).addCidade(Cidade(cidade, pais));
+			destinos.insert(Destino(getPais(pais).getCidade(cidade)));
 		}
 		file.close();
 	} else {

@@ -71,5 +71,6 @@ public:
 	 @return false se for diferente
 	 */
 	bool operator==(const Alojamento& a) const;
+	bool operator<(const Alojamento& a) const;
 };
 #endif // SRC_ALOJAMENTO_H_

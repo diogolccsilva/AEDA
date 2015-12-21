@@ -11,12 +11,13 @@
 #include "Pais.h"
 
 class Destino {
-	Pais* pais;
 	Cidade* cidade;
+	Alojamento alojamento;
 public:
 	Destino();
-	Destino(Pais* p, Cidade* c);
+	Destino(Cidade* c);
 	virtual ~Destino();
+	bool operator<(const Destino &d1) const;
 };
 
 #endif /* SRC_DESTINO_H_ */

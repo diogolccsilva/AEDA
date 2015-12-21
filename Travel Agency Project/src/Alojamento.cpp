@@ -43,3 +43,7 @@ bool Alojamento::operator==(const Alojamento& a) const {
 	return (nome == a.nome);
 }
 
+bool Alojamento::operator<(const Alojamento& a) const{
+	return (preco<a.preco);
+}
+

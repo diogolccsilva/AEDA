@@ -508,7 +508,7 @@ int main(int argc, char const *argv[]) {
 		cout << "1- Automatico;" << endl;
 		cout << "2- Manual;" << endl;
 		cout << "3- Sair." << endl;
-		cout << Agencia::getTempo_Info()->tm_mday << "/" << Agencia::getTempo_Info()->tm_mon << "/" << Agencia::getTempo_Info()->tm_year + 1900 << endl;
+		cout << asctime(Agencia::getTempo_Info()) << endl;
 		c = getch();
 		system("CLS");
 		switch (c) {
