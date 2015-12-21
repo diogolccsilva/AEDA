@@ -9,7 +9,6 @@
 #define SRC_VIAGEM_H_
 
 #include "Itinerario.h"
-#include "Alojamento.h"
 
 class Viagem {
 	Itinerario itinerario;

@@ -8,16 +8,6 @@
 #ifndef SRC_AGENCIA_H_
 #define SRC_AGENCIA_H_
 
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <ctime>
-#include <string>
-#include <conio.h>
-#include <fstream>
-#include <sstream>
-#include <cstdio>
-
 #include "Cliente.h"
 #include "Pais.h"
 #include "Viagem.h"

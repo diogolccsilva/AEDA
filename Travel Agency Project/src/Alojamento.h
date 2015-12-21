@@ -8,9 +8,15 @@
 #ifndef SRC_ALOJAMENTO_H_
 #define SRC_ALOJAMENTO_H_
 
-#include <string>
 #include <iostream>
 #include <vector>
+#include <algorithm>
+#include <ctime>
+#include <string>
+#include <conio.h>
+#include <fstream>
+#include <sstream>
+#include <cstdio>
 
 using namespace std;
 
