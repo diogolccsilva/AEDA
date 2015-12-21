@@ -8,6 +8,7 @@
 #include "Agencia.h"
 
 time_t Agencia::tempo_local = time(0);
+tm* Agencia::tempo_info = localtime(&tempo_local);
 
 /* Class: Agencia
  *
@@ -410,6 +411,10 @@ void Agencia::saveClientes() {
 			file << clientes[i]->getViagens()[j]->getId();
 		}
 	}
+}
+
+tm* Agencia::getTempo_Info(){
+	return tempo_info;
 }
 
 

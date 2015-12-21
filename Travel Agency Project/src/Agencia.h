@@ -16,6 +16,7 @@
 
 class Agencia {
 	static time_t tempo_local;
+	static tm* tempo_info;
 	string nome;
 	vector<Cliente*> clientes; //clientes da agencia
 	vector<Viagem> viagens; //totalidade de viagens da agencia (ja efetuadas e futuras)
@@ -182,6 +183,7 @@ public:
 	 @return
 	 */
 	void saveClientes();
+	static tm* getTempo_Info();
 };
 
 #endif SRC_AGENCIA_H_
