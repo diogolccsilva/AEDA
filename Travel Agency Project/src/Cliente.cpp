@@ -35,6 +35,26 @@ string Cliente::getNome() const {
 	return nome;
 }
 
+string Cliente::getEmail()const
+{
+	return email;
+}
+
+void Cliente::setEmail(string e)
+{
+	email=e;
+}
+
+string Cliente::getMorada() const
+{
+	return morada;
+}
+
+void Cliente::setMorada(string m)
+{
+	morada=m;
+}
+
 bool Cliente::operator==(const Cliente& cliente) const {
 	return (nome == cliente.nome);
 }

@@ -22,6 +22,7 @@ class Agencia {
 	vector<Viagem> viagens; //totalidade de viagens da agencia (ja efetuadas e futuras)
 	vector<Pais> paises; //paises para os quais faz viagens
 	BST<Destino> destinos; //destinos para os quais a agência faz viagens
+	tr1::unordered_set<Cliente*,hstr,hstr> clientesantigos;
 public:
 	/**
 	 Construtor da classe Agencia
