@@ -422,7 +422,6 @@ tm* Agencia::getTempo_Info() {
 	return tempo_info;
 }
 
-<<<<<<< HEAD
 Agencia::DestinoInexistente::DestinoInexistente(string nome) :
 		nome(nome) {
 
@@ -445,7 +444,8 @@ Destino* Agencia::getDestino(string nome) const {
 		it.advance();
 	}
 	throw DestinoInexistente(nome);
-=======
+}
+
 void Agencia::imprimeClientes() {
 	tr1::unordered_set<Cliente*, hstr, hstr>::iterator it;
 
@@ -493,7 +493,5 @@ void Agencia::procurarClienteNome(string n) {
 
 void Agencia::addClienteAntigo(Cliente* c) {
 	clientesantigos.insert(c);
-
->>>>>>> origin/master
 }
 
