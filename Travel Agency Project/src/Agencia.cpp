@@ -17,7 +17,7 @@ tm* Agencia::tempo_info = localtime(&tempo_local);
  */
 
 Agencia::Agencia(string nome) :
-		nome(nome),destinos(Destino(NULL)) {
+		nome(nome), destinos(Destino(NULL)) {
 
 }
 
@@ -278,7 +278,8 @@ void Agencia::loadClientes() {
 			} else if (tipo == "C") {
 				string nop = "";
 				getline(file, nop, '-');
-				this->addCliente(new Comercial(nome,email,morada, atoi(nop.c_str())));
+				this->addCliente(
+						new Comercial(nome, email, morada, atoi(nop.c_str())));
 			}
 			string vids = "";
 			getline(file, vids);
@@ -414,24 +415,57 @@ void Agencia::saveClientes() {
 	}
 }
 
-tm* Agencia::getTempo_Info(){
+tm* Agencia::getTempo_Info() {
 	return tempo_info;
 }
 
+void Agencia::imprimeClientes() {
+	tr1::unordered_set<Cliente*, hstr, hstr>::iterator it;
 
+	for (it = clientesantigos.begin(); it != clientesantigos.end(); it++) {
+		cout << "Nome:" << (*it)->getNome() << " Email:" << (*it)->getEmail()
+				<< " Morada:" << (*it)->getMorada() << endl;
+	}
+}
 
+void Agencia::procurarClienteEmail(string e) {
+	tr1::unordered_set<Cliente*, hstr, hstr>::iterator it;
 
+	for (it = clientesantigos.begin(); it != clientesantigos.end(); it++) {
+		if ((*it)->getEmail() == e) {
+			cout << "Nome:" << (*it)->getNome() << " Morada:"
+					<< (*it)->getMorada() << endl;
+		}
+	}
 
+}
 
+void Agencia::procurarClienteMorada(string m) {
+	tr1::unordered_set<Cliente*, hstr, hstr>::iterator it;
 
+	for (it = clientesantigos.begin(); it != clientesantigos.end(); it++) {
+		if ((*it)->getMorada() == m) {
+			cout << "Nome:" << (*it)->getNome() << " Email:"
+					<< (*it)->getEmail() << endl;
+		}
+	}
 
+}
 
+void Agencia::procurarClienteNome(string n) {
+	tr1::unordered_set<Cliente*, hstr, hstr>::iterator it;
 
+	for (it = clientesantigos.begin(); it != clientesantigos.end(); it++) {
+		if ((*it)->getNome() == n) {
+			cout << "Morada:" << (*it)->getMorada() << " Email:"
+					<< (*it)->getEmail() << endl;
+		}
+	}
 
+}
 
+void Agencia::addClienteAntigo(Cliente* c) {
+	clientesantigos.insert(c);
 
-
-
-
-
+}
 
