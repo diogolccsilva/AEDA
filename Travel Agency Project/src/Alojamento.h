@@ -17,6 +17,7 @@
 #include <fstream>
 #include <sstream>
 #include <cstdio>
+#include <tr1/unordered_set>
 
 #include "BST.h"
 

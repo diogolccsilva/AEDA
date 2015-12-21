@@ -45,6 +45,30 @@ public:
 	 */
 	string getNome() const;
 	/**
+	 Get do Email do Cliente
+	 @param void
+	 @return Email do Cliente
+	 */
+	string getEmail() const;
+	/**
+	 Set do Email do Cliente
+	 @param email String que se pretende adicionar ou alterar
+	 @return void
+	 */
+	void setEmail(string e);
+	/**
+	 Get da Morada do Cliente
+	 @param void
+	 @return Morada do Cliente
+	 */
+	string getMorada() const;
+	/**
+	 Set da Morada do Cliente
+	 @param morada String que se pretende adicionar ou alterar
+	 @return void
+	 */
+	void setMorada(string m);
+	/**
 	 Overload do operador == em Clientes
 	 @param c Cliente
 	 @return Se cliente e, ou nao, igual
@@ -93,6 +117,23 @@ public:
 	 @return Parâmetro de saída
 	 */
 	friend ostream & operator<<(ostream & o, const Cliente & c);
+};
+
+struct hstr
+{
+	int operator()(const Cliente* s1) const
+	{
+		string f1 = s1->getNome();
+		int v = 0;
+		for (unsigned int i = 0; i < f1.size(); i++)
+			v = 37 * v + f1[i];
+		return v;
+	}
+
+	bool operator() (const Cliente * s1, const Cliente* s2) const
+	{
+	return s1->getEmail()==s2->getEmail();
+	}
 };
 
 #endif // SRC_CLIENTE_H_
