@@ -13,7 +13,7 @@
 class Cliente {
 	string nome, email, morada;
 	vector<Viagem*> viagens;
-	int pontos, expirapontos;
+	int expirapontos;
 	priority_queue<Cliente, vector<Cliente>, FreqViaj> frequenciaviajantes;
 public:
 	/**

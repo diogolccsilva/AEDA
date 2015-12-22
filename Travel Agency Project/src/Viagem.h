@@ -15,7 +15,8 @@ class Viagem {
 	Itinerario itinerario;
 	Destino* destino;
 	float preco; //apenas o preco da viagem, para obter o preco total adicionar o preco do alojamento
-	int id;
+	int id, pontos;
+	//vai ter que se acrescentar data
 public:
 	static int sid;
 	/**
