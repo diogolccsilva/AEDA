@@ -498,7 +498,7 @@ void Agencia::imprimeClientesAntigos() {
 	}
 }
 
-void Agencia::procurarClienteEmail(string e) {
+void Agencia::procurarClienteAntigoEmail(string e) {
 	tr1::unordered_set<Cliente*, hstr, hstr>::iterator it;
 
 	for (it = clientes_antigos.begin(); it != clientes_antigos.end(); it++) {
@@ -510,7 +510,7 @@ void Agencia::procurarClienteEmail(string e) {
 
 }
 
-void Agencia::procurarClienteMorada(string m) {
+void Agencia::procurarClienteAntigoMorada(string m) {
 	tr1::unordered_set<Cliente*, hstr, hstr>::iterator it;
 
 	for (it = clientes_antigos.begin(); it != clientes_antigos.end(); it++) {
@@ -522,7 +522,7 @@ void Agencia::procurarClienteMorada(string m) {
 
 }
 
-void Agencia::procurarClienteNome(string n) {
+void Agencia::procurarClienteAntigoNome(string n) {
 	tr1::unordered_set<Cliente*, hstr, hstr>::iterator it;
 	for (it = clientes_antigos.begin(); it != clientes_antigos.end(); it++) {
 		if ((*it)->getNome() == n) {
@@ -538,36 +538,35 @@ void Agencia::addClienteAntigo(Cliente* c) {
 
 
 void Agencia::addClienteFrequente(Cliente* c) {
-	vector<Cliente*> tempouro, tempprata, tempbronze;
-		int p = c->getPontos();
-		if (p >= 20)
+
+	int p = c->getPontos();
+
+	if (p >= 20)
+		clientes_frequentes[0].push(c);
+	if (p < 20 && p > 10)
+		clientes_frequentes[1].push(c);
+	else
+		clientes_frequentes[2].push(c);
+
+}
+
+
+void Agencia::atualizaPontos(Cliente* c){
+
+}
+
+void Agencia::procurarClienteFrequentePontos(Cliente* c){
+
+	for (unsigned int i = 0; i<3; i++)
+	{
+		priority_queue<Cliente*> temp = clientes_frequentes[i];
+		while (!temp.empty())
 		{
-			frequenciaviajantes.top().push_back(c);
-			for (unsigned int i = 0; i<frequenciaviajantes.top().size(); i++)
-			{
-				Cliente* x = frequenciaviajantes.top()[i];
-			}
-		}
-		if (p < 20) {
-			tempouro = frequenciaviajantes.top();
-			frequenciaviajantes.pop();
-			tempprata = frequenciaviajantes.top();
-			if (p > 10) {
-				tempprata.push_back(c);
-				frequenciaviajantes.pop();
-				tempbronze = frequenciaviajantes.top();
-				frequenciaviajantes.pop();
-			} else {
-				frequenciaviajantes.pop();
-				tempbronze = frequenciaviajantes.top();
-				tempbronze.push_back(c);
-				frequenciaviajantes.pop();
-			}
-
-			frequenciaviajantes.push(tempbronze);
-			frequenciaviajantes.push(tempprata);
-			frequenciaviajantes.push(tempouro);
+			if (temp.top() == c)
+				cout << "Pontos: " << c->getPontos();
+			else
+				temp.pop();
 		}
 
-
+	}
 }
