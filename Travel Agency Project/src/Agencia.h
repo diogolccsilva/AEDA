@@ -22,7 +22,7 @@ class Agencia {
 	vector<Pais> paises; //paises para os quais faz viagens
 	BST<Destino> destinos; //destinos para os quais a agência faz viagens
 	tr1::unordered_set<Cliente*, hstr, hstr> clientes_antigos;
-	vector<priority_queue<Cliente*> > clientes_frequentes;
+	priority_queue<Cliente*> clientes_frequentes;
 	//priority_queue<vector<Cliente*> > clientes_frequentes;
 public:
 	/**

@@ -539,34 +539,48 @@ void Agencia::addClienteAntigo(Cliente* c) {
 
 void Agencia::addClienteFrequente(Cliente* c) {
 
-	int p = c->getPontos();
-
-	if (p >= 20)
+//	int p = c->getPontos();
+	clientes_frequentes.push(c);
+	/*if (p >= 20)
 		clientes_frequentes[0].push(c);
 	if (p < 20 && p > 10)
 		clientes_frequentes[1].push(c);
 	else
-		clientes_frequentes[2].push(c);
+		clientes_frequentes[2].push(c);*/
 
 }
 
 
 void Agencia::atualizaPontos(Cliente* c){
 
+	for (unsigned int i = 0; i<3; i++)
+	{
+		priority_queue<Cliente*> temp = clientes_frequentes;
+		priority_queue<Cliente*> temp2;
+		while (!temp.empty())
+		{
+			if (temp.top() == c)
+				;
+			else
+			{
+				temp2.push(temp.top());
+				temp.pop();
+			}
+		}
+	}
+
 }
 
 void Agencia::procurarClienteFrequentePontos(Cliente* c){
 
-	for (unsigned int i = 0; i<3; i++)
+	priority_queue<Cliente*> temp = clientes_frequentes;
+	while (!temp.empty())
 	{
-		priority_queue<Cliente*> temp = clientes_frequentes[i];
-		while (!temp.empty())
-		{
-			if (temp.top() == c)
-				cout << "Pontos: " << c->getPontos();
-			else
-				temp.pop();
-		}
-
+		if (temp.top() == c)
+			cout << "Pontos: " << c->getPontos();
+		else
+			temp.pop();
 	}
+
 }
+
