@@ -1,4 +1,5 @@
 Hotel Porto-Hotel-79.5-Portugal,Porto
-Hotel Madrid-Hotel-69.0-Espanha,Madrid
-Hotel Paris-Hotel-100.0-Franca,Paris
-Hotel Roma-Hotel-89.0-Italia,Roma
+Hotel Lisboa-Hotel-75.9-Portugal,Lisboa
+Hotel Madrid-Hotel-69-Espanha,Madrid
+Hotel Paris-Hotel-100-Franca,Paris
+Hotel Roma-Hotel-89-Italia,Roma

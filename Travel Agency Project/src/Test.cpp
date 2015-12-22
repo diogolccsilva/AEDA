@@ -442,6 +442,51 @@ void galojamentos(Agencia* a) {
 	}
 }
 
+void pdestinos(Agencia* a) {
+	BSTItrLevel<Destino> it(a->getDestinos());
+	while(!it.isAtEnd()){
+		Destino d = it.retrieve();
+		cout << "Destino: " << d.getCidade()->getNome() << endl;
+		cout << "Preco: " << d.getPreco() << endl;
+		cout << "Id Viagem: " << d.getViagem()->getId() << endl << endl;
+		it.advance();
+	}
+	getch();
+}
+
+void adddestinos(Agencia* a) {
+
+}
+
+void gdestinos(Agencia* a) {
+	char c;
+	while (c != 27 && c != '9') {
+		system("cls");
+		cout << "1- Ver destinos;" << endl;
+		cout << "2- Adicionar destino;" << endl;
+		cout << "3- Remover destino;" << endl;
+		cout << "4- Guardar destinos;" << endl;
+		cout << "9- Voltar;" << endl;
+		c = getch();
+		system("cls");
+		switch (c) {
+		case '1':
+			pdestinos(a);
+			break;
+		case '2':
+			adddestinos(a);
+			break;
+		case '3':
+			break;
+		case '4':
+			a->saveDestinos();
+			break;
+		default:
+			break;
+		}
+	}
+}
+
 void admin(Agencia* a) {
 	char c;
 	while (c != 27 && c != '9') {
@@ -450,6 +495,7 @@ void admin(Agencia* a) {
 		cout << "2- Gerir viagens;" << endl;
 		cout << "3- Gerir cidades;" << endl;
 		cout << "4- Gerir alojamentos;" << endl;
+		cout << "5- Gerir destinos;" << endl;
 		cout << "9- Voltar;" << endl;
 		c = getch();
 		system("cls");
@@ -466,6 +512,9 @@ void admin(Agencia* a) {
 		case '4':
 			galojamentos(a);
 			break;
+		case '5':
+			gdestinos(a);
+			break;
 		default:
 			break;
 		}
@@ -478,15 +527,10 @@ void manual() {
 	cin >> nome;
 	Agencia* a = new Agencia(nome);
 	//Carregar informações para agencia
-	cout << "cidades ";
 	a->loadCidades();
-	cout << "alojamentos ";
 	a->loadAlojamentos();
-	cout << "viagens ";
 	a->loadViagens();
-	cout << "destinos ";
 	a->loadDestinos();
-	cout << "clientes ";
 	a->loadClientes();
 	char c;
 	system("cls");

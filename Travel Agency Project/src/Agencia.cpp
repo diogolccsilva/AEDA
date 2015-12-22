@@ -322,6 +322,10 @@ void Agencia::loadDestinos() {
 			addDestino(
 					Destino(atoi(desconto.c_str()),
 							v->getItinerario().getDestino(), v, a));
+			/*cout << "destino: "<< v->getItinerario().getDestino()->getNome() << endl;
+			cout << "alojamento: " << alojamento << endl;
+			cout << "desconto: " << desconto << endl;
+			getch();*/
 		}
 		file.close();
 	} else {
@@ -487,6 +491,10 @@ Destino* Agencia::getDestino(string nome) const {
 		it.advance();
 	}
 	throw DestinoInexistente(nome);
+}
+
+BST<Destino> Agencia::getDestinos() const{
+	return destinos;
 }
 
 void Agencia::imprimeClientes() {

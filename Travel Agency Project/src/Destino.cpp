@@ -8,7 +8,7 @@
 #include "Destino.h"
 
 Destino::Destino() :
-		cidade(), alojamento() {
+		cidade(NULL), alojamento(NULL),viagem(NULL) {
 
 }
 
@@ -27,7 +27,7 @@ bool Destino::operator<(const Destino &d1) const {
 	if (cidade->getNome() != d1.cidade->getNome())
 		return cidade->getNome() < d1.cidade->getNome();
 	else if (cidade->getNome() == d1.cidade->getNome())
-		if (alojamento < d1.alojamento)
+		if (preco < d1.preco)
 			return true;
 	return false;
 }

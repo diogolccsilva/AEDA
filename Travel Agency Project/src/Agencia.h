@@ -19,7 +19,7 @@ class Agencia {
 	string nome;
 	vector<Cliente*> clientes; //clientes da agencia
 	vector<Viagem> viagens; //totalidade de viagens da agencia (ja efetuadas e futuras)
-	vector<Pais> paises; //paises para os quais faz viagens
+	vector<Pais> paises; //paises com as cidades para as quais faz viagens
 	BST<Destino> destinos; //destinos para os quais a agência faz viagens
 	tr1::unordered_set<Cliente*, hstr, hstr> clientes_antigos;
 	priority_queue<Cliente*> clientes_frequentes;
@@ -61,7 +61,7 @@ public:
 	 @param void
 	 @return Vetor de Viagens
 	 */
-	vector<Viagem> getViagens() const; //TODO REMOVE THIS
+	vector<Viagem> getViagens() const;
 	/**
 	 Funcao booleana para verificar se pode adicionar viagem
 	 @param v Viagem
@@ -211,6 +211,7 @@ public:
 	Destino* addDestino(Destino d1);
 	//retorna o destino com o nome nome, mais barato
 	Destino* getDestino(string nome) const;
+	BST<Destino> getDestinos() const;
 	static tm* getTempo_Info();
 	void imprimeClientes();
 	void procurarClienteEmail(string e);
