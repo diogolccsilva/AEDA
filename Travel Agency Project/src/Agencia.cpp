@@ -584,7 +584,14 @@ void Agencia::procurarClienteFrequentePontos(Cliente* c){
 	while (!temp.empty())
 	{
 		if (temp.top() == c)
-			cout << "Pontos: " << c->getPontos();
+		{
+			if (c->getPontos()>100)
+				cout << "Cliente de Ouro/n" << "Pontos: " << c->getPontos();
+			else if (c->getPontos() > 50)
+				cout << "Cliente de Prata/n" << "Pontos: " << c->getPontos();
+			else if (c->getPontos() > 0)
+				cout << "Cliente de Bronze/n" << "Pontos: " << c->getPontos();
+		}
 		else
 			temp.pop();
 	}
