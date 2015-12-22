@@ -39,3 +39,7 @@ int Viagem::getId() const {
 bool Viagem::operator==(const Viagem& v) const {
 	return (id == v.id);
 }
+
+int Viagem::getPontos() const {
+	return pontos;
+}

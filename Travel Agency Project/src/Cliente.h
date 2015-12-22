@@ -120,7 +120,7 @@ public:
 	friend ostream & operator<<(ostream & o, const Cliente & c);
 	int getPontos() const;
 	bool operator<(const Cliente& a1) const;
-	/*void addPontosCliente(Cliente* c);*/
+	void atualizaPontos(Cliente* c);
 };
 
 struct hstr

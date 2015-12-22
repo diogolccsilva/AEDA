@@ -62,6 +62,8 @@ public:
 	 @return Id da Viagem
 	 */
 	int getId() const;
+
+	int getPontos() const;
 };
 
 #endif // SRC_VIAGEM_H_

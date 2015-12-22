@@ -81,17 +81,11 @@ int Cliente::getPontos() const{
 	return pontos;
 }
 
-/*void Cliente::setQeue() {
-	vector<Cliente*> ouro = NULL;
-	vector<Cliente*> bronze = NULL;
-	vector<Cliente*> prata = NULL;
-	frequenciaviajantes.push(bronze);
-	frequenciaviajantes.push(prata);
-	frequenciaviajantes.push(ouro);
+void Cliente::atualizaPontos(Cliente* c) { //verifica please
+
+	int pontostemp = 0;
+
+	for (unsigned int i = 0; i<viagens.size(); i++)
+		pontostemp += viagens[i]->getPontos();
 }
-
-void Cliente::addPontosCliente(Cliente* c) {
-
-
-}*/
 
