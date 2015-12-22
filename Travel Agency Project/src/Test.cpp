@@ -302,7 +302,7 @@ void gviagens(Agencia* a) {
 	}
 }
 
-void pdestinos(Agencia* a) {
+void pcidades(Agencia* a) {
 	vector<Pais> vp = a->getPaises();
 	for (unsigned int i = 0; i < vp.size(); i++) {
 		vector<Cidade> vc = vp[i].getCidades();
@@ -313,7 +313,7 @@ void pdestinos(Agencia* a) {
 	getch();
 }
 
-void adddestino(Agencia* a) {
+void addcidade(Agencia* a) {
 	cout << "Pais: ";
 	string pais = "";
 	cin >> pais;
@@ -330,23 +330,23 @@ void adddestino(Agencia* a) {
 	getch();
 }
 
-void gdestinos(Agencia* a) {
+void gcidades(Agencia* a) {
 	char c;
 	while (c != 27 && c != '9') {
 		system("cls");
-		cout << "1- Ver destinos;" << endl;
-		cout << "2- Adicionar destino;" << endl;
-		cout << "3- Remover destino;" << endl;
-		cout << "4- Guardar destinos;" << endl;
+		cout << "1- Ver cidades;" << endl;
+		cout << "2- Adicionar cidade;" << endl;
+		cout << "3- Remover cidade;" << endl;
+		cout << "4- Guardar cidades;" << endl;
 		cout << "9- Voltar;" << endl;
 		c = getch();
 		system("cls");
 		switch (c) {
 		case '1':
-			pdestinos(a);
+			pcidades(a);
 			break;
 		case '2':
-			adddestino(a);
+			addcidade(a);
 			break;
 		case '3':
 			break;
@@ -448,7 +448,7 @@ void admin(Agencia* a) {
 		system("cls");
 		cout << "1- Gerir clientes;" << endl;
 		cout << "2- Gerir viagens;" << endl;
-		cout << "3- Gerir destinos;" << endl;
+		cout << "3- Gerir cidades;" << endl;
 		cout << "4- Gerir alojamentos;" << endl;
 		cout << "9- Voltar;" << endl;
 		c = getch();
@@ -461,7 +461,7 @@ void admin(Agencia* a) {
 			gviagens(a);
 			break;
 		case '3':
-			gdestinos(a);
+			gcidades(a);
 			break;
 		case '4':
 			galojamentos(a);
@@ -478,9 +478,15 @@ void manual() {
 	cin >> nome;
 	Agencia* a = new Agencia(nome);
 	//Carregar informações para agencia
-	a->loadDestinos();
+	cout << "cidades ";
+	a->loadCidades();
+	cout << "alojamentos ";
 	a->loadAlojamentos();
+	cout << "viagens ";
 	a->loadViagens();
+	cout << "destinos ";
+	a->loadDestinos();
+	cout << "clientes ";
 	a->loadClientes();
 	char c;
 	system("cls");

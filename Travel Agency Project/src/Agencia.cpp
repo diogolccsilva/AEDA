@@ -120,6 +120,10 @@ Agencia::ViagemInexistente::ViagemInexistente(int id) :
 
 }
 
+int Agencia::ViagemInexistente::getId() const {
+	return id;
+}
+
 void Agencia::loadCidades() {
 	string filename = "../cidades" + nome + ".txt";
 	ifstream file(filename.c_str());
@@ -195,6 +199,10 @@ void Agencia::loadViagens() {
 					cout << "Cidade " << ci.getNome() << " nao existe!" << endl;
 					getch();
 					//should never happen
+				} catch (PaisInexistente &pi) {
+					cout << "Pais " << pi.getNome() << " nao existe!" << endl;
+					getch();
+					//should never happen
 				}
 			}
 			Itinerario iti(vc[0], vc[vc.size() - 1]);
@@ -210,7 +218,7 @@ void Agencia::loadViagens() {
 			}
 			//Ler datas
 			string datas;
-			getline(file, datas, '-');
+			getline(file, datas);
 			istringstream dstream(datas);
 			vector<tm> vd;
 			while (!dstream.eof()) {
@@ -237,7 +245,7 @@ void Agencia::loadViagens() {
 				iti.addTroco(Troco(vc[i], vc[i + 1], vt[i], vd[i]));
 			}
 			//Adicionar viagem
-			addViagem(Viagem(iti,atoi(id.c_str())));
+			addViagem(Viagem(iti, atoi(preco.c_str()), atoi(id.c_str())));
 		}
 		file.close();
 	} else {
@@ -296,9 +304,24 @@ void Agencia::loadDestinos() {
 			string alojamento = "";
 			getline(file, alojamento, '-');
 			string desconto = "";
-			getline(file,desconto);
-			Viagem *v = getViagem(atoi(vid.c_str()));
-			addDestino(Destino(atoi(desconto.c_str()),v->getItinerario().getDestino(),v,v->getItinerario().getDestino()->getAlojamento(alojamento)));
+			getline(file, desconto);
+			Viagem *v;
+			try {
+				v = getViagem(atoi(vid.c_str()));
+			} catch (ViagemInexistente &vi) {
+				cout << "Viagem " << vi.getId() << " nao existe!" << endl;
+				getch();
+				//should never happen
+			}
+			Alojamento* a;
+			try {
+				a = v->getItinerario().getDestino()->getAlojamento(alojamento);
+			} catch (Cidade::AlojamentoInexistente &ai) {
+				a = new Alojamento();
+			}
+			addDestino(
+					Destino(atoi(desconto.c_str()),
+							v->getItinerario().getDestino(), v, a));
 		}
 		file.close();
 	} else {
@@ -426,11 +449,12 @@ void Agencia::saveDestinos() {
 	}
 	ofstream file(filename.c_str());
 	BSTItrIn<Destino> it(destinos);
-	while(!it.isAtEnd()){
+	while (!it.isAtEnd()) {
 		Destino d = it.retrieve();
-		file << d.getViagem()->getId() << "-" << d.getAlojamento()->getNome() << "-" << d.getDesconto();
+		file << d.getViagem()->getId() << "-" << d.getAlojamento()->getNome()
+				<< "-" << d.getDesconto();
 		it.advance();
-		if (!it.isAtEnd()){
+		if (!it.isAtEnd()) {
 			file << endl;
 		}
 	}
@@ -446,11 +470,11 @@ Agencia::DestinoInexistente::DestinoInexistente(string nome) :
 
 }
 
-string Agencia::DestinoInexistente::getNome() const{
+string Agencia::DestinoInexistente::getNome() const {
 	return nome;
 }
 
-Destino* Agencia::addDestino(Destino d1){
+Destino* Agencia::addDestino(Destino d1) {
 	destinos.insert(d1);
 	return &d1;
 }

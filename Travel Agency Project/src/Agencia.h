@@ -135,6 +135,7 @@ public:
 		 @return
 		 */
 		ViagemInexistente(int id);
+		int getId() const;
 	};
 	/**
 	 Load do ficheiro cidades para saber o Pais e a Cidade

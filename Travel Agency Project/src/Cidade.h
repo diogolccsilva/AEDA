@@ -5,7 +5,6 @@
  *      Author: Rita
  */
 
-
 #ifndef SRC_CIDADE_H_
 #define SRC_CIDADE_H_
 
