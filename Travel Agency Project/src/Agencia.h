@@ -220,7 +220,7 @@ public:
 	void procurarClienteAntigoMorada(string m);
 	void addClienteAntigo(Cliente *c);
 	void addClienteFrequente(Cliente* c);
-	void atualizaPontos(Cliente* c);
+	void atualizaCliente();
 	void procurarClienteFrequentePontos(Cliente *c);
 };
 

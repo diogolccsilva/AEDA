@@ -591,10 +591,41 @@ void Agencia::procurarClienteFrequentePontos(Cliente* c){
 				cout << "Cliente de Prata/n" << "Pontos: " << c->getPontos();
 			else if (c->getPontos() > 0)
 				cout << "Cliente de Bronze/n" << "Pontos: " << c->getPontos();
+			temp.pop();
 		}
 		else
 			temp.pop();
 	}
 
+}
+
+void Agencia::atualizaCliente(){
+
+	priority_queue<Cliente*> temp = clientes_frequentes, temp2;
+
+	while (!temp.empty())
+	{
+		for (unsigned int i = 0; i<clientes.size(); i++)
+		{
+			if (clientes[i]->getNome()==temp.top()->getNome())
+			{
+				if (clientes[i]->getPontos() == temp.top()->getPontos())
+				{
+					temp2.push(temp.top());
+					temp.pop();
+				}
+				else
+				{
+					temp2.push(clientes[i]);
+					temp.pop();
+				}
+			}
+			else
+				temp2.push(temp.top());
+				temp.pop();
+		}
+	}
+
+	clientes_frequentes = temp2;
 }
 
