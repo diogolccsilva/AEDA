@@ -489,7 +489,7 @@ Destino* Agencia::getDestino(string nome) const {
 	throw DestinoInexistente(nome);
 }
 
-void Agencia::imprimeClientes() {
+void Agencia::imprimeClientesAntigos() {
 	tr1::unordered_set<Cliente*, hstr, hstr>::iterator it;
 
 	for (it = clientes_antigos.begin(); it != clientes_antigos.end(); it++) {
@@ -536,3 +536,38 @@ void Agencia::addClienteAntigo(Cliente* c) {
 	clientes_antigos.insert(c);
 }
 
+
+void Agencia::addClienteFrequente(Cliente* c) {
+	vector<Cliente*> tempouro, tempprata, tempbronze;
+		int p = c->getPontos();
+		if (p >= 20)
+		{
+			frequenciaviajantes.top().push_back(c);
+			for (unsigned int i = 0; i<frequenciaviajantes.top().size(); i++)
+			{
+				Cliente* x = frequenciaviajantes.top()[i];
+			}
+		}
+		if (p < 20) {
+			tempouro = frequenciaviajantes.top();
+			frequenciaviajantes.pop();
+			tempprata = frequenciaviajantes.top();
+			if (p > 10) {
+				tempprata.push_back(c);
+				frequenciaviajantes.pop();
+				tempbronze = frequenciaviajantes.top();
+				frequenciaviajantes.pop();
+			} else {
+				frequenciaviajantes.pop();
+				tempbronze = frequenciaviajantes.top();
+				tempbronze.push_back(c);
+				frequenciaviajantes.pop();
+			}
+
+			frequenciaviajantes.push(tempbronze);
+			frequenciaviajantes.push(tempprata);
+			frequenciaviajantes.push(tempouro);
+		}
+
+
+}
