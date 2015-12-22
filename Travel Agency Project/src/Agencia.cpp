@@ -557,7 +557,8 @@ void Agencia::addClienteFrequente(Cliente* c) {
 
 }
 
-
+//fazer pontos na classe cliente
+/*
 void Agencia::atualizaPontos(Cliente* c){
 
 	for (unsigned int i = 0; i<3; i++)
@@ -576,7 +577,7 @@ void Agencia::atualizaPontos(Cliente* c){
 		}
 	}
 
-}
+}*/
 
 void Agencia::procurarClienteFrequentePontos(Cliente* c){
 
@@ -599,7 +600,7 @@ void Agencia::procurarClienteFrequentePontos(Cliente* c){
 
 }
 
-void Agencia::atualizaCliente(){
+void Agencia::atualizaCliente(){ //vê se está bem, please
 
 	priority_queue<Cliente*> temp = clientes_frequentes, temp2;
 
