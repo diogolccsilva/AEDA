@@ -1,12 +1,5 @@
-Portugal-Porto
-Portugal-Lisboa
-Portugal-Faro
-Espanha-Madrid
-Espanha-Barcelona
-Espanha-Sevilha
-Reino Unido-Londres
-Reino Unido-Manchester
-Franca-Paris
-Franca-Lyon
-Italia-Roma
-Italia-Pisa
+1-Hotel Paris-10
+2-Hotel Madrid-10
+3-Hotel Roma-10
+4--0
+5--0

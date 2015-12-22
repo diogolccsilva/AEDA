@@ -9,12 +9,10 @@
 #define SRC_VIAGEM_H_
 
 #include "Itinerario.h"
-#include "Destino.h"
 
 class Viagem {
 	Itinerario itinerario;
-	Destino* destino;
-	float preco; //apenas o preco da viagem, para obter o preco total adicionar o preco do alojamento
+	float preco;
 	int id, pontos;
 	//vai ter que se acrescentar data
 public:
@@ -28,7 +26,7 @@ public:
 	 @param id int
 	 @return
 	 */
-	Viagem(Itinerario itinerario, Destino* destino, float preco, int id = sid);
+	Viagem(Itinerario itinerario, float preco, int id = sid);
 	/**
 	 Destrutor de Viagem
 
@@ -51,13 +49,6 @@ public:
 	 */
 	Itinerario getItinerario() const;
 	/**
-	 Retorna o Alojamento, se este existir
-
-	 @param void
-	 @return Alojamento
-	 */
-	Alojamento* getAlojamento() const;
-	/**
 	 Overload do operador ==
 
 	 @param v Viagem
@@ -71,27 +62,6 @@ public:
 	 @return Id da Viagem
 	 */
 	int getId() const;
-	/**
-	 Adiciona um Alojamento as caracteristicas de viagem, uma vez que este nao e obrigatorio
-
-	 @param alojamento Alojamento
-	 @return
-	 */
-	bool addAlojamento(Alojamento* a);
-	/**
-	 Elimina o Alojamento
-
-	 @param void
-	 @return
-	 */
-	void delAlojamento();
-	/**
-	 Altera o Alojamento da Viagem
-
-	 @param a Alojamento
-	 @return true, se alteracao for aplicada, caso contrario false
-	 */
-	bool changeAlojamento(Alojamento* a);
 };
 
 #endif // SRC_VIAGEM_H_

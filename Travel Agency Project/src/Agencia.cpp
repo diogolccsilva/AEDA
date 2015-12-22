@@ -17,7 +17,7 @@ tm* Agencia::tempo_info = localtime(&tempo_local);
  */
 
 Agencia::Agencia(string nome) :
-		nome(nome), destinos(Destino(NULL)) {
+		nome(nome), destinos(Destino()) {
 
 }
 
@@ -120,8 +120,8 @@ Agencia::ViagemInexistente::ViagemInexistente(int id) :
 
 }
 
-void Agencia::loadDestinos() {
-	string filename = "../destinos" + nome + ".txt";
+void Agencia::loadCidades() {
+	string filename = "../cidades" + nome + ".txt";
 	ifstream file(filename.c_str());
 	if (file.is_open()) {
 		while (!file.eof()) {
@@ -131,7 +131,6 @@ void Agencia::loadDestinos() {
 			getline(file, cidade);
 			addPais(Pais(pais));
 			getPais(pais).addCidade(Cidade(cidade, pais));
-			destinos.insert(Destino(getPais(pais).getCidade(cidade)));
 		}
 		file.close();
 	} else {
@@ -156,7 +155,6 @@ void Agencia::loadAlojamentos() {
 			getline(file, cidade);
 			getPais(pais).getCidade(cidade)->addAlojamento(
 					Alojamento(tipo, nome, atof(preco.c_str())));
-
 		}
 		file.close();
 	} else {
@@ -238,23 +236,8 @@ void Agencia::loadViagens() {
 			for (unsigned int i = 0; i < vc.size() - 1; i++) {
 				iti.addTroco(Troco(vc[i], vc[i + 1], vt[i], vd[i]));
 			}
-			//Ler alojamento
-			string alojamento;
-			getline(file, alojamento);
-			Alojamento* a;
-			try{
-				a = iti.getDestino()->getAlojamento(alojamento);
-			} catch(Cidade::AlojamentoInexistente &ai){
-				a = new Alojamento();
-			}
-			Destino* d;
-			try {
-				d = getDestino(iti.getDestino()->getNome());
-			} catch (DestinoInexistente &di) {
-				d = addDestino(Destino(iti.getDestino(),a));
-			}
-			addViagem(Viagem(iti, d, atof(preco.c_str()),atoi(id.c_str())));
-
+			//Adicionar viagem
+			addViagem(Viagem(iti,atoi(id.c_str())));
 		}
 		file.close();
 	} else {
@@ -303,8 +286,28 @@ void Agencia::loadClientes() {
 	}
 }
 
-void Agencia::saveDestinos() {
+void Agencia::loadDestinos() {
 	string filename = "../destinos" + nome + ".txt";
+	ifstream file(filename.c_str());
+	if (file.is_open()) {
+		while (!file.eof()) {
+			string vid = "";
+			getline(file, vid, '-');
+			string alojamento = "";
+			getline(file, alojamento, '-');
+			string desconto = "";
+			getline(file,desconto);
+			Viagem *v = getViagem(atoi(vid.c_str()));
+			addDestino(Destino(atoi(desconto.c_str()),v->getItinerario().getDestino(),v,v->getItinerario().getDestino()->getAlojamento(alojamento)));
+		}
+		file.close();
+	} else {
+
+	}
+}
+
+void Agencia::saveCidades() {
+	string filename = "../cidades" + nome + ".txt";
 	if (ifstream(filename.c_str())) {
 		remove(filename.c_str());
 	}
@@ -387,8 +390,6 @@ void Agencia::saveViagens() {
 					<< trocos[j].getData().tm_hour << ":"
 					<< trocos[j].getData().tm_min;
 		}
-		file << "-";
-		file << viagens[i].getAlojamento()->getNome();
 	}
 }
 
@@ -416,6 +417,24 @@ void Agencia::saveClientes() {
 			file << clientes[i]->getViagens()[j]->getId();
 		}
 	}
+}
+
+void Agencia::saveDestinos() {
+	string filename = "../destinos" + nome + ".txt";
+	if (ifstream(filename.c_str())) {
+		remove(filename.c_str());
+	}
+	ofstream file(filename.c_str());
+	BSTItrIn<Destino> it(destinos);
+	while(!it.isAtEnd()){
+		Destino d = it.retrieve();
+		file << d.getViagem()->getId() << "-" << d.getAlojamento()->getNome() << "-" << d.getDesconto();
+		it.advance();
+		if (!it.isAtEnd()){
+			file << endl;
+		}
+	}
+	file.close();
 }
 
 tm* Agencia::getTempo_Info() {
@@ -449,7 +468,7 @@ Destino* Agencia::getDestino(string nome) const {
 void Agencia::imprimeClientes() {
 	tr1::unordered_set<Cliente*, hstr, hstr>::iterator it;
 
-	for (it = clientesantigos.begin(); it != clientesantigos.end(); it++) {
+	for (it = clientes_antigos.begin(); it != clientes_antigos.end(); it++) {
 		cout << "Nome:" << (*it)->getNome() << " Email:" << (*it)->getEmail()
 				<< " Morada:" << (*it)->getMorada() << endl;
 	}
@@ -458,7 +477,7 @@ void Agencia::imprimeClientes() {
 void Agencia::procurarClienteEmail(string e) {
 	tr1::unordered_set<Cliente*, hstr, hstr>::iterator it;
 
-	for (it = clientesantigos.begin(); it != clientesantigos.end(); it++) {
+	for (it = clientes_antigos.begin(); it != clientes_antigos.end(); it++) {
 		if ((*it)->getEmail() == e) {
 			cout << "Nome:" << (*it)->getNome() << " Morada:"
 					<< (*it)->getMorada() << endl;
@@ -470,7 +489,7 @@ void Agencia::procurarClienteEmail(string e) {
 void Agencia::procurarClienteMorada(string m) {
 	tr1::unordered_set<Cliente*, hstr, hstr>::iterator it;
 
-	for (it = clientesantigos.begin(); it != clientesantigos.end(); it++) {
+	for (it = clientes_antigos.begin(); it != clientes_antigos.end(); it++) {
 		if ((*it)->getMorada() == m) {
 			cout << "Nome:" << (*it)->getNome() << " Email:"
 					<< (*it)->getEmail() << endl;
@@ -481,17 +500,15 @@ void Agencia::procurarClienteMorada(string m) {
 
 void Agencia::procurarClienteNome(string n) {
 	tr1::unordered_set<Cliente*, hstr, hstr>::iterator it;
-
-	for (it = clientesantigos.begin(); it != clientesantigos.end(); it++) {
+	for (it = clientes_antigos.begin(); it != clientes_antigos.end(); it++) {
 		if ((*it)->getNome() == n) {
 			cout << "Morada:" << (*it)->getMorada() << " Email:"
 					<< (*it)->getEmail() << endl;
 		}
 	}
-
 }
 
 void Agencia::addClienteAntigo(Cliente* c) {
-	clientesantigos.insert(c);
+	clientes_antigos.insert(c);
 }
 

@@ -13,8 +13,7 @@
 class Cliente {
 	string nome, email, morada;
 	vector<Viagem*> viagens;
-	int expirapontos;
-	priority_queue<Cliente, vector<Cliente>, FreqViaj> frequenciaviajantes;
+	int pontos;
 public:
 	/**
 	 Construtor base de Cliente
@@ -27,7 +26,7 @@ public:
 	 @param nome Nome do Cliente
 	 @return
 	 */
-	Cliente(string nome, string email, string morada, int pontos);
+	Cliente(string nome, string email, string morada, int pontos = 0);
 	/**
 	 Destrutor de Cliente
 	 @param void
@@ -119,12 +118,9 @@ public:
 	 @return Parâmetro de saída
 	 */
 	friend ostream & operator<<(ostream & o, const Cliente & c);
-
-	int getPontos();
-
-	bool operator<(const Cliente& a1, const Cliente& a2);
-
-	void addPontosCliente (Cliente c);
+	int getPontos() const;
+	bool operator<(const Cliente& a1) const;
+	/*void addPontosCliente(Cliente* c);*/
 };
 
 struct hstr

@@ -7,32 +7,52 @@
 
 #include "Destino.h"
 
-Destino::Destino():cidade(),alojamento(){
+Destino::Destino() :
+		cidade(), alojamento() {
 
 }
 
-Destino::Destino(Cidade* c,Alojamento* alojamento): cidade(c),alojamento(alojamento) {
+Destino::Destino(float desconto, Cidade* c, Viagem* viagem,
+		Alojamento* alojamento) :
+		desconto(desconto), cidade(c), viagem(viagem), alojamento(alojamento) {
 	// TODO Auto-generated constructor stub
-
+	updatePreco();
 }
 
 Destino::~Destino() {
 	// TODO Auto-generated destructor stub
 }
 
-bool Destino::operator<(const Destino &d1) const{
-	if(cidade->getNome()!=d1.cidade->getNome())
-		return cidade->getNome()<d1.cidade->getNome();
-	else if(cidade->getNome()==d1.cidade->getNome())
-		if(alojamento<d1.alojamento)
+bool Destino::operator<(const Destino &d1) const {
+	if (cidade->getNome() != d1.cidade->getNome())
+		return cidade->getNome() < d1.cidade->getNome();
+	else if (cidade->getNome() == d1.cidade->getNome())
+		if (alojamento < d1.alojamento)
 			return true;
 	return false;
 }
 
-Cidade* Destino::getCidade() const{
+Cidade* Destino::getCidade() const {
 	return cidade;
 }
 
-Alojamento* Destino::getAlojamento() const{
+Alojamento* Destino::getAlojamento() const {
 	return alojamento;
+}
+
+Viagem* Destino::getViagem() const {
+	return viagem;
+}
+
+float Destino::getDesconto() const{
+	return desconto;
+}
+
+void Destino::updatePreco(){
+	preco = viagem->getPreco() + alojamento->getPreco();
+	preco -= preco*desconto/100;
+}
+
+float Destino::getPreco() const{
+	return preco;
 }

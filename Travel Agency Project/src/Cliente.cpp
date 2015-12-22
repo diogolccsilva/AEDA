@@ -18,8 +18,8 @@ Cliente::Cliente() :
 
 }
 
-Cliente::Cliente(string nome, string email, string morada) :
-		nome(nome), email(email), morada(morada) {
+Cliente::Cliente(string nome, string email, string morada,int pontos) :
+		nome(nome), email(email), morada(morada),pontos(pontos) {
 
 }
 
@@ -35,24 +35,20 @@ string Cliente::getNome() const {
 	return nome;
 }
 
-string Cliente::getEmail()const
-{
+string Cliente::getEmail() const {
 	return email;
 }
 
-void Cliente::setEmail(string e)
-{
-	email=e;
+void Cliente::setEmail(string e) {
+	email = e;
 }
 
-string Cliente::getMorada() const
-{
+string Cliente::getMorada() const {
 	return morada;
 }
 
-void Cliente::setMorada(string m)
-{
-	morada=m;
+void Cliente::setMorada(string m) {
+	morada = m;
 }
 
 bool Cliente::operator==(const Cliente& cliente) const {
@@ -74,44 +70,42 @@ ostream & operator<<(ostream & o, const Cliente & c) {
 	return o;
 }
 
-bool Cliente::operator<(const Cliente& a1, const Cliente& a2)
-{
-	if (a1.pontos < a2.pontos)
+bool Cliente::operator<(const Cliente& a1) const {
+	if (pontos < a1.pontos)
 		return true;
 	else
 		return false;
 }
 
-void Cliente::setQeue()
-{
-	vector<Cliente> ouro = NULL;
-	vector<Cliente> bronze = NULL;
-	vector<Cliente> prata = NULL;
+int Cliente::getPontos() const{
+	return pontos;
+}
+
+/*void Cliente::setQeue() {
+	vector<Cliente*> ouro = NULL;
+	vector<Cliente*> bronze = NULL;
+	vector<Cliente*> prata = NULL;
 	frequenciaviajantes.push(bronze);
 	frequenciaviajantes.push(prata);
 	frequenciaviajantes.push(ouro);
 }
 
-void Cliente::addPontosCliente (Cliente c)
-{
-	vector<Cliente> tempouro, tempprata, tempbronze;
-	int p = c.pontos;
-	if (p>=20)
+void Cliente::addPontosCliente(Cliente* c) {
+
+	vector<Cliente*> tempouro, tempprata, tempbronze;
+	int p = c->getPontos();
+	if (p >= 20)
 		frequenciaviajantes.top().push_back(c);
-	if (p<20)
-	{
+	if (p < 20) {
 		tempouro = frequenciaviajantes.top();
 		frequenciaviajantes.pop();
 		tempprata = frequenciaviajantes.top();
-		if (p>10)
-		{
+		if (p > 10) {
 			tempprata.push_back(c);
 			frequenciaviajantes.pop();
 			tempbronze = frequenciaviajantes.top();
 			frequenciaviajantes.pop();
-		}
-		else
-		{
+		} else {
 			frequenciaviajantes.pop();
 			tempbronze = frequenciaviajantes.top();
 			tempbronze.push_back(c);
@@ -122,5 +116,5 @@ void Cliente::addPontosCliente (Cliente c)
 		frequenciaviajantes.push(tempprata);
 		frequenciaviajantes.push(tempouro);
 	}
-}
+}*/
 

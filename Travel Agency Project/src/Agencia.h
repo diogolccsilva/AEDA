@@ -10,7 +10,6 @@
 
 #include "Cliente.h"
 #include "Destino.h"
-#include "Viagem.h"
 #include "Particular.h"
 #include "Comercial.h"
 
@@ -22,7 +21,8 @@ class Agencia {
 	vector<Viagem> viagens; //totalidade de viagens da agencia (ja efetuadas e futuras)
 	vector<Pais> paises; //paises para os quais faz viagens
 	BST<Destino> destinos; //destinos para os quais a agência faz viagens
-	tr1::unordered_set<Cliente*, hstr, hstr> clientesantigos;
+	tr1::unordered_set<Cliente*, hstr, hstr> clientes_antigos;
+	priority_queue<Cliente*> clientes_frequentes;
 public:
 	/**
 	 Construtor da classe Agencia
@@ -61,7 +61,7 @@ public:
 	 @param void
 	 @return Vetor de Viagens
 	 */
-	vector<Viagem> getViagens() const;
+	vector<Viagem> getViagens() const; //TODO REMOVE THIS
 	/**
 	 Funcao booleana para verificar se pode adicionar viagem
 	 @param v Viagem
@@ -137,11 +137,11 @@ public:
 		ViagemInexistente(int id);
 	};
 	/**
-	 Load do ficheiro destinos para saber o Pais e a Cidade
+	 Load do ficheiro cidades para saber o Pais e a Cidade
 	 @param void
 	 @return
 	 */
-	void loadDestinos();
+	void loadCidades();
 	/**
 	 Load do ficheiro alojamentos para saber o nome, tipo, preco e pais
 	 @param void
@@ -155,17 +155,23 @@ public:
 	 */
 	void loadViagens();
 	/**
+	 Load do ficheiro destinos para saber os destinos disponiveis
+	 @param void
+	 @return
+	 */
+	void loadDestinos();
+	/**
 	 Load do ficheiro clientes para saber o nome e o tipo
 	 @param void
 	 @return
 	 */
 	void loadClientes();
 	/**
-	 Atualizacao do ficheiro destinos
+	 Atualizacao do ficheiro cidades
 	 @param void
 	 @return
 	 */
-	void saveDestinos();
+	void saveCidades();
 	/**
 	 Atualizacao do ficheiro alojamentos
 	 @param void
@@ -178,6 +184,12 @@ public:
 	 @return
 	 */
 	void saveViagens();
+	/**
+	 Atualizacao do ficheiro destinos
+	 @param void
+	 @return
+	 */
+	void saveDestinos();
 	/**
 	 Atualizacao do ficheiro clientes
 	 @param void

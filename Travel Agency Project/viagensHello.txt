@@ -1,5 +1,5 @@
-1-200-Portugal,Porto;Espanha,Barcelona;Franca,Paris-Aviao;Aviao-20/11/15 11:50;20/11/15 14:30-Hotel Paris
-2-150-Portugal,Porto;Espanha,Madrid-Autocarro-20/11/15 11:50-Hotel Madrid
-3-345-Portugal,Porto;Italia,Roma-Aviao-20/11/15 11:50-Hotel Roma
-4-20-Portugal,Porto;Portugal,Lisboa-Aviao-13/11/15 13:20-
-5-35.99-Portugal,Porto;Portugal,Lisboa-Comboio-12/11/15 9:50-
+1-200-Portugal,Porto;Espanha,Barcelona;Franca,Paris-Aviao;Aviao-20/11/15 11:50;20/11/15 14:30
+2-150-Portugal,Porto;Espanha,Madrid-Autocarro-20/11/15 11:50
+3-345-Portugal,Porto;Italia,Roma-Aviao-20/11/15 11:50
+4-20-Portugal,Porto;Portugal,Lisboa-Aviao-13/11/15 13:20
+5-35.99-Portugal,Porto;Portugal,Lisboa-Comboio-12/11/15 9:50
