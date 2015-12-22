@@ -23,6 +23,7 @@ class Agencia {
 	BST<Destino> destinos; //destinos para os quais a agência faz viagens
 	tr1::unordered_set<Cliente*, hstr, hstr> clientes_antigos;
 	priority_queue<Cliente*> clientes_frequentes;
+	//priority_queue<vector<Cliente*> > clientes_frequentes;
 public:
 	/**
 	 Construtor da classe Agencia
@@ -213,11 +214,14 @@ public:
 	Destino* getDestino(string nome) const;
 	BST<Destino> getDestinos() const;
 	static tm* getTempo_Info();
-	void imprimeClientes();
-	void procurarClienteEmail(string e);
-	void procurarClienteNome(string n);
-	void procurarClienteMorada(string m);
+	void imprimeClientesAntigos();
+	void procurarClienteAntigoEmail(string e);
+	void procurarClienteAntigoNome(string n);
+	void procurarClienteAntigoMorada(string m);
 	void addClienteAntigo(Cliente *c);
+	void addClienteFrequente(Cliente* c);
+	void atualizaPontos(Cliente* c);
+	void procurarClienteFrequentePontos(Cliente *c);
 };
 
 #endif SRC_AGENCIA_H_

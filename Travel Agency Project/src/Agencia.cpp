@@ -497,16 +497,15 @@ BST<Destino> Agencia::getDestinos() const{
 	return destinos;
 }
 
-void Agencia::imprimeClientes() {
+void Agencia::imprimeClientesAntigos() {
 	tr1::unordered_set<Cliente*, hstr, hstr>::iterator it;
-
 	for (it = clientes_antigos.begin(); it != clientes_antigos.end(); it++) {
 		cout << "Nome:" << (*it)->getNome() << " Email:" << (*it)->getEmail()
 				<< " Morada:" << (*it)->getMorada() << endl;
 	}
 }
 
-void Agencia::procurarClienteEmail(string e) {
+void Agencia::procurarClienteAntigoEmail(string e) {
 	tr1::unordered_set<Cliente*, hstr, hstr>::iterator it;
 
 	for (it = clientes_antigos.begin(); it != clientes_antigos.end(); it++) {
@@ -518,7 +517,7 @@ void Agencia::procurarClienteEmail(string e) {
 
 }
 
-void Agencia::procurarClienteMorada(string m) {
+void Agencia::procurarClienteAntigoMorada(string m) {
 	tr1::unordered_set<Cliente*, hstr, hstr>::iterator it;
 
 	for (it = clientes_antigos.begin(); it != clientes_antigos.end(); it++) {
@@ -530,7 +529,7 @@ void Agencia::procurarClienteMorada(string m) {
 
 }
 
-void Agencia::procurarClienteNome(string n) {
+void Agencia::procurarClienteAntigoNome(string n) {
 	tr1::unordered_set<Cliente*, hstr, hstr>::iterator it;
 	for (it = clientes_antigos.begin(); it != clientes_antigos.end(); it++) {
 		if ((*it)->getNome() == n) {
@@ -542,5 +541,53 @@ void Agencia::procurarClienteNome(string n) {
 
 void Agencia::addClienteAntigo(Cliente* c) {
 	clientes_antigos.insert(c);
+}
+
+
+void Agencia::addClienteFrequente(Cliente* c) {
+
+//	int p = c->getPontos();
+	clientes_frequentes.push(c);
+	/*if (p >= 20)
+		clientes_frequentes[0].push(c);
+	if (p < 20 && p > 10)
+		clientes_frequentes[1].push(c);
+	else
+		clientes_frequentes[2].push(c);*/
+
+}
+
+
+void Agencia::atualizaPontos(Cliente* c){
+
+	for (unsigned int i = 0; i<3; i++)
+	{
+		priority_queue<Cliente*> temp = clientes_frequentes;
+		priority_queue<Cliente*> temp2;
+		while (!temp.empty())
+		{
+			if (temp.top() == c)
+				;
+			else
+			{
+				temp2.push(temp.top());
+				temp.pop();
+			}
+		}
+	}
+
+}
+
+void Agencia::procurarClienteFrequentePontos(Cliente* c){
+
+	priority_queue<Cliente*> temp = clientes_frequentes;
+	while (!temp.empty())
+	{
+		if (temp.top() == c)
+			cout << "Pontos: " << c->getPontos();
+		else
+			temp.pop();
+	}
+
 }
 
