@@ -18,8 +18,9 @@ Cliente::Cliente() :
 
 }
 
-Cliente::Cliente(string nome, string email, string morada,string status,int pontos) :
-		nome(nome), email(email), morada(morada),status(status),pontos(pontos) {
+Cliente::Cliente(string nome, string email, string morada, string status,
+		int pontos) :
+		nome(nome), email(email), morada(morada), status(status), pontos(pontos) {
 
 }
 
@@ -51,8 +52,7 @@ void Cliente::setMorada(string m) {
 	morada = m;
 }
 
-string Cliente::getStatus() const
-{
+string Cliente::getStatus() const {
 	return status;
 }
 
@@ -71,7 +71,8 @@ vector<Viagem*> Cliente::getViagens() const {
 //TODO usar templates talvez para ver se imprime o tipo direito
 ostream & operator<<(ostream & o, const Cliente & c) {
 	o << "Nome: " << c.getNome() << ";\n" << "Tipo: " << c.getTipo() << ";\n"
-			<< "No de Viagens: " << c.getNoViagens() << ";\n";
+			<< "No de Viagens: " << c.getNoViagens() << ";\n" << "Pontos: "
+			<< c.getPontos() << ";\n";
 	return o;
 }
 
@@ -82,7 +83,7 @@ bool Cliente::operator<(const Cliente& a1) const {
 		return false;
 }
 
-int Cliente::getPontos() const{
+int Cliente::getPontos() const {
 	return pontos;
 }
 
@@ -90,20 +91,20 @@ void Cliente::atualizaPontos(Cliente* c) { //verifica please
 
 	int pontostemp = 0;
 
-	for (unsigned int i = 0; i<viagens.size(); i++)
+	for (unsigned int i = 0; i < viagens.size(); i++)
 		pontostemp += viagens[i]->getPontos();
 }
 
-void Cliente::printViagens() const{
-	for (unsigned int i = 0;i<destinos.size();i++){
+void Cliente::printViagens() const {
+	for (unsigned int i = 0; i < destinos.size(); i++) {
 		cout << (*destinos[i]) << endl;
 	}
 }
 
-bool Cliente::addDestino(Destino* d){
+bool Cliente::addDestino(Destino* d) {
 	vector<Destino*>::iterator it;
-	it = find(destinos.begin(),destinos.end(),d);
-	if (it!=destinos.end()){
+	it = find(destinos.begin(), destinos.end(), d);
+	if (it != destinos.end()) {
 		return false;
 	}
 	destinos.push_back(d);
@@ -112,19 +113,19 @@ bool Cliente::addDestino(Destino* d){
 	return true;
 }
 
-vector<Destino*> Cliente::getDestinos() const{
+vector<Destino*> Cliente::getDestinos() const {
 	return destinos;
 }
 
-void Cliente::updateStatus(){
-	tm t = getViagens()[0]->getItinerario().getData(),data;
+void Cliente::updateStatus() {
+	tm t = getViagens()[0]->getItinerario().getData(), data;
 	time_t now;
 	time(&now);
 	data = *localtime(&now);
-	float dtime = difftime(mktime(&data), mktime(&t))/ (60 * 60 * 24);
-	if (dtime > 365){
+	float dtime = difftime(mktime(&data), mktime(&t)) / (60 * 60 * 24);
+	if (dtime > 365) {
 		status = "Antigo";
-	}else{
+	} else {
 		status = "Frequente";
 	}
 }

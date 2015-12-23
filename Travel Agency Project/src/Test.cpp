@@ -452,7 +452,7 @@ void pdestinos(Agencia* a) {
 
 void adddestino(Agencia* a) {
 	cout << "Viagem (id): ";
-	int id;
+	int id = 0;
 	cin >> id;
 	Viagem* v;
 	try {
@@ -463,14 +463,15 @@ void adddestino(Agencia* a) {
 		return;
 	}
 	cout << "C/ Alojamento? (s/n) ";
-	char c;
+	char c = ' ';
 	cin >> c;
 	Alojamento* al;
 	string alojamento;
 	switch (c) {
 	case 's':
 		cout << "Alojamento: ";
-		cin >> alojamento;
+		cin.ignore();
+		getline(cin,alojamento);
 		try {
 			al = v->getItinerario().getDestino()->getAlojamento(alojamento);
 		} catch (Cidade::AlojamentoInexistente &ai) {
@@ -484,7 +485,7 @@ void adddestino(Agencia* a) {
 		break;
 	}
 	cout << "Desconto (0-100%): ";
-	float desc;
+	float desc = 0;
 	cin >> desc;
 	a->addDestino(Destino(desc, v->getItinerario().getDestino(), v, al));
 }
