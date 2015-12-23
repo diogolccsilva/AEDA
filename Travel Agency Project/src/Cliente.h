@@ -27,7 +27,7 @@ public:
 	 @param nome Nome do Cliente
 	 @return
 	 */
-	Cliente(string nome, string email, string morada,string status = "", int pontos = 0);
+	Cliente(string nome, string email, string morada,string status = "Antigo", int pontos = 0);
 	/**
 	 Destrutor de Cliente
 	 @param void

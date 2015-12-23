@@ -113,6 +113,7 @@ bool Cliente::addDestino(Destino* d){
 	}
 	destinos.push_back(d);
 	viagens.push_back(d->getViagem());
+	updateStatus();
 	return true;
 }
 
@@ -121,5 +122,14 @@ vector<Destino*> Cliente::getDestinos() const{
 }
 
 void Cliente::updateStatus(){
-
+	tm t = getViagens()[0]->getItinerario().getData(),data;
+	time_t now;
+	time(&now);
+	data = *localtime(&now);
+	float dtime = difftime(mktime(&data), mktime(&t))/ (60 * 60 * 24);
+	if (dtime > dtime){
+		status = "Antigo";
+	}else{
+		status = "Frequente";
+	}
 }

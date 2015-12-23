@@ -35,17 +35,10 @@ bool Agencia::addCliente(Cliente* c) {
 	if (it != clientes.end())
 		return false; //TODO change to a throw eventually
 	else {
-		if (c->getViagens().size() > 0) {
-			tm t = c->getViagens()[0]->getItinerario().getData();
-			float dtime = difftime(mktime(getTempo_Info()), mktime(&t))
-					/ (60 * 60 * 24);
-			if (dtime > 365) {
-				addClienteAntigo(c);
-			} else {
-				addClienteFrequente(c);
-			}
+		if (c->getStatus() == "Frequente") {
+			addClienteFrequente(c);
 		} else {
-
+			addClienteAntigo(c);
 		}
 		clientes.push_back(c);
 	}
