@@ -344,6 +344,7 @@ public:
 	 @return void
 	 */
 	void printAlojamentos() const;
+	void removeViagem(Viagem v);
 };
 
 #endif SRC_AGENCIA_H_

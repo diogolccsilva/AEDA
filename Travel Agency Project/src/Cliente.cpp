@@ -129,3 +129,6 @@ void Cliente::updateStatus() {
 		status = "Frequente";
 	}
 }
+
+
+

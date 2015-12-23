@@ -695,3 +695,16 @@ void Agencia::printAlojamentos() const {
 		}
 	}
 }
+
+void Agencia::removeViagem(Viagem v)
+{
+	vector <Viagem>::iterator it;
+
+	for(it = viagens.begin(); it!= viagens.end();it++)
+	{
+		if((*it).getId()== v.getId())
+		{
+			viagens.erase(it);
+		}
+	}
+}

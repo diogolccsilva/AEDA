@@ -56,6 +56,7 @@ public:
 	 @return Vetor com as Cidades
 	 */
 	vector<Cidade> getCidades() const;
+	void removeCidade(Cidade c);
 	/**
 	 Classe da excecao Cidade Inexistente
 	 @param void
@@ -76,6 +77,7 @@ public:
 		 @return Nome da Cidade Inexistente
 		 */
 		string getNome() const;
+
 	};
 };
 
