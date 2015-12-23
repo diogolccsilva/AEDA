@@ -127,7 +127,7 @@ void Cliente::updateStatus(){
 	time(&now);
 	data = *localtime(&now);
 	float dtime = difftime(mktime(&data), mktime(&t))/ (60 * 60 * 24);
-	if (dtime > dtime){
+	if (dtime > 365){
 		status = "Antigo";
 	}else{
 		status = "Frequente";
