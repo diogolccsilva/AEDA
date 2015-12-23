@@ -123,6 +123,41 @@ void mcliente(Agencia* a) {
 	}
 }
 
+void pcantigos(Agencia* a) {
+	a->printClientesAntigos();
+	getch();
+}
+
+void pcfrequentes(Agencia* a) {
+
+}
+
+void mpclientes(Agencia* a) {
+	char c;
+	while (c != 27 && c != '9') {
+		system("cls");
+		cout << "1- Ver togos os clientes;" << endl;
+		cout << "2- Ver clientes antigos;" << endl;
+		cout << "3- Ver clientes frequentes;" << endl;
+		cout << "9- Voltar;" << endl;
+		c = getch();
+		system("cls");
+		switch (c) {
+		case '1':
+			pclientes(a);
+			break;
+		case '2':
+			pcantigos(a);
+			break;
+		case '3':
+			pcfrequentes(a);
+			break;
+		default:
+			break;
+		}
+	}
+}
+
 void gclientes(Agencia* a) {
 	char c;
 	while (c != 27 && c != '9') {
@@ -136,7 +171,7 @@ void gclientes(Agencia* a) {
 		system("cls");
 		switch (c) {
 		case '1':
-			pclientes(a);
+			mpclientes(a);
 			break;
 		case '2':
 			addcliente(a);
@@ -540,19 +575,19 @@ int main(int argc, char const *argv[]) {
 		cout << "2- Manual;" << endl;
 		cout << "3- Sair." << endl;
 		/*cout << asctime(Agencia::getTempo_Info()) << endl;
-		tm data;
-		time_t now;
-		time(&now);
-		data = *localtime(&now);
-		data.tm_hour = 14;
-		data.tm_min = 01;
-		data.tm_mday = 21;
-		data.tm_mon = 12 - 1;
-		data.tm_year = 2015 - 1900;
-		cout
-				<< difftime(mktime(Agencia::getTempo_Info()), mktime(&data))
-						/ (60 * 60 * 24) << endl;
-		cout << asctime(&data) << endl;*/
+		 tm data;
+		 time_t now;
+		 time(&now);
+		 data = *localtime(&now);
+		 data.tm_hour = 14;
+		 data.tm_min = 01;
+		 data.tm_mday = 21;
+		 data.tm_mon = 12 - 1;
+		 data.tm_year = 2015 - 1900;
+		 cout
+		 << difftime(mktime(Agencia::getTempo_Info()), mktime(&data))
+		 / (60 * 60 * 24) << endl;
+		 cout << asctime(&data) << endl;*/
 		c = getch();
 		system("CLS");
 		switch (c) {

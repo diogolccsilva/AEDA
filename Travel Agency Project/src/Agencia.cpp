@@ -40,9 +40,9 @@ bool Agencia::addCliente(Cliente* c) {
 			float dtime = difftime(mktime(getTempo_Info()), mktime(&t))
 					/ (60 * 60 * 24);
 			if (dtime > 365) {
-				addClienteFrequente(c);
-			} else {
 				addClienteAntigo(c);
+			} else {
+				addClienteFrequente(c);
 			}
 		} else {
 
@@ -518,8 +518,9 @@ BST<Destino> Agencia::getDestinos() const {
 void Agencia::printClientesAntigos() const {
 	tr1::unordered_set<Cliente*, hstr, hstr>::const_iterator it;
 	for (it = clientes_antigos.begin(); it != clientes_antigos.end(); it++) {
-		cout << "Nome:" << (*it)->getNome() << " Email:" << (*it)->getEmail()
-				<< " Morada:" << (*it)->getMorada() << endl;
+		cout << "Nome:" << (*it)->getNome() << endl;
+		cout << "Email:" << (*it)->getEmail() << endl;
+		cout << "Morada:" << (*it)->getMorada() << endl;
 	}
 }
 
