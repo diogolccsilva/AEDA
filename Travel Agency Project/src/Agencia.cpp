@@ -651,7 +651,7 @@ void Agencia::removeCliente(Cliente *c) {
 			clientes.erase(it);
 		}
 	}
-	if (c->getStatus() == "frequente") {
+	if (c->getStatus() == "Frequente") {
 		priority_queue<Cliente*> temp = clientes_frequentes;
 		while (temp.size() > 0) {
 			if (temp.top()->getNome() == c->getNome()) {
@@ -660,7 +660,7 @@ void Agencia::removeCliente(Cliente *c) {
 		}
 		clientes_frequentes = temp;
 	}
-	if (c->getStatus() == "antigo") {
+	if (c->getStatus() == "Antigo") {
 		tr1::unordered_set<Cliente*, hstr, hstr>::iterator it2;
 		for (it2 = clientes_antigos.begin(); it2 != clientes_antigos.end();
 				it2++) {
