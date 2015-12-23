@@ -11,7 +11,7 @@
 #include "Viagem.h"
 
 class Cliente {
-	string nome, email, morada;
+	string nome, email, morada,status;
 	vector<Viagem*> viagens;
 	int pontos;
 public:
@@ -26,7 +26,7 @@ public:
 	 @param nome Nome do Cliente
 	 @return
 	 */
-	Cliente(string nome, string email, string morada, int pontos = 0);
+	Cliente(string nome, string email, string morada,string status, int pontos = 0);
 	/**
 	 Destrutor de Cliente
 	 @param void
@@ -69,6 +69,8 @@ public:
 	 @return void
 	 */
 	void setMorada(string m);
+	void setStatus(string s);
+	string getStatus()const;
 	/**
 	 Overload do operador == em Clientes
 	 @param c Cliente
@@ -122,6 +124,9 @@ public:
 	bool operator<(const Cliente& a1) const;
 	void atualizaPontos(Cliente* c);
 	void printViagens() const;
+	void updateStatus(); //TODO
+
+
 };
 
 struct hstr

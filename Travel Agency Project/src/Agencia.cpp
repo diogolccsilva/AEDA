@@ -629,28 +629,7 @@ void Agencia::procurarClienteFrequentePontos(Cliente* c) {
 
 }
 
-void Agencia::updateCliente() {
 
-	priority_queue<Cliente*> temp = clientes_frequentes, temp2;
-
-	while (!temp.empty()) {
-		for (unsigned int i = 0; i < clientes.size(); i++) {
-			if (clientes[i]->getNome() == temp.top()->getNome()) {
-				if (clientes[i]->getPontos() == temp.top()->getPontos()) {
-					temp2.push(temp.top());
-					temp.pop();
-				} else {
-					temp2.push(clientes[i]);
-					temp.pop();
-				}
-			} else
-				temp2.push(temp.top());
-			temp.pop();
-		}
-	}
-
-	clientes_frequentes = temp2;
-}
 
 void Agencia::printDestinos() const {
 	BSTItrLevel<Destino> it(destinos);
@@ -691,4 +670,51 @@ void Agencia::printViagens() const {
 void Agencia::printClientes() const {
 	for (unsigned int i = 0; i < clientes.size(); i++)
 		cout << (*clientes[i]) << endl;
+}
+
+void Agencia::removeCliente(Cliente *c)
+{
+	vector<Cliente*>::iterator it;
+	priority_queue<Cliente*>temp= clientes_frequentes;
+	tr1::unordered_set<Cliente*, hstr, hstr>::iterator it2;
+
+	for(it=clientes.begin(); it!= clientes.end();it++)
+	{
+		if((*it)->getNome()== c->getNome())
+		{
+			clientes.erase(it);
+		}
+	}
+
+	if (c->getStatus() == "frequente")
+	{
+		while (temp.size() > 0)
+		{
+			if (temp.top()->getNome() == c->getNome()) {
+				temp.pop();
+			}
+		}
+
+		clientes_frequentes=temp;
+	}
+
+	if(c->getStatus()== "antigo")
+	{
+		for(it2=clientes_antigos.begin(); it2!= clientes_antigos.end();it2++)
+		{
+			if((*it)->getNome()== c->getNome())
+			{
+				clientes_antigos.erase(it2);
+			}
+		}
+
+	}
+
+}
+
+void Agencia::updateCliente(Cliente *c)
+{
+	c->updateStatus();
+	removeCliente(c);
+	addCliente(c);
 }

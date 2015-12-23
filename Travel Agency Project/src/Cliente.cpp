@@ -14,12 +14,12 @@
 #include "Cliente.h"
 
 Cliente::Cliente() :
-		nome(""), email(""), morada("") {
+		nome(""), email(""), morada(""), status("") {
 
 }
 
-Cliente::Cliente(string nome, string email, string morada,int pontos) :
-		nome(nome), email(email), morada(morada),pontos(pontos) {
+Cliente::Cliente(string nome, string email, string morada,string status,int pontos) :
+		nome(nome), email(email), morada(morada),status(status),pontos(pontos) {
 
 }
 
@@ -49,6 +49,16 @@ string Cliente::getMorada() const {
 
 void Cliente::setMorada(string m) {
 	morada = m;
+}
+
+void Cliente::setStatus(string s)
+{
+	status=s;
+}
+
+string Cliente::getStatus() const
+{
+	return status;
 }
 
 bool Cliente::operator==(const Cliente& cliente) const {

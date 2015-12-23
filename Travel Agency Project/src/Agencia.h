@@ -216,10 +216,11 @@ public:
 	static tm* getTempo_Info();
 
 	Destino* addDestino(Destino d1);
+
 	void addClienteAntigo(Cliente *c);
 	void addClienteFrequente(Cliente* c);
-
-	void updateCliente();
+	void removeCliente(Cliente *c);
+	void updateCliente(Cliente *c); // TODO
 
 	void procurarClienteFrequentePontos(Cliente *c);
 	void procurarClienteAntigoEmail(string e);
