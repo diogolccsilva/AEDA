@@ -52,7 +52,7 @@ public:
 	 @return Cidade Destino do Troco
 	 */
 	Cidade* getDestino() const;
-	tm* getData() const;
+	tm getData();
 
 };
 

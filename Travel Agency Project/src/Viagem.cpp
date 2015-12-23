@@ -51,7 +51,7 @@ ostream & operator<<(ostream & o, const Viagem & v){
 		cout << " " << v.getItinerario().getTrocos()[i].getTransporte().getTipo();
 	}
 	o << endl;
-	tm* data = v.getItinerario().getTrocos()[0].getData();
-	o << "Data: " << data->tm_mday << "/" << data->tm_mon << "/" << data->tm_year << endl;
+	tm data = v.getItinerario().getTrocos()[0].getData();
+	o << "Data: " << data.tm_mday << "/" << data.tm_mon+1 << "/" << data.tm_year-100 << endl;
 	return o;
 }

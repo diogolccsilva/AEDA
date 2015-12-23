@@ -33,8 +33,8 @@ Transporte Troco::getTransporte() const {
 	return transporte;
 }
 
-tm* Troco::getData() const{
-	return const_cast<tm*>(&data);
+tm Troco::getData() const{
+	return data;
 }
 
 void Troco::printData() const {

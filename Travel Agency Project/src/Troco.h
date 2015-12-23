@@ -60,7 +60,7 @@ public:
 	 @param void
 	 @return Data
 	 */
-	tm* getData() const;
+	tm getData() const;
 	void printData() const;
 };
 

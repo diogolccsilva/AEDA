@@ -34,12 +34,18 @@ bool Agencia::addCliente(Cliente* c) {
 	it = find(clientes.begin(), clientes.end(), c);
 	if (it != clientes.end())
 		return false; //TODO change to a throw eventually
-	else
-	{
-		if (difftime(mktime(getTempo_Info()), mktime(c->getViagens()[0]->getItinerario().getData()))/(60 * 60 * 24)>365) {
-			addClienteFrequente(c);
+	else {
+		if (c->getViagens().size() > 0) {
+			tm t = c->getViagens()[0]->getItinerario().getData();
+			float dtime = difftime(mktime(getTempo_Info()), mktime(&t))
+					/ (60 * 60 * 24);
+			if (dtime > 365) {
+				addClienteFrequente(c);
+			} else {
+				addClienteAntigo(c);
+			}
 		} else {
-			addClienteAntigo(c);
+
 		}
 		clientes.push_back(c);
 	}
@@ -278,13 +284,13 @@ void Agencia::loadClientes() {
 			getline(file, morada, '-');
 			string tipo = "";
 			getline(file, tipo, '-');
+			Cliente* c;
 			if (tipo == "P") {
-				this->addCliente(new Particular(nome, email, morada));
+				c = new Particular(nome, email, morada);
 			} else if (tipo == "C") {
 				string nop = "";
 				getline(file, nop, '-');
-				this->addCliente(
-						new Comercial(nome, email, morada, atoi(nop.c_str())));
+				c = new Comercial(nome, email, morada, atoi(nop.c_str()));
 			}
 			string vids = "";
 			getline(file, vids);
@@ -293,11 +299,12 @@ void Agencia::loadClientes() {
 				string id = "";
 				getline(svids, id, ' ');
 				try {
-					getCliente(nome)->addViagem(getViagem(atoi(id.c_str())));
+					c->addViagem(getViagem(atoi(id.c_str())));
 				} catch (Agencia::ViagemInexistente &vi) {
 					//should work still
 				}
 			}
+			addCliente(c);
 		}
 		file.close();
 	} else {
@@ -422,11 +429,11 @@ void Agencia::saveViagens() {
 			if (j != 0) {
 				file << ";";
 			}
-			file << trocos[j].getData()->tm_mday << "/"
-					<< trocos[j].getData()->tm_mon + 1 << "/"
-					<< trocos[j].getData()->tm_year - 100 << " "
-					<< trocos[j].getData()->tm_hour << ":"
-					<< trocos[j].getData()->tm_min;
+			file << trocos[j].getData().tm_mday << "/"
+					<< trocos[j].getData().tm_mon + 1 << "/"
+					<< trocos[j].getData().tm_year - 100 << " "
+					<< trocos[j].getData().tm_hour << ":"
+					<< trocos[j].getData().tm_min;
 		}
 	}
 }
