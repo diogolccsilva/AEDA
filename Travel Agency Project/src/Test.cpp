@@ -85,6 +85,23 @@ void cpviagens(Agencia* a, Cliente* c) {
 	getch();
 }
 
+void bviagens(Agencia* a, Cliente* c1) {
+	a->printDestinos();
+	cout << "Nome do destino: ";
+	string destino;
+	cin >> destino;
+	try {
+		if (c1->addDestino(a->getDestino(destino))) {
+			cout << "Viagem comprada!" << endl;
+		} else {
+			cout << "Viagem já existe!" << endl;
+		}
+	} catch (Agencia::DestinoInexistente &di) {
+		cout << "Destino inexistente!" << endl;
+	}
+	getch();
+}
+
 void mcliente(Agencia* a) {
 	string nome;
 	cout << "Nome: ";
@@ -109,7 +126,7 @@ void mcliente(Agencia* a) {
 		system("cls");
 		switch (c) {
 		case '1':
-
+			bviagens(a, c1);
 			break;
 		case '2':
 			cpviagens(a, c1);

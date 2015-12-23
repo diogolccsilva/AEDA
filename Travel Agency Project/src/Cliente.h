@@ -8,12 +8,13 @@
 #ifndef SRC_CLIENTE_H_
 #define SRC_CLIENTE_H_
 
-#include "Viagem.h"
+#include "Destino.h"
 
 class Cliente {
 	string nome, email, morada;
 	vector<Viagem*> viagens;
 	int pontos;
+	vector<Destino*> destinos;
 public:
 	/**
 	 Construtor base de Cliente
@@ -122,6 +123,8 @@ public:
 	bool operator<(const Cliente& a1) const;
 	void atualizaPontos(Cliente* c);
 	void printViagens() const;
+	bool addDestino(Destino* d);
+	vector<Destino*> getDestinos() const;
 };
 
 struct hstr

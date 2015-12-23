@@ -90,8 +90,22 @@ void Cliente::atualizaPontos(Cliente* c) { //verifica please
 }
 
 void Cliente::printViagens() const{
-	for (unsigned int i = 0;i<viagens.size();i++){
-		cout << (*viagens[i]) << endl;
+	for (unsigned int i = 0;i<destinos.size();i++){
+		cout << (*destinos[i]) << endl;
 	}
 }
 
+bool Cliente::addDestino(Destino* d){
+	vector<Destino*>::iterator it;
+	it = find(destinos.begin(),destinos.end(),d);
+	if (it!=destinos.end()){
+		return false;
+	}
+	destinos.push_back(d);
+	viagens.push_back(d->getViagem());
+	return true;
+}
+
+vector<Destino*> Cliente::getDestinos() const{
+	return destinos;
+}

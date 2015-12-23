@@ -12,14 +12,16 @@
 #include "Viagem.h"
 
 class Destino {
+	int id;
+	static int sid;
 	Cidade* cidade;
 	Alojamento* alojamento;
 	Viagem* viagem;
-	float desconto,preco; //entre 0,0 e 100,0%
+	float desconto, preco; //entre 0,0 e 100,0%
 public:
 	Destino();
 	Destino(float desconto, Cidade* c, Viagem* viagem, Alojamento* alojamento =
-			new Alojamento());
+			new Alojamento(), int id = sid);
 	virtual ~Destino();
 	bool operator<(const Destino &d1) const;
 	Cidade* getCidade() const;
@@ -55,6 +57,8 @@ public:
 	 @return true, se alteracao for aplicada, caso contrario false
 	 */
 	bool changeAlojamento(Alojamento* a);
+	int getId() const;
+	friend ostream & operator<<(ostream & o, const Destino & d);
 };
 
 #endif /* SRC_DESTINO_H_ */

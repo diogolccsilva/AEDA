@@ -181,7 +181,6 @@ void Agencia::loadAlojamentos() {
 }
 
 void Agencia::loadViagens() {
-	int vid = 0;
 	string filename = "../viagens" + nome + ".txt";
 	ifstream file(filename.c_str());
 	if (file.is_open()) {
@@ -189,9 +188,6 @@ void Agencia::loadViagens() {
 			//Ler id
 			string id;
 			getline(file, id, '-');
-			if (vid < atoi(id.c_str())) {
-				vid = atoi(id.c_str());
-			}
 			//Ler preco
 			string preco;
 			getline(file, preco, '-');
@@ -268,7 +264,6 @@ void Agencia::loadViagens() {
 	} else {
 
 	}
-	Viagem::sid = vid + 1;
 }
 
 void Agencia::loadClientes() {
@@ -299,8 +294,11 @@ void Agencia::loadClientes() {
 				string id = "";
 				getline(svids, id, ' ');
 				try {
-					c->addViagem(getViagem(atoi(id.c_str())));
+					Destino* d = getDestino(atoi(id.c_str()));
+					c->addDestino(d);
 				} catch (Agencia::ViagemInexistente &vi) {
+					//should work still
+				} catch (Agencia::DestinoInexistente &vi) {
 					//should work still
 				}
 			}
@@ -317,6 +315,8 @@ void Agencia::loadDestinos() {
 	ifstream file(filename.c_str());
 	if (file.is_open()) {
 		while (!file.eof()) {
+			string id = "";
+			getline(file, id, '-');
 			string vid = "";
 			getline(file, vid, '-');
 			string alojamento = "";
@@ -339,7 +339,8 @@ void Agencia::loadDestinos() {
 			}
 			addDestino(
 					Destino(atoi(desconto.c_str()),
-							v->getItinerario().getDestino(), v, a));
+							v->getItinerario().getDestino(), v, a,
+							atoi(id.c_str())));
 			/*cout << "destino: "<< v->getItinerario().getDestino()->getNome() << endl;
 			 cout << "alojamento: " << alojamento << endl;
 			 cout << "desconto: " << desconto << endl;
@@ -449,17 +450,19 @@ void Agencia::saveClientes() {
 			file << endl;
 		}
 		file << clientes[i]->getNome() << "-";
+		file << clientes[i]->getEmail() << "-";
+		file << clientes[i]->getMorada() << "-";
 		if (clientes[i]->getTipo() == "Comercial") {
 			file << "C" << "-";
 			file << clientes[i]->getNoParticipantes() << "-";
 		} else if (clientes[i]->getTipo() == "Particular") {
 			file << "P" << "-";
 		}
-		for (unsigned int j = 0; j < clientes[i]->getViagens().size(); j++) {
+		for (unsigned int j = 0; j < clientes[i]->getDestinos().size(); j++) {
 			if (j != 0) {
 				file << " ";
 			}
-			file << clientes[i]->getViagens()[j]->getId();
+			file << clientes[i]->getDestinos()[j]->getId();
 		}
 	}
 }
@@ -473,8 +476,8 @@ void Agencia::saveDestinos() {
 	BSTItrIn<Destino> it(destinos);
 	while (!it.isAtEnd()) {
 		Destino d = it.retrieve();
-		file << d.getViagem()->getId() << "-" << d.getAlojamento()->getNome()
-				<< "-" << d.getDesconto();
+		file << d.getId() << "-" << d.getViagem()->getId() << "-"
+				<< d.getAlojamento()->getNome() << "-" << d.getDesconto();
 		it.advance();
 		if (!it.isAtEnd()) {
 			file << endl;
@@ -511,6 +514,16 @@ Destino* Agencia::getDestino(string nome) const {
 	throw DestinoInexistente(nome);
 }
 
+Destino* Agencia::getDestino(int id) const {
+	BSTItrIn<Destino> it(destinos);
+	while (!it.isAtEnd()) {
+		if (it.retrieve().getId() == id)
+			return &it.retrieve();
+		it.advance();
+	}
+	throw DestinoInexistente(nome);
+}
+
 BST<Destino> Agencia::getDestinos() const {
 	return destinos;
 }
@@ -527,11 +540,10 @@ void Agencia::printClientesAntigos() const {
 void Agencia::printClientesFrequentes() const {
 
 	priority_queue<Cliente*> copia = clientes_frequentes;
-	while(copia.size()>0)
-	{
+	while (copia.size() > 0) {
 
 		cout << "Nome: " << copia.top()->getNome() << endl;
-		cout << "Email: " <<copia.top()->getEmail() << endl;
+		cout << "Email: " << copia.top()->getEmail() << endl;
 		cout << "Morada: " << copia.top()->getMorada() << endl;
 
 		copia.pop();

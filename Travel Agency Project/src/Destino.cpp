@@ -7,14 +7,16 @@
 
 #include "Destino.h"
 
+int Destino::sid = 0;
+
 Destino::Destino() :
 		cidade(NULL), alojamento(NULL),viagem(NULL) {
 
 }
 
 Destino::Destino(float desconto, Cidade* c, Viagem* viagem,
-		Alojamento* alojamento) :
-		desconto(desconto), cidade(c), viagem(viagem), alojamento(alojamento) {
+		Alojamento* alojamento,int id) :
+		desconto(desconto), cidade(c), viagem(viagem), alojamento(alojamento),id(id) {
 	updatePreco();
 }
 
@@ -53,4 +55,13 @@ void Destino::updatePreco(){
 
 float Destino::getPreco() const{
 	return preco;
+}
+
+int Destino::getId() const{
+	return id;
+}
+
+ostream & operator<<(ostream & o, const Destino & d){
+	o << (*d.getViagem()) << "Preco: " << d.getPreco() << endl;
+	return o;
 }

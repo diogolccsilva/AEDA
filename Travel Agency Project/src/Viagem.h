@@ -15,8 +15,8 @@ class Viagem {
 	float preco;
 	int id, pontos;
 	//vai ter que se acrescentar data
-public:
 	static int sid;
+public:
 	/**
 	 Construtor de Viagem
 

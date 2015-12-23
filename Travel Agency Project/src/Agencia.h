@@ -9,7 +9,6 @@
 #define SRC_AGENCIA_H_
 
 #include "Cliente.h"
-#include "Destino.h"
 #include "Particular.h"
 #include "Comercial.h"
 
@@ -212,6 +211,7 @@ public:
 
 	//retorna o destino com o nome nome, mais barato
 	Destino* getDestino(string nome) const;
+	Destino* getDestino(int id) const;
 	BST<Destino> getDestinos() const;
 	static tm* getTempo_Info();
 
