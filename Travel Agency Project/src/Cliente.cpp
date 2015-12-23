@@ -68,7 +68,6 @@ vector<Viagem*> Cliente::getViagens() const {
 	return viagens;
 }
 
-//TODO usar templates talvez para ver se imprime o tipo direito
 ostream & operator<<(ostream & o, const Cliente & c) {
 	o << "Nome: " << c.getNome() << ";\n" << "Tipo: " << c.getTipo() << ";\n"
 			<< "No de Viagens: " << c.getNoViagens() << ";\n" << "Pontos: "
@@ -87,12 +86,19 @@ int Cliente::getPontos() const {
 	return pontos;
 }
 
-void Cliente::atualizaPontos(Cliente* c) { //verifica please
-
+void Cliente::updatePontos() {
 	int pontostemp = 0;
-
-	for (unsigned int i = 0; i < viagens.size(); i++)
+	tm data;
+	for (unsigned int i = 0; i < viagens.size(); i++) {
 		pontostemp += viagens[i]->getPontos();
+		data = viagens[i]->getItinerario().getData();
+	}
+	tm tnow;
+	time_t now;
+	time(&now);
+	tnow = *localtime(&now);
+	int dtime = difftime(mktime(&tnow), mktime(&data)) / (60 * 60 * 24 * 30);
+	pontos = pontostemp - dtime*10;
 }
 
 void Cliente::printViagens() const {
@@ -110,6 +116,7 @@ bool Cliente::addDestino(Destino* d) {
 	destinos.push_back(d);
 	viagens.push_back(d->getViagem());
 	updateStatus();
+	updatePontos();
 	return true;
 }
 

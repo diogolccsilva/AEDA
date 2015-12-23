@@ -143,7 +143,7 @@ public:
 	 @param c Cliente por apontador
 	 @return void
 	 */
-	void atualizaPontos(Cliente* c);
+	void updatePontos();
 	/**
 	 Funcao que faz o print das viagens de um cliente
 	 @param

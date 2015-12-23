@@ -18,6 +18,7 @@ int Viagem::sid = 0;
 Viagem::Viagem(Itinerario itinerario, float preco, int id) :
 		itinerario(itinerario), preco(preco), id(id) {
 	sid=id+1;
+	pontos = preco/2;
 }
 
 Viagem::~Viagem() {
@@ -53,5 +54,6 @@ ostream & operator<<(ostream & o, const Viagem & v){
 	o << endl;
 	tm data = v.getItinerario().getTrocos()[0].getData();
 	o << "Data: " << data.tm_mday << "/" << data.tm_mon+1 << "/" << data.tm_year-100 << endl;
+	o << "Pontos: " << v.getPontos() << endl;
 	return o;
 }

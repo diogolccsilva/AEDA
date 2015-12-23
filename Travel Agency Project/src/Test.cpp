@@ -115,9 +115,9 @@ void mcliente(Agencia* a) {
 		return;
 	}
 	char c;
-	cout << c1 << endl;
 	while (c != 27 && c != '9') {
 		system("cls");
+		cout << (*c1) << endl;
 		cout << "1- Comprar viagem;" << endl;
 		cout << "2- Ver viagens futuras;" << endl;
 		cout << "3- " << endl;
@@ -216,6 +216,11 @@ void addviagem(Agencia* a) {
 	cin >> nt;
 	cin.ignore();
 	vector<Troco> trocos;
+	if (nt<1){
+		cout << "Numero de trocos tem de sair maior que 0!" << endl;
+		getch();
+		return;
+	}
 	for (unsigned int i = 0; i < nt; i++) {
 		cout << "Troco " << i + 1 << ":" << endl;
 		string cidade = "";
