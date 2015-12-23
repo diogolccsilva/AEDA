@@ -664,11 +664,12 @@ void Agencia::removeCliente(Cliente *c) {
 		tr1::unordered_set<Cliente*, hstr, hstr>::iterator it2;
 		for (it2 = clientes_antigos.begin(); it2 != clientes_antigos.end();
 				it2++) {
-			if ((*it)->getNome() == c->getNome()) {
-				clientes_antigos.erase(it2);
+			if ((*it2)->getNome() == c->getNome()) {
+				it2 = clientes_antigos.erase(it2);
 			}
 		}
 	}
+	c->~Cliente();
 }
 
 void Agencia::updateCliente(Cliente *c) {
