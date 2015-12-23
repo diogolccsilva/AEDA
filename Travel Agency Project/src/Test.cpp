@@ -176,6 +176,19 @@ void mpclientes(Agencia* a) {
 	}
 }
 
+void remcliente(Agencia*& a) {
+	cout << "Nome: ";
+	string nome;
+	cin >> nome;
+	try {
+		a->removeCliente(a->getCliente(nome));
+		cout << "Cliente Removido!" << endl;
+	} catch (Agencia::ClienteInexistente &ci) {
+		cout << "Cliente Inexistente!" << endl;
+	}
+	getch();
+}
+
 void gclientes(Agencia* a) {
 	char c;
 	while (c != 27 && c != '9') {
@@ -195,6 +208,7 @@ void gclientes(Agencia* a) {
 			addcliente(a);
 			break;
 		case '3':
+			remcliente(a);
 			break;
 		case '4':
 			a->saveClientes();
@@ -216,7 +230,7 @@ void addviagem(Agencia* a) {
 	cin >> nt;
 	cin.ignore();
 	vector<Troco> trocos;
-	if (nt<1){
+	if (nt < 1) {
 		cout << "Numero de trocos tem de sair maior que 0!" << endl;
 		getch();
 		return;
@@ -476,7 +490,7 @@ void adddestino(Agencia* a) {
 	case 's':
 		cout << "Alojamento: ";
 		cin.ignore();
-		getline(cin,alojamento);
+		getline(cin, alojamento);
 		try {
 			al = v->getItinerario().getDestino()->getAlojamento(alojamento);
 		} catch (Cidade::AlojamentoInexistente &ai) {

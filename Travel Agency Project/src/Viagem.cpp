@@ -18,7 +18,7 @@ int Viagem::sid = 0;
 Viagem::Viagem(Itinerario itinerario, float preco, int id) :
 		itinerario(itinerario), preco(preco), id(id) {
 	sid=id+1;
-	pontos = preco/2;
+	pontos = preco*2;
 }
 
 Viagem::~Viagem() {

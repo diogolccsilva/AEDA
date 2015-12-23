@@ -99,6 +99,8 @@ void Cliente::updatePontos() {
 	tnow = *localtime(&now);
 	int dtime = difftime(mktime(&tnow), mktime(&data)) / (60 * 60 * 24 * 30);
 	pontos = pontostemp - dtime*10;
+	if (pontos < 0)
+		pontos = 0;
 }
 
 void Cliente::printViagens() const {
