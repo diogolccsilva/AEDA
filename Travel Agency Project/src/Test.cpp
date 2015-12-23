@@ -153,18 +153,7 @@ void gclientes(Agencia* a) {
 }
 
 void pviagens(Agencia* a) {
-	vector<Viagem> vv = a->getViagens();
-	for (unsigned int i = 0; i < vv.size(); i++) {
-		Cidade* origem = vv[i].getItinerario().getOrigem();
-		Cidade* destino = vv[i].getItinerario().getDestino();
-		cout << "ID: " << vv[i].getId() << endl;
-		cout << "Origem: " << origem->getPais() << "," << origem->getNome()
-				<< endl;
-		cout << "Destino: " << destino->getPais() << "," << destino->getNome()
-				<< endl;
-		cout << "Preco: " << vv[i].getPreco() << endl;
-		cout << endl;
-	}
+	a->printViagens();
 	getch();
 }
 
@@ -303,13 +292,7 @@ void gviagens(Agencia* a) {
 }
 
 void pcidades(Agencia* a) {
-	vector<Pais> vp = a->getPaises();
-	for (unsigned int i = 0; i < vp.size(); i++) {
-		vector<Cidade> vc = vp[i].getCidades();
-		for (unsigned int j = 0; j < vc.size(); j++) {
-			cout << vp[i].getNome() << "," << vc[j].getNome() << endl;
-		}
-	}
+	a->printCidades();
 	getch();
 }
 
@@ -443,14 +426,7 @@ void galojamentos(Agencia* a) {
 }
 
 void pdestinos(Agencia* a) {
-	BSTItrLevel<Destino> it(a->getDestinos());
-	while(!it.isAtEnd()){
-		Destino d = it.retrieve();
-		cout << "Destino: " << d.getCidade()->getNome() << endl;
-		cout << "Preco: " << d.getPreco() << endl;
-		cout << "Id Viagem: " << d.getViagem()->getId() << endl << endl;
-		it.advance();
-	}
+	a->printDestinos();
 	getch();
 }
 

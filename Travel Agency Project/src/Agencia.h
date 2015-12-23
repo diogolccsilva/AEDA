@@ -214,14 +214,17 @@ public:
 	Destino* getDestino(string nome) const;
 	BST<Destino> getDestinos() const;
 	static tm* getTempo_Info();
-	void imprimeClientesAntigos();
+	void printClientesAntigos();
 	void procurarClienteAntigoEmail(string e);
 	void procurarClienteAntigoNome(string n);
 	void procurarClienteAntigoMorada(string m);
 	void addClienteAntigo(Cliente *c);
 	void addClienteFrequente(Cliente* c);
-	void atualizaCliente();
+	void updateCliente();
 	void procurarClienteFrequentePontos(Cliente *c);
+	void printDestinos() const;
+	void printCidades() const;
+	void printViagens() const;
 };
 
 #endif SRC_AGENCIA_H_

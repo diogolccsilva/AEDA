@@ -323,9 +323,9 @@ void Agencia::loadDestinos() {
 					Destino(atoi(desconto.c_str()),
 							v->getItinerario().getDestino(), v, a));
 			/*cout << "destino: "<< v->getItinerario().getDestino()->getNome() << endl;
-			cout << "alojamento: " << alojamento << endl;
-			cout << "desconto: " << desconto << endl;
-			getch();*/
+			 cout << "alojamento: " << alojamento << endl;
+			 cout << "desconto: " << desconto << endl;
+			 getch();*/
 		}
 		file.close();
 	} else {
@@ -493,11 +493,11 @@ Destino* Agencia::getDestino(string nome) const {
 	throw DestinoInexistente(nome);
 }
 
-BST<Destino> Agencia::getDestinos() const{
+BST<Destino> Agencia::getDestinos() const {
 	return destinos;
 }
 
-void Agencia::imprimeClientesAntigos() {
+void Agencia::printClientesAntigos() {
 	tr1::unordered_set<Cliente*, hstr, hstr>::iterator it;
 	for (it = clientes_antigos.begin(); it != clientes_antigos.end(); it++) {
 		cout << "Nome:" << (*it)->getNome() << " Email:" << (*it)->getEmail()
@@ -543,90 +543,114 @@ void Agencia::addClienteAntigo(Cliente* c) {
 	clientes_antigos.insert(c);
 }
 
-
 void Agencia::addClienteFrequente(Cliente* c) {
 
 //	int p = c->getPontos();
 	clientes_frequentes.push(c);
 	/*if (p >= 20)
-		clientes_frequentes[0].push(c);
-	if (p < 20 && p > 10)
-		clientes_frequentes[1].push(c);
-	else
-		clientes_frequentes[2].push(c);*/
+	 clientes_frequentes[0].push(c);
+	 if (p < 20 && p > 10)
+	 clientes_frequentes[1].push(c);
+	 else
+	 clientes_frequentes[2].push(c);*/
 
 }
 
 //fazer pontos na classe cliente
 /*
-void Agencia::atualizaPontos(Cliente* c){
+ void Agencia::atualizaPontos(Cliente* c){
 
-	for (unsigned int i = 0; i<3; i++)
-	{
-		priority_queue<Cliente*> temp = clientes_frequentes;
-		priority_queue<Cliente*> temp2;
-		while (!temp.empty())
-		{
-			if (temp.top() == c)
-				;
-			else
-			{
-				temp2.push(temp.top());
-				temp.pop();
-			}
-		}
-	}
+ for (unsigned int i = 0; i<3; i++)
+ {
+ priority_queue<Cliente*> temp = clientes_frequentes;
+ priority_queue<Cliente*> temp2;
+ while (!temp.empty())
+ {
+ if (temp.top() == c)
+ ;
+ else
+ {
+ temp2.push(temp.top());
+ temp.pop();
+ }
+ }
+ }
 
-}*/
+ }*/
 
-void Agencia::procurarClienteFrequentePontos(Cliente* c){
+void Agencia::procurarClienteFrequentePontos(Cliente* c) {
 
 	priority_queue<Cliente*> temp = clientes_frequentes;
-	while (!temp.empty())
-	{
-		if (temp.top() == c)
-		{
-			if (c->getPontos()>100)
+	while (!temp.empty()) {
+		if (temp.top() == c) {
+			if (c->getPontos() > 100)
 				cout << "Cliente de Ouro/n" << "Pontos: " << c->getPontos();
 			else if (c->getPontos() > 50)
 				cout << "Cliente de Prata/n" << "Pontos: " << c->getPontos();
 			else if (c->getPontos() > 0)
 				cout << "Cliente de Bronze/n" << "Pontos: " << c->getPontos();
 			temp.pop();
-		}
-		else
+		} else
 			temp.pop();
 	}
 
 }
 
-void Agencia::atualizaCliente(){ //vê se está bem, please
+void Agencia::updateCliente() { //vê se está bem, please
 
 	priority_queue<Cliente*> temp = clientes_frequentes, temp2;
 
-	while (!temp.empty())
-	{
-		for (unsigned int i = 0; i<clientes.size(); i++)
-		{
-			if (clientes[i]->getNome()==temp.top()->getNome())
-			{
-				if (clientes[i]->getPontos() == temp.top()->getPontos())
-				{
+	while (!temp.empty()) {
+		for (unsigned int i = 0; i < clientes.size(); i++) {
+			if (clientes[i]->getNome() == temp.top()->getNome()) {
+				if (clientes[i]->getPontos() == temp.top()->getPontos()) {
 					temp2.push(temp.top());
 					temp.pop();
-				}
-				else
-				{
+				} else {
 					temp2.push(clientes[i]);
 					temp.pop();
 				}
-			}
-			else
+			} else
 				temp2.push(temp.top());
-				temp.pop();
+			temp.pop();
 		}
 	}
 
 	clientes_frequentes = temp2;
 }
 
+void Agencia::printDestinos() const {
+	BSTItrLevel<Destino> it(destinos);
+	while (!it.isAtEnd()) {
+		Destino d = it.retrieve();
+		cout << "Destino: " << d.getCidade()->getNome() << endl;
+		cout << "Preco: " << d.getPreco() << endl;
+		cout << "Id Viagem: " << d.getViagem()->getId() << endl << endl;
+		it.advance();
+	}
+}
+
+void Agencia::printCidades() const {
+	vector<Pais> vp = paises;
+	for (unsigned int i = 0; i < vp.size(); i++) {
+		vector<Cidade> vc = vp[i].getCidades();
+		for (unsigned int j = 0; j < vc.size(); j++) {
+			cout << vp[i].getNome() << "," << vc[j].getNome() << endl;
+		}
+	}
+}
+
+void Agencia::printViagens() const {
+	vector<Viagem> vv = viagens;
+	for (unsigned int i = 0; i < vv.size(); i++) {
+		Cidade* origem = vv[i].getItinerario().getOrigem();
+		Cidade* destino = vv[i].getItinerario().getDestino();
+		cout << "ID: " << vv[i].getId() << endl;
+		cout << "Origem: " << origem->getPais() << "," << origem->getNome()
+				<< endl;
+		cout << "Destino: " << destino->getPais() << "," << destino->getNome()
+				<< endl;
+		cout << "Preco: " << vv[i].getPreco() << endl;
+		cout << endl;
+	}
+}
