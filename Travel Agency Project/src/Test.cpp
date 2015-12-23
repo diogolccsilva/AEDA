@@ -677,7 +677,7 @@ int main(int argc, char const *argv[]) {
 		 data.tm_mon = 12 - 1;
 		 data.tm_year = 2015 - 1900;
 		 cout
-		 << difftime(mktime(Agencia::getTempo_Info()), mktime(&data))
+		 << difftime(mktime(&data),mktime(Agencia::getTempo_Info()))
 		 / (60 * 60 * 24) << endl;
 		 cout << asctime(&data) << endl;*/
 		c = getch();

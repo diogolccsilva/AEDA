@@ -75,6 +75,7 @@ public:
 	 @return o Do tipo ostream
 	 */
 	friend ostream & operator<<(ostream & o, const Viagem & v);
+	bool operator<(const Viagem& v) const;
 };
 
 #endif // SRC_VIAGEM_H_

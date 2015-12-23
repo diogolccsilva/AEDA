@@ -17,8 +17,8 @@ int Viagem::sid = 0;
 
 Viagem::Viagem(Itinerario itinerario, float preco, int id) :
 		itinerario(itinerario), preco(preco), id(id) {
-	sid=id+1;
-	pontos = preco*2;
+	sid = id + 1;
+	pontos = preco * 2;
 }
 
 Viagem::~Viagem() {
@@ -44,16 +44,24 @@ int Viagem::getPontos() const {
 	return pontos;
 }
 
-ostream & operator<<(ostream & o, const Viagem & v){
+ostream & operator<<(ostream & o, const Viagem & v) {
 	o << "Origem: " << v.getItinerario().getOrigem()->getNome() << endl;
 	o << "Destino: " << v.getItinerario().getDestino()->getNome() << endl;
 	o << "Transporte(s):";
-	for (unsigned int i=0;i<v.getItinerario().getTrocos().size();i++){
-		cout << " " << v.getItinerario().getTrocos()[i].getTransporte().getTipo();
+	for (unsigned int i = 0; i < v.getItinerario().getTrocos().size(); i++) {
+		cout << " "
+				<< v.getItinerario().getTrocos()[i].getTransporte().getTipo();
 	}
 	o << endl;
 	tm data = v.getItinerario().getTrocos()[0].getData();
-	o << "Data: " << data.tm_mday << "/" << data.tm_mon+1 << "/" << data.tm_year-100 << endl;
+	o << "Data: " << data.tm_mday << "/" << data.tm_mon + 1 << "/"
+			<< data.tm_year - 100 << endl;
 	o << "Pontos: " << v.getPontos() << endl;
 	return o;
+}
+
+bool Viagem::operator<(const Viagem& v) const {
+	tm t1 = getItinerario().getData(), t2 = v.getItinerario().getData();
+	float dtime = difftime(mktime(&t1), mktime(&t2));
+	return (dtime > 0);
 }

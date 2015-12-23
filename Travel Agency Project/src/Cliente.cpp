@@ -120,6 +120,7 @@ bool Cliente::addDestino(Destino* d) {
 	}
 	destinos.push_back(d);
 	viagens.push_back(d->getViagem());
+	sortViagens();
 	updateStatus();
 	updatePontos();
 	return true;
@@ -142,3 +143,14 @@ void Cliente::updateStatus() {
 	}
 }
 
+void Cliente::sortViagens() {
+	for (unsigned int i = 0; i < viagens.size(); i++) {
+		for (unsigned int j = 0; j < i; j++) {
+			if ((*viagens[i]) < (*viagens[j])) {
+				Viagem* tmp = viagens[i];
+				viagens[i] = viagens[j];
+				viagens[j] = tmp;
+			}
+		}
+	}
+}

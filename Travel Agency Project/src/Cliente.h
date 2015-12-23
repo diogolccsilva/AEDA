@@ -169,6 +169,7 @@ public:
 	 @return void
 	 */
 	void updateStatus();
+	void sortViagens();
 
 };
 
