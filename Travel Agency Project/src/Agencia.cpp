@@ -34,7 +34,15 @@ bool Agencia::addCliente(Cliente* c) {
 	it = find(clientes.begin(), clientes.end(), c);
 	if (it != clientes.end())
 		return false; //TODO change to a throw eventually
-	clientes.push_back(c);
+	else
+	{
+		if (difftime(mktime(getTempo_Info()), mktime(c->getViagens()[0]->getItinerario().getData()))/(60 * 60 * 24)>365) {
+			addClienteFrequente(c);
+		} else {
+			addClienteAntigo(c);
+		}
+		clientes.push_back(c);
+	}
 	return true;
 }
 
@@ -223,6 +231,9 @@ void Agencia::loadViagens() {
 			vector<tm> vd;
 			while (!dstream.eof()) {
 				tm nd;
+				time_t now;
+				time(&now);
+				nd = *localtime(&now);
 				string dia = "";
 				getline(dstream, dia, '/');
 				nd.tm_mday = atoi(dia.c_str());

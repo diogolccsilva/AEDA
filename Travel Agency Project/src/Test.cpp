@@ -80,7 +80,7 @@ void addcliente(Agencia* a) {
 	}
 }
 
-void cpviagens(Agencia* a,Cliente* c) {
+void cpviagens(Agencia* a, Cliente* c) {
 	c->printViagens();
 	getch();
 }
@@ -112,7 +112,7 @@ void mcliente(Agencia* a) {
 
 			break;
 		case '2':
-			cpviagens(a,c1);
+			cpviagens(a, c1);
 			break;
 		case '3':
 
@@ -209,6 +209,9 @@ void addviagem(Agencia* a) {
 		getline(cin, h, ':');
 		getline(cin, min);
 		tm data;
+		time_t now;
+		time(&now);
+		data = *localtime(&now);
 		data.tm_mday = atoi(d.c_str());
 		data.tm_mon = atoi(m.c_str()) - 1;
 		data.tm_year = atoi(a.c_str()) + 100;
@@ -536,7 +539,7 @@ int main(int argc, char const *argv[]) {
 		cout << "1- Automatico;" << endl;
 		cout << "2- Manual;" << endl;
 		cout << "3- Sair." << endl;
-		cout << asctime(Agencia::getTempo_Info()) << endl;
+		/*cout << asctime(Agencia::getTempo_Info()) << endl;
 		tm data;
 		time_t now;
 		time(&now);
@@ -544,10 +547,12 @@ int main(int argc, char const *argv[]) {
 		data.tm_hour = 14;
 		data.tm_min = 01;
 		data.tm_mday = 21;
-		data.tm_mon = 12-1;
-		data.tm_year = 2015-1900;
-		cout << difftime(mktime(Agencia::getTempo_Info()),mktime(&data))/(60*60*24) << endl;
-		cout << asctime(&data) << endl;
+		data.tm_mon = 12 - 1;
+		data.tm_year = 2015 - 1900;
+		cout
+				<< difftime(mktime(Agencia::getTempo_Info()), mktime(&data))
+						/ (60 * 60 * 24) << endl;
+		cout << asctime(&data) << endl;*/
 		c = getch();
 		system("CLS");
 		switch (c) {
