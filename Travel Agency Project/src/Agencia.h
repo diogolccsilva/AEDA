@@ -8,7 +8,6 @@
 #ifndef SRC_AGENCIA_H_
 #define SRC_AGENCIA_H_
 
-#include "Cliente.h"
 #include "Particular.h"
 #include "Comercial.h"
 
@@ -333,6 +332,8 @@ public:
 	 @return void
 	 */
 	void printClientesFrequentes() const;
+	void removeDestino(Destino* d);
+	void printAlojamentos() const;
 };
 
 #endif SRC_AGENCIA_H_

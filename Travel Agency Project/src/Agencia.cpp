@@ -492,7 +492,7 @@ string Agencia::DestinoInexistente::getNome() const {
 	return nome;
 }
 
-Destino* Agencia::addDestino(Destino d1) {
+Destino* Agencia::addDestino(Destino d1){
 	destinos.insert(d1);
 	return &d1;
 }
@@ -582,39 +582,8 @@ void Agencia::addClienteAntigo(Cliente* c) {
 }
 
 void Agencia::addClienteFrequente(Cliente* c) {
-
-//	int p = c->getPontos();
 	clientes_frequentes.push(c);
-	/*if (p >= 20)
-	 clientes_frequentes[0].push(c);
-	 if (p < 20 && p > 10)
-	 clientes_frequentes[1].push(c);
-	 else
-	 clientes_frequentes[2].push(c);*/
-
 }
-
-//fazer pontos na classe cliente
-/*
- void Agencia::atualizaPontos(Cliente* c){
-
- for (unsigned int i = 0; i<3; i++)
- {
- priority_queue<Cliente*> temp = clientes_frequentes;
- priority_queue<Cliente*> temp2;
- while (!temp.empty())
- {
- if (temp.top() == c)
- ;
- else
- {
- temp2.push(temp.top());
- temp.pop();
- }
- }
- }
-
- }*/
 
 void Agencia::procurarClienteFrequentePontos(Cliente* c) {
 
@@ -677,39 +646,52 @@ void Agencia::printClientes() const {
 
 void Agencia::removeCliente(Cliente *c) {
 	vector<Cliente*>::iterator it;
-	priority_queue<Cliente*> temp = clientes_frequentes;
-	tr1::unordered_set<Cliente*, hstr, hstr>::iterator it2;
-
 	for (it = clientes.begin(); it != clientes.end(); it++) {
 		if ((*it)->getNome() == c->getNome()) {
 			clientes.erase(it);
 		}
 	}
-
 	if (c->getStatus() == "frequente") {
+		priority_queue<Cliente*> temp = clientes_frequentes;
 		while (temp.size() > 0) {
 			if (temp.top()->getNome() == c->getNome()) {
 				temp.pop();
 			}
 		}
-
 		clientes_frequentes = temp;
 	}
-
 	if (c->getStatus() == "antigo") {
+		tr1::unordered_set<Cliente*, hstr, hstr>::iterator it2;
 		for (it2 = clientes_antigos.begin(); it2 != clientes_antigos.end();
 				it2++) {
 			if ((*it)->getNome() == c->getNome()) {
 				clientes_antigos.erase(it2);
 			}
 		}
-
 	}
-
 }
 
 void Agencia::updateCliente(Cliente *c) {
 	c->updateStatus();
 	removeCliente(c);
 	addCliente(c);
+}
+
+void Agencia::removeDestino(Destino* d) {
+	destinos.remove((*d));
+}
+
+void Agencia::printAlojamentos() const {
+	for (unsigned int i = 0; i < paises.size(); i++) {
+		for (unsigned int j = 0; j < paises[i].getCidades().size(); j++) {
+			for (unsigned int k = 0;
+					k < paises[i].getCidades()[j].getAlojamentos().size();
+					k++) {
+				cout << paises[i].getNome() << ","
+						<< paises[i].getCidades()[j].getNome() << " - "
+						<< paises[i].getCidades()[j].getAlojamentos()[k].getNome()
+						<< endl;
+			}
+		}
+	}
 }

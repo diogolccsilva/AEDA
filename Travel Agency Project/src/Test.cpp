@@ -280,41 +280,13 @@ void addviagem(Agencia* a) {
 	cout << "Preco: ";
 	float preco;
 	cin >> preco;
-	cout << "Alojamento? (y/n): ";
-	char check;
-	cin >> check;
-	cin.ignore();
-	if (check == 'y') {
-		cout << "Nome: ";
-		string alojamento = "";
-		getline(cin, alojamento);
-		Alojamento* al;
-		try {
-			al = trocos[trocos.size() - 1].getCidadeDestino()->getAlojamento(
-					alojamento);
-		} catch (Cidade::AlojamentoInexistente &ai) {
-			cout << "Alojamento " << ai.getNome() << " inexistente!" << endl;
-			getch();
-			return;
-		}
-		//TODO: FIX THIS SHIT
-		Viagem v(iti, preco + al->getPreco());
-		if (a->addViagem(v))
-			cout << "Viagem adicionada! ID: " << v.getId() << endl;
-		else {
-			cout << "Erro!" << endl;
-		}
-		getch();
-	} else {
-		//TODO: FIX THIS SHIT x2
-		Viagem v(iti, preco);
-		if (a->addViagem(v))
-			cout << "Viagem adicionada! ID: " << v.getId() << endl;
-		else {
-			cout << "Erro!" << endl;
-		}
-		getch();
+	Viagem v(iti, preco);
+	if (a->addViagem(v))
+		cout << "Viagem adicionada! ID: " << v.getId() << endl;
+	else {
+		cout << "Erro!" << endl;
 	}
+	getch();
 }
 
 void gviagens(Agencia* a) {
@@ -399,20 +371,7 @@ void gcidades(Agencia* a) {
 }
 
 void palojamentos(Agencia* a) {
-	for (unsigned int i = 0; i < a->getPaises().size(); i++) {
-		for (unsigned int j = 0; j < a->getPaises()[i].getCidades().size();
-				j++) {
-			for (unsigned int k = 0;
-					k
-							< a->getPaises()[i].getCidades()[j].getAlojamentos().size();
-					k++) {
-				cout << a->getPaises()[i].getNome() << ","
-						<< a->getPaises()[i].getCidades()[j].getNome() << " - "
-						<< a->getPaises()[i].getCidades()[j].getAlojamentos()[k].getNome()
-						<< endl;
-			}
-		}
-	}
+	a->printAlojamentos();
 	getch();
 }
 
@@ -452,6 +411,10 @@ void addalojamento(Agencia* a) {
 	getch();
 }
 
+void remalojamento(Agencia*& a) {
+
+}
+
 void galojamentos(Agencia* a) {
 	char c;
 	while (c != 27 && c != '9') {
@@ -471,6 +434,7 @@ void galojamentos(Agencia* a) {
 			addalojamento(a);
 			break;
 		case '3':
+			remalojamento(a);
 			break;
 		case '4':
 			a->saveAlojamentos();
@@ -486,8 +450,57 @@ void pdestinos(Agencia* a) {
 	getch();
 }
 
-void adddestinos(Agencia* a) {
+void adddestino(Agencia* a) {
+	cout << "Viagem (id): ";
+	int id;
+	cin >> id;
+	Viagem* v;
+	try {
+		v = a->getViagem(id);
+	} catch (Agencia::ViagemInexistente &vi) {
+		cout << "Viagem inexistente!" << endl;
+		getch();
+		return;
+	}
+	cout << "C/ Alojamento? (s/n) ";
+	char c;
+	cin >> c;
+	Alojamento* al;
+	string alojamento;
+	switch (c) {
+	case 's':
+		cout << "Alojamento: ";
+		cin >> alojamento;
+		try {
+			al = v->getItinerario().getDestino()->getAlojamento(alojamento);
+		} catch (Cidade::AlojamentoInexistente &ai) {
+			cout << "Alojamento inexistente!" << endl;
+			getch();
+			return;
+		}
+		break;
+	case 'n':
+		al = new Alojamento();
+		break;
+	}
+	cout << "Desconto (0-100%): ";
+	float desc;
+	cin >> desc;
+	a->addDestino(Destino(desc, v->getItinerario().getDestino(), v, al));
+}
 
+void remdestino(Agencia*& a) {
+	a->printDestinos();
+	cout << "Destino a remover: ";
+	string destino;
+	cin >> destino;
+	try {
+		a->removeDestino(a->getDestino(destino));
+		cout << "Destino Removido!" << endl;
+	} catch (Agencia::DestinoInexistente &di) {
+		cout << "Destino Inexistente!" << endl;
+	}
+	getch();
 }
 
 void gdestinos(Agencia* a) {
@@ -506,9 +519,10 @@ void gdestinos(Agencia* a) {
 			pdestinos(a);
 			break;
 		case '2':
-			adddestinos(a);
+			adddestino(a);
 			break;
 		case '3':
+			remdestino(a);
 			break;
 		case '4':
 			a->saveDestinos();
