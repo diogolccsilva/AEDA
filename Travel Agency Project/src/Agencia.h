@@ -349,7 +349,7 @@ public:
 	 @param v Viagem
 	 @return void
 	 */
-	void removeViagem(Viagem v);
+	void removeViagem(Viagem* v);
 };
 
 #endif SRC_AGENCIA_H_

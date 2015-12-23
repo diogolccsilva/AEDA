@@ -697,15 +697,12 @@ void Agencia::printAlojamentos() const {
 	}
 }
 
-void Agencia::removeViagem(Viagem v)
+void Agencia::removeViagem(Viagem* v)
 {
-	vector <Viagem>::iterator it;
-
-	for(it = viagens.begin(); it!= viagens.end();it++)
-	{
-		if((*it).getId()== v.getId())
-		{
-			viagens.erase(it);
-		}
+	vector<Viagem>::iterator it;
+	it = find(viagens.begin(),viagens.end(),v);
+	if (it!=viagens.end()){
+		throw ViagemInexistente(v->getId());
 	}
+	viagens.erase(it);
 }

@@ -348,6 +348,19 @@ void addviagem(Agencia* a) {
 	getch();
 }
 
+void remviagem(Agencia*& a) {
+	cout << "Id: ";
+	int id;
+	cin >> id;
+	try{
+		a->removeViagem(a->getViagem(id));
+		cout << "Viagem removida!" << endl;
+	} catch(Agencia::ViagemInexistente &vi){
+		cout << "Viagem inexistente!" << endl;
+	}
+	getch();
+}
+
 void gviagens(Agencia* a) {
 	char c;
 	while (c != 27 && c != '9') {
@@ -367,7 +380,7 @@ void gviagens(Agencia* a) {
 			addviagem(a);
 			break;
 		case '3':
-
+			remviagem(a);
 			break;
 		case '4':
 			a->saveViagens();
