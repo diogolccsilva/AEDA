@@ -15,11 +15,9 @@
 
 Transporte::Transporte(string tipo) :
 		tipo(tipo) {
-	// TODO Auto-generated constructor stub
 }
 
 Transporte::~Transporte() {
-	// TODO Auto-generated destructor stub
 }
 
 string Transporte::getTipo() const {

@@ -89,3 +89,9 @@ void Cliente::atualizaPontos(Cliente* c) { //verifica please
 		pontostemp += viagens[i]->getPontos();
 }
 
+void Cliente::printViagens() const{
+	for (unsigned int i = 0;i<viagens.size();i++){
+		cout << (*viagens[i]) << endl;
+	}
+}
+

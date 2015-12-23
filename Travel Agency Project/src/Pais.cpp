@@ -19,7 +19,6 @@ Pais::Pais(string nome) :
 }
 
 Pais::~Pais() {
-	// TODO Auto-generated destructor stub
 }
 
 bool Pais::addCidade(const Cidade& c) {

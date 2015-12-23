@@ -19,7 +19,6 @@ Troco::Troco(Cidade* origem, Cidade* destino, Transporte transporte, tm data) :
 }
 
 Troco::~Troco() {
-	// TODO Auto-generated destructor stub
 }
 
 Cidade* Troco::getCidadeOrigem() const {
@@ -34,8 +33,12 @@ Transporte Troco::getTransporte() const {
 	return transporte;
 }
 
-tm Troco::getData() const {
-	return data;
+tm* Troco::getData() const{
+	return const_cast<tm*>(&data);
+}
+
+void Troco::printData() const {
+	cout << "Data: " << data.tm_mday << "/" << data.tm_mon << "/" << data.tm_year << endl;
 }
 
 

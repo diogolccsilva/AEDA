@@ -64,6 +64,8 @@ public:
 	int getId() const;
 
 	int getPontos() const;
+
+	friend ostream & operator<<(ostream & o, const Viagem & v);
 };
 
 #endif // SRC_VIAGEM_H_

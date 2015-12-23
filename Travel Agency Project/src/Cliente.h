@@ -121,6 +121,7 @@ public:
 	int getPontos() const;
 	bool operator<(const Cliente& a1) const;
 	void atualizaPontos(Cliente* c);
+	void printViagens() const;
 };
 
 struct hstr

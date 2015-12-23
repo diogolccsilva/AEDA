@@ -15,12 +15,10 @@ Destino::Destino() :
 Destino::Destino(float desconto, Cidade* c, Viagem* viagem,
 		Alojamento* alojamento) :
 		desconto(desconto), cidade(c), viagem(viagem), alojamento(alojamento) {
-	// TODO Auto-generated constructor stub
 	updatePreco();
 }
 
 Destino::~Destino() {
-	// TODO Auto-generated destructor stub
 }
 
 bool Destino::operator<(const Destino &d1) const {

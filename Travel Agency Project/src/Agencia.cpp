@@ -411,11 +411,11 @@ void Agencia::saveViagens() {
 			if (j != 0) {
 				file << ";";
 			}
-			file << trocos[j].getData().tm_mday << "/"
-					<< trocos[j].getData().tm_mon + 1 << "/"
-					<< trocos[j].getData().tm_year - 100 << " "
-					<< trocos[j].getData().tm_hour << ":"
-					<< trocos[j].getData().tm_min;
+			file << trocos[j].getData()->tm_mday << "/"
+					<< trocos[j].getData()->tm_mon + 1 << "/"
+					<< trocos[j].getData()->tm_year - 100 << " "
+					<< trocos[j].getData()->tm_hour << ":"
+					<< trocos[j].getData()->tm_min;
 		}
 	}
 }
@@ -497,8 +497,8 @@ BST<Destino> Agencia::getDestinos() const {
 	return destinos;
 }
 
-void Agencia::printClientesAntigos() {
-	tr1::unordered_set<Cliente*, hstr, hstr>::iterator it;
+void Agencia::printClientesAntigos() const {
+	tr1::unordered_set<Cliente*, hstr, hstr>::const_iterator it;
 	for (it = clientes_antigos.begin(); it != clientes_antigos.end(); it++) {
 		cout << "Nome:" << (*it)->getNome() << " Email:" << (*it)->getEmail()
 				<< " Morada:" << (*it)->getMorada() << endl;
@@ -596,7 +596,7 @@ void Agencia::procurarClienteFrequentePontos(Cliente* c) {
 
 }
 
-void Agencia::updateCliente() { //vê se está bem, please
+void Agencia::updateCliente() {
 
 	priority_queue<Cliente*> temp = clientes_frequentes, temp2;
 
@@ -653,4 +653,9 @@ void Agencia::printViagens() const {
 		cout << "Preco: " << vv[i].getPreco() << endl;
 		cout << endl;
 	}
+}
+
+void Agencia::printClientes() const {
+	for (unsigned int i = 0; i < clientes.size(); i++)
+		cout << (*clientes[i]) << endl;
 }

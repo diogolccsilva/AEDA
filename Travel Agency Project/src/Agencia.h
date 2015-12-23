@@ -209,19 +209,25 @@ public:
 		DestinoInexistente(string nome);
 		string getNome() const;
 	};
-	Destino* addDestino(Destino d1);
+
 	//retorna o destino com o nome nome, mais barato
 	Destino* getDestino(string nome) const;
 	BST<Destino> getDestinos() const;
 	static tm* getTempo_Info();
-	void printClientesAntigos();
+
+	Destino* addDestino(Destino d1);
+	void addClienteAntigo(Cliente *c);
+	void addClienteFrequente(Cliente* c);
+
+	void updateCliente();
+
+	void procurarClienteFrequentePontos(Cliente *c);
 	void procurarClienteAntigoEmail(string e);
 	void procurarClienteAntigoNome(string n);
 	void procurarClienteAntigoMorada(string m);
-	void addClienteAntigo(Cliente *c);
-	void addClienteFrequente(Cliente* c);
-	void updateCliente();
-	void procurarClienteFrequentePontos(Cliente *c);
+
+	void printClientes() const;
+	void printClientesAntigos() const;
 	void printDestinos() const;
 	void printCidades() const;
 	void printViagens() const;

@@ -13,7 +13,6 @@ Itinerario::Itinerario(Cidade* origem, Cidade* destino) :
 }
 
 Itinerario::~Itinerario() {
-	// TODO Auto-generated destructor stub
 }
 
 void Itinerario::addTroco(Troco troco) {

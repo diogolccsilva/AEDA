@@ -60,7 +60,8 @@ public:
 	 @param void
 	 @return Data
 	 */
-	tm getData() const;
+	tm* getData() const;
+	void printData() const;
 };
 
 #endif // SRC_TROCO_H_

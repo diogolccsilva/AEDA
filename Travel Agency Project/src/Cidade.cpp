@@ -19,7 +19,6 @@ Cidade::Cidade(string nome, string pais) :
 }
 
 Cidade::~Cidade() {
-	// TODO Auto-generated destructor stub
 }
 
 string Cidade::getNome() const {

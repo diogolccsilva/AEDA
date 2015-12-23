@@ -50,8 +50,7 @@ void runAllTests(int argc, char const *argv[]) {
 }
 
 void pclientes(Agencia* a) {
-	for (unsigned int i = 0; i < a->getClientes().size(); i++)
-		cout << (*a->getClientes()[i]) << endl;
+	a->printClientes();
 	getch();
 }
 
@@ -81,8 +80,9 @@ void addcliente(Agencia* a) {
 	}
 }
 
-void cpviagens(Agencia* a) {
-
+void cpviagens(Agencia* a,Cliente* c) {
+	c->printViagens();
+	getch();
 }
 
 void mcliente(Agencia* a) {
@@ -112,7 +112,7 @@ void mcliente(Agencia* a) {
 
 			break;
 		case '2':
-			cpviagens(a);
+			cpviagens(a,c1);
 			break;
 		case '3':
 
