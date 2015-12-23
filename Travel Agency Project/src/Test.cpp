@@ -102,6 +102,46 @@ void bviagens(Agencia* a, Cliente* c1) {
 	getch();
 }
 
+void altemail(Agencia* a, Cliente* c1) {
+	cout << "Novo email: ";
+	string email;
+	cin >> email;
+	c1->setEmail(email);
+	cout << "Email alterado!" << endl;
+	getch();
+}
+
+void altmorada(Agencia* a, Cliente* c1) {
+	cout << "Nova morada: ";
+	string morada;
+	getline(cin,morada);
+	c1->setMorada(morada);
+	cout << "Morada alterada!" << endl;
+	getch();
+}
+
+void altdados(Agencia* a, Cliente* c1) {
+	char c;
+	while (c != 27 && c != '9') {
+		system("cls");
+		cout << "1- Alterar email;" << endl;
+		cout << "2- Alterar morada;" << endl;
+		cout << "9- Voltar;" << endl;
+		c = getch();
+		system("cls");
+		switch (c) {
+		case '1':
+			altemail(a, c1);
+			break;
+		case '2':
+			altmorada(a, c1);
+			break;
+		default:
+			break;
+		}
+	}
+}
+
 void mcliente(Agencia* a) {
 	string nome;
 	cout << "Nome: ";
@@ -120,7 +160,7 @@ void mcliente(Agencia* a) {
 		cout << (*c1) << endl;
 		cout << "1- Comprar viagem;" << endl;
 		cout << "2- Ver viagens futuras;" << endl;
-		cout << "3- " << endl;
+		cout << "3- Alterar dados;" << endl;
 		cout << "9- Voltar;" << endl;
 		c = getch();
 		system("cls");
@@ -132,7 +172,7 @@ void mcliente(Agencia* a) {
 			cpviagens(a, c1);
 			break;
 		case '3':
-
+			altdados(a, c1);
 			break;
 		default:
 			break;
