@@ -106,7 +106,18 @@ public:
 	 @return true, se alteracao for aplicada, caso contrario false
 	 */
 	bool changeAlojamento(Alojamento* a);
+	/**
+	 Get do ID do Destino
+	 @param void
+	 @return void
+	 */
 	int getId() const;
+	/**
+	 Overload do operador de saida
+	 @param o objeto de saida
+	 @param d Destino por referencia
+	 @return o objeto de saida
+	 */
 	friend ostream & operator<<(ostream & o, const Destino & d);
 };
 

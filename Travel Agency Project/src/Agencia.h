@@ -332,7 +332,17 @@ public:
 	 @return void
 	 */
 	void printClientesFrequentes() const;
+	/**
+	 Funcao que remove o destino pedido
+	 @param d Destino por apontador
+	 @return void
+	 */
 	void removeDestino(Destino* d);
+	/**
+	 Funcao que faz o cout dos alojamentos
+	 @param void
+	 @return void
+	 */
 	void printAlojamentos() const;
 };
 
