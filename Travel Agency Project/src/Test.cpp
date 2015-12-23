@@ -129,14 +129,15 @@ void pcantigos(Agencia* a) {
 }
 
 void pcfrequentes(Agencia* a) {
-
+	a->printClientesFrequentes();
+	getch();
 }
 
 void mpclientes(Agencia* a) {
 	char c;
 	while (c != 27 && c != '9') {
 		system("cls");
-		cout << "1- Ver togos os clientes;" << endl;
+		cout << "1- Ver todos os clientes;" << endl;
 		cout << "2- Ver clientes antigos;" << endl;
 		cout << "3- Ver clientes frequentes;" << endl;
 		cout << "9- Voltar;" << endl;
