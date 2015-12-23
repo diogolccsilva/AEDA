@@ -344,6 +344,11 @@ public:
 	 @return void
 	 */
 	void printAlojamentos() const;
+	/**
+	 Funcao que remove uma viavem do vetor
+	 @param v Viagem
+	 @return void
+	 */
 	void removeViagem(Viagem v);
 };
 
