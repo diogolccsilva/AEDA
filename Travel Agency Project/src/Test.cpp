@@ -537,6 +537,17 @@ int main(int argc, char const *argv[]) {
 		cout << "2- Manual;" << endl;
 		cout << "3- Sair." << endl;
 		cout << asctime(Agencia::getTempo_Info()) << endl;
+		tm data;
+		time_t now;
+		time(&now);
+		data = *localtime(&now);
+		data.tm_hour = 14;
+		data.tm_min = 01;
+		data.tm_mday = 21;
+		data.tm_mon = 12-1;
+		data.tm_year = 2015-1900;
+		cout << difftime(mktime(Agencia::getTempo_Info()),mktime(&data))/(60*60*24) << endl;
+		cout << asctime(&data) << endl;
 		c = getch();
 		system("CLS");
 		switch (c) {
