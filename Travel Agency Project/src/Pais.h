@@ -57,6 +57,12 @@ public:
 	 */
 	vector<Cidade> getCidades() const;
 	/**
+	 Funcao que remove uma cidade de um Pais
+	 @param c Cidade
+	 @return void
+	 */
+	void removeCidade(Cidade c);
+	/**
 	 Classe da excecao Cidade Inexistente
 	 @param void
 	 @return
@@ -76,6 +82,7 @@ public:
 		 @return Nome da Cidade Inexistente
 		 */
 		string getNome() const;
+
 	};
 };
 

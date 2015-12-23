@@ -62,4 +62,16 @@ string Pais::CidadeInexistente::getNome() const {
 	return this->nome;
 }
 
+void Pais::removeCidade(Cidade c)
+{
+	vector <Cidade>::iterator it;
 
+		for(it = cidades.begin(); it!= cidades.end();it++)
+		{
+			if((*it).getNome()== c.getNome())
+			{
+				cidades.erase(it);
+			}
+		}
+
+}

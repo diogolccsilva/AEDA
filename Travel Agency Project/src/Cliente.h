@@ -168,7 +168,8 @@ public:
 	 @param
 	 @return void
 	 */
-	void updateStatus(); //TODO
+	void updateStatus();
+
 };
 
 struct hstr
