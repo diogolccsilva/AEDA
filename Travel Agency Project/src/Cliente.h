@@ -185,7 +185,7 @@ struct hstr
 
 	bool operator() (const Cliente * s1, const Cliente* s2) const
 	{
-	return s1->getEmail()==s2->getEmail();
+	return s1->getNome()==s2->getNome();
 	}
 };
 
