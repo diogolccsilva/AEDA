@@ -231,6 +231,7 @@ public:
 	void printDestinos() const;
 	void printCidades() const;
 	void printViagens() const;
+	void printClientesFrequentes() const;
 };
 
 #endif SRC_AGENCIA_H_

@@ -524,6 +524,20 @@ void Agencia::printClientesAntigos() const {
 	}
 }
 
+void Agencia::printClientesFrequentes() const {
+
+	priority_queue<Cliente*> copia = clientes_frequentes;
+	while(copia.size()>0)
+	{
+
+		cout << "Nome:" << copia.top()->getNome() << endl;
+		cout << "Email:" <<copia.top()->getEmail() << endl;
+		cout << "Morada:" << copia.top()->getMorada() << endl;
+
+		copia.pop();
+	}
+}
+
 void Agencia::procurarClienteAntigoEmail(string e) {
 	tr1::unordered_set<Cliente*, hstr, hstr>::iterator it;
 
