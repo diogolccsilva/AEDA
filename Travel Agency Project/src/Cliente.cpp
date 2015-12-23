@@ -69,9 +69,12 @@ vector<Viagem*> Cliente::getViagens() const {
 }
 
 ostream & operator<<(ostream & o, const Cliente & c) {
-	o << "Nome: " << c.getNome() << ";\n" << "Tipo: " << c.getTipo() << ";\n"
-			<< "No de Viagens: " << c.getNoViagens() << ";\n" << "Pontos: "
-			<< c.getPontos() << ";\n";
+	o << "Nome: " << c.getNome() << ";" << endl;
+	o << "Email: " << c.getEmail() << ";" << endl;
+	o << "Morada: " << c.getMorada() << ";" << endl;
+	o << "Tipo: " << c.getTipo() << ";" << endl;
+	o << "No de Viagens: " << c.getNoViagens() << ";" << endl;
+	o << "Pontos: " << c.getPontos() << ";" << endl;
 	return o;
 }
 
@@ -98,7 +101,7 @@ void Cliente::updatePontos() {
 	time(&now);
 	tnow = *localtime(&now);
 	int dtime = difftime(mktime(&tnow), mktime(&data)) / (60 * 60 * 24 * 30);
-	pontos = pontostemp - dtime*10;
+	pontos = pontostemp - dtime * 10;
 	if (pontos < 0)
 		pontos = 0;
 }
@@ -138,6 +141,4 @@ void Cliente::updateStatus() {
 		status = "Frequente";
 	}
 }
-
-
 
