@@ -518,9 +518,9 @@ BST<Destino> Agencia::getDestinos() const {
 void Agencia::printClientesAntigos() const {
 	tr1::unordered_set<Cliente*, hstr, hstr>::const_iterator it;
 	for (it = clientes_antigos.begin(); it != clientes_antigos.end(); it++) {
-		cout << "Nome:" << (*it)->getNome() << endl;
-		cout << "Email:" << (*it)->getEmail() << endl;
-		cout << "Morada:" << (*it)->getMorada() << endl;
+		cout << "Nome: " << (*it)->getNome() << endl;
+		cout << "Email: " << (*it)->getEmail() << endl;
+		cout << "Morada: " << (*it)->getMorada() << endl;
 	}
 }
 
@@ -530,9 +530,9 @@ void Agencia::printClientesFrequentes() const {
 	while(copia.size()>0)
 	{
 
-		cout << "Nome:" << copia.top()->getNome() << endl;
-		cout << "Email:" <<copia.top()->getEmail() << endl;
-		cout << "Morada:" << copia.top()->getMorada() << endl;
+		cout << "Nome: " << copia.top()->getNome() << endl;
+		cout << "Email: " <<copia.top()->getEmail() << endl;
+		cout << "Morada: " << copia.top()->getMorada() << endl;
 
 		copia.pop();
 	}
