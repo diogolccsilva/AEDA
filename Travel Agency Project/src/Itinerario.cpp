@@ -30,3 +30,7 @@ Cidade* Itinerario::getOrigem() const {
 Cidade* Itinerario::getDestino() const {
 	return destino;
 }
+
+tm* Itinerario::getData() const{
+	return trocos[0].getData();
+}
