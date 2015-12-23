@@ -33,7 +33,17 @@ bool Agencia::addCliente(Cliente* c) {
 	vector<Cliente*>::const_iterator it;
 	it = find(clientes.begin(), clientes.end(), c);
 	if (it != clientes.end())
-		return false; //TODO change to a throw eventually
+		//return false; //TODO change to a throw eventually
+	{
+		if(//(*it)->getViagens()[0]->getItinerario().getData()->)
+		{
+			addClienteFrequente(c);
+		}
+		else
+		{
+			addClienteAntigo(c);
+		}
+	}
 	clientes.push_back(c);
 	return true;
 }
