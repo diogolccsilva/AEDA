@@ -135,6 +135,11 @@ public:
 		 @return
 		 */
 		ViagemInexistente(int id);
+		/**
+		 Get do ID da Viagem
+		 @param
+		 @return void
+		 */
 		int getId() const;
 	};
 	/**
@@ -206,32 +211,127 @@ public:
 		 @return
 		 */
 		DestinoInexistente(string nome);
+		/**
+		 Get do Nome do Destino Inexistente
+		 @param
+		 @return void
+		 */
 		string getNome() const;
 	};
 
-	//retorna o destino com o nome nome, mais barato
+	/**
+	 Get do Destino recebendo um nome
+	 @param nome Nome do Destino
+	 @return Destino
+	 */
 	Destino* getDestino(string nome) const;
+	/**
+	 Get do Destino recebendo o id do mesmo
+	 @param id ID do destino
+	 @return destino
+	 */
 	Destino* getDestino(int id) const;
+	/**
+	 Get da Arvore Binaria de Destinos
+	 @param
+	 @return BST de Destinos
+	 */
 	BST<Destino> getDestinos() const;
+	/**
+	 Get do Apontador Tempo_Info
+	 @param
+	 @return static tm
+	 */
 	static tm* getTempo_Info();
-
+	/**
+	 Funcao que adiciona Destino D1 a uma BST
+	 @param d1 Destino a adicionar
+	 @return d1 Destino adicionado
+	 */
 	Destino* addDestino(Destino d1);
-
+	/**
+	 Funcao que adiciona cliente antigo a uma tabela de dispersao
+	 @param c Apontador de um cliente
+	 @return void
+	 */
 	void addClienteAntigo(Cliente *c);
+	/**
+	 Funcao que adiciona cliente frequente a uma fila de prioridades
+	 @param c Apontador de um cleinte
+	 @return void
+	 */
 	void addClienteFrequente(Cliente* c);
+	/**
+	 Funcao que remove um cliente
+	 @param c Apontador do cliente a ser removido
+	 @return void
+	 */
 	void removeCliente(Cliente *c);
+	/**
+	 Funcao que faz o update dos pontos do Cliente
+	 @param c Apontador do cliente a ser atualizado
+	 @return void
+	 */
 	void updateCliente(Cliente *c); // TODO
-
+	/**
+	 Funcao que procurar Cliente e faz cout dos pontos do mesmo
+	 @param c Apontador de cliente
+	 @return void
+	 */
 	void procurarClienteFrequentePontos(Cliente *c);
+	/**
+	 Funcao que procurar Cliente e faz cout do email do mesmo
+	@param c Apontador de cliente
+	 @return void
+	 */
 	void procurarClienteAntigoEmail(string e);
+	/**
+	 Funcao que procurar Cliente e faz cout do nome do mesmo
+	 @param c Apontador de cliente
+	 @return void
+	 */
 	void procurarClienteAntigoNome(string n);
+	/**
+	 Funcao que procurar Cliente e faz cout da morada do mesmo
+	 @param c Apontador de cliente
+	 @return void
+	 */
 	void procurarClienteAntigoMorada(string m);
-
+	/**
+	 Funcao que faz o cout de todos os clientes da agencia
+	 @param
+	 @return void
+	 */
 	void printClientes() const;
+	/**
+	 Funcao que faz o cout de todos os clientes antigos da agencia
+	 @param
+	 @return void
+	 */
 	void printClientesAntigos() const;
+	/**
+	 Funcao que faz o cout de todos os destinos da agencia
+	 @param
+	 @return void
+	 */
 	void printDestinos() const;
+	/**
+	 Funcao que faz o cout de todas as cidades da agencia
+	 @param
+	 @return void
+	 */
 	void printCidades() const;
+	/**
+	 Funcao que faz o cout de todas as viagens da agencia
+	 @param
+	 @return void
+	 */
 	void printViagens() const;
+	/**
+	 Funcao que faz o cout de todos os clientes frequentes da agencia
+	 @param
+	 @return void
+	 */
 	void printClientesFrequentes() const;
 };
 

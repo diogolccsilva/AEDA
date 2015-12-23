@@ -52,6 +52,11 @@ public:
 	 @return Cidade Destino do Troco
 	 */
 	Cidade* getDestino() const;
+	/**
+	 Get da Data do Itinerario
+	 @param
+	 @return data
+	 */
 	tm getData();
 
 };

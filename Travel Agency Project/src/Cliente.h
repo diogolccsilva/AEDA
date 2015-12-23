@@ -70,7 +70,11 @@ public:
 	 @return void
 	 */
 	void setMorada(string m);
-	void setStatus(string s);
+	/**
+	 Get do Status do Cliente
+	 @param void
+	 @return status Status do cliente
+	 */
 	string getStatus()const;
 	/**
 	 Overload do operador == em Clientes
@@ -121,12 +125,49 @@ public:
 	 @return Parâmetro de saída
 	 */
 	friend ostream & operator<<(ostream & o, const Cliente & c);
+	/**
+	 Get dos Pontos do CLiente
+	 @param
+	 @return void
+	 */
 	int getPontos() const;
+	/**
+	 Compara dois clientes e verifica qual tem menos pontos
+	 @param a1 Cliente por referencia
+	 @return true se for menor
+	 @return false se for maior ou igual
+	 */
 	bool operator<(const Cliente& a1) const;
+	/**
+	 Funcao que atualiza os pontos de um cliente
+	 @param c Cliente por apontador
+	 @return void
+	 */
 	void atualizaPontos(Cliente* c);
+	/**
+	 Funcao que faz o print das viagens de um cliente
+	 @param
+	 @return void
+	 */
 	void printViagens() const;
+	/**
+	 Funcao boleana que adiciona um destino ao cliente
+	 @param d Destino por apontador
+	 @return true se adicionar
+	 @return false se nao adicionar
+	 */
 	bool addDestino(Destino* d);
+	/**
+	 Get do vetor de Destinos
+	 @param
+	 @return vector<Detino*> Vetor de destinos
+	 */
 	vector<Destino*> getDestinos() const;
+	/**
+	 Funcao que faz o update do Status do Cliente
+	 @param
+	 @return void
+	 */
 	void updateStatus(); //TODO
 };
 

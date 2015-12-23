@@ -72,6 +72,12 @@ public:
 	 @return false se for diferente
 	 */
 	bool operator==(const Alojamento& a) const;
+	/**
+	 Compara dois alojamentos e verifica se é menor
+	 @param a Alojamento por referencia
+	 @return true se for menor
+	 @return false se for maior ou igual
+	 */
 	bool operator<(const Alojamento& a) const;
 };
 #endif // SRC_ALOJAMENTO_H_

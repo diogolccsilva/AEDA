@@ -62,9 +62,18 @@ public:
 	 @return Id da Viagem
 	 */
 	int getId() const;
-
+	/**
+	 Funcao Get dos pontos que a viagem oferece
+	 @param void
+	 @return pontos Pontos que a viagem oferece
+	 */
 	int getPontos() const;
-
+	/**
+	 Overload do operador << para fazer o cout de uma viagem
+	 @param o Do tipo ostream
+	 @param v Viagem por referencia
+	 @return o Do tipo ostream
+	 */
 	friend ostream & operator<<(ostream & o, const Viagem & v);
 };
 

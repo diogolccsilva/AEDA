@@ -51,11 +51,6 @@ void Cliente::setMorada(string m) {
 	morada = m;
 }
 
-void Cliente::setStatus(string s)
-{
-	status=s;
-}
-
 string Cliente::getStatus() const
 {
 	return status;

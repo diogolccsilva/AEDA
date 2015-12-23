@@ -61,6 +61,11 @@ public:
 	 @return Data
 	 */
 	tm getData() const;
+	/**
+	 Funcao que faz o cout da data do troco
+	 @param void
+	 @return void
+	 */
 	void printData() const;
 };
 
